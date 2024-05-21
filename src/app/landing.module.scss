@@ -1,0 +1,27 @@
+@import '../styles/typed';
+
+$start-color: #004400;
+$end-color: #000000;
+
+.mainDiv {
+  width: 100vw;
+  height: 100vh;
+  //background: radial-gradient(#858585, #5C5C5C, #333333, #0A0A0A);
+  background: radial-gradient(circle, $start-color, $end-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    @include typed("I'm walking here!");
+    color: #00ff00; /* Terminal Green Text Color */
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.5rem;
+    animation: blink-caret 0.75s step-end infinite;
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #00ff00; }
+    }
+  }
+}
