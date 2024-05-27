@@ -21,3 +21,5 @@ C
 tsconfig.json,6/1/61ebb9fd6e8cf9082658121d5d81e297791dacd0
 K
 src/app/landing.module.scss,5/7/576a421faf60156abffc204c456c5de7ec0689fc
+V
+&src/app/components/terminal-cursor.tsx,6/c/6cde1a7f1ab30609c14bccab46d3bfc88068fcdb
