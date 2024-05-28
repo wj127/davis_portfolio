@@ -11,6 +11,31 @@ $end-color: #000000;
   align-items: center;
 }
 
+.consoleWrapper {
+  width: 50%;
+  height: 50%;
+  background-color: #00000078;
+  //opacity: 0.5;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #595858;
+
+  p, span {
+    opacity: 1;
+  }
+}
+
+.consoleTextWrapper {
+  padding: 20px;
+}
+
+.consoleTop {
+  width: 100%;
+  height: fit-content;
+  background-color: #595858;
+}
+
 .terminalTextWrapper {
   display: flex;
 }
@@ -33,4 +58,32 @@ $end-color: #000000;
 .terminalText {
   color: white;
   margin: 0;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-start;
+  height: inherit;
+  align-items: center;
+  margin: 7px;
+}
+
+.button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+#buttonCancel {
+  background-color: red;
+}
+
+#buttonMinimize {
+  background-color: #f6d732;
+}
+
+#buttonMaximize {
+  background-color: lime;
 }
