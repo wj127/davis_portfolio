@@ -12,8 +12,8 @@ $end-color: #000000;
 }
 
 .consoleWrapper {
-  width: 50%;
-  height: 50%;
+  width: 65%;
+  height: 65%;
   background-color: #00000078;
   //opacity: 0.5;
   border-radius: 10px;
@@ -27,7 +27,7 @@ $end-color: #000000;
 }
 
 .consoleTextWrapper {
-  padding: 20px;
+  padding: 17px 13px 0 10px;
 }
 
 .consoleTop {
@@ -45,7 +45,7 @@ $end-color: #000000;
   display: inline-block;
   width: 10px;
   background-color: lime;
-  margin-left: 5px;
+  //margin-left: 5px;
   animation: blink 1s step-start infinite;
 
   @keyframes blink {
@@ -56,8 +56,10 @@ $end-color: #000000;
 }
 
 .terminalText {
+  font-family: var(--font-source-code-pro);
+  font-weight: 400;
   color: white;
-  margin: 0;
+  margin-left: 7px;
 }
 
 .buttonContainer {
@@ -86,4 +88,11 @@ $end-color: #000000;
 
 #buttonMaximize {
   background-color: lime;
+}
+
+.consoleTextPre {
+  font-family: var(--font-source-code-pro);
+  font-weight: 200;
+  font-style: italic;
+  color: #FAA066;
 }
