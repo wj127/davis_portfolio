@@ -3,7 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../landing.module.scss';
 
-const text = 'Hey! This is Davis. Welcome to my website :D';
+// const text = 'Hey! This is Davis. Welcome to my website :D';
+const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat mi non diam ornare dictum. Nullam laoreet mattis velit sed lobortis. Donec quis convallis leo. Nunc aliquet aliquet libero, ultrices faucibus lacus aliquet quis.';
 let timeout: ReturnType<typeof setTimeout>;
 
 export const TerminalCursor: React.FC = () => {
@@ -32,9 +33,11 @@ export const TerminalCursor: React.FC = () => {
 
   return (
     <div className={styles.terminalTextWrapper}>
-      <p className={styles.consoleTextPre}>/Home/MrDavis &gt;</p>
-      <p className={styles.terminalText}>{displayedText}</p>
-      <span className={styles.cursor}>a</span>
+      <p className={styles.terminalText}>
+        <span className={styles.consoleTextPre}>/Home/MrDavis &gt;</span>
+        {displayedText}
+        <span className={styles.cursor}>a</span>
+      </p>
     </div>
   );
 };
