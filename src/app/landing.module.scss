@@ -59,7 +59,7 @@ $end-color: #000000;
 }
 
 .terminalText {
-  font-family: var(--font-source-code-pro);
+  font-family: var(--font-source-code-pro), serif;
   font-weight: 400;
   color: white;
   margin-left: 7px;
@@ -94,7 +94,7 @@ $end-color: #000000;
 }
 
 .consoleTextPre {
-  font-family: var(--font-source-code-pro);
+  font-family: var(--font-source-code-pro), serif;
   font-weight: 200;
   font-style: italic;
   color: #FAA066;
