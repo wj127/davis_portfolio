@@ -4,6 +4,7 @@ import React from 'react';
 import styles from '../landing.module.scss';
 import { TerminalCursor } from './terminal-cursor';
 import { Source_Code_Pro } from 'next/font/google';
+import { TerminalText } from './terminal-text';
 
 const sourceCodePro = Source_Code_Pro({
   subsets: ['latin'],
@@ -35,12 +36,7 @@ export const Console: React.FC = () => {
         {currentIndex > 0 &&
           texts.slice(0, currentIndex).map((text, index) => (
             <div className={styles.consoleTextWrapper} key={index}>
-              <div className={styles.terminalTextWrapper}>
-                <p className={styles.terminalText}>
-                  <span className={styles.consoleTextPre}>/Home/MrDavis &gt;</span>
-                  {text}
-                </p>
-              </div>
+              <TerminalText displayedText={text} showCursor={false} />
             </div>
           ))}
         <div className={styles.consoleTextWrapper}>
