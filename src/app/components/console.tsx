@@ -1,10 +1,10 @@
 'use client';
 
 import React from 'react';
-import styles from '../landing.module.scss';
-import { TerminalCursor } from './terminal-cursor';
+import styles from 'src/app/landing.module.scss';
+import { TerminalCursor } from 'src/app/components/terminal-cursor';
+import { TerminalText } from 'src/app/components/terminal-text';
 import { Source_Code_Pro } from 'next/font/google';
-import { TerminalText } from './terminal-text';
 
 const sourceCodePro = Source_Code_Pro({
   subsets: ['latin'],

@@ -1,8 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import styles from '../landing.module.scss';
-import { TerminalText } from './terminal-text';
+import { TerminalText } from 'src/app/components/terminal-text';
 
 let displayTimeout: ReturnType<typeof setTimeout>;
 let onEndTimeout: ReturnType<typeof setTimeout>;

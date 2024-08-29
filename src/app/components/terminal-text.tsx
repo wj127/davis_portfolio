@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../landing.module.scss';
+import styles from 'src/app/landing.module.scss';
 
 type TerminalTextProps = {
   displayedText: string;
