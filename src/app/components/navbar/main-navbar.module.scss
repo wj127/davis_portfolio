@@ -1,0 +1,81 @@
+@import "src/styles/varibales";
+
+.NavigationMenuRoot {
+  background-color: $end-color;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  z-index: 1;
+  border-bottom: 3px solid $selected-gray;
+
+  > div {
+    position: unset;
+    margin: 10px 0;
+    width: 100%;
+  }
+}
+
+.NavigationMenuList {
+  display: flex;
+  gap: 5%;
+  justify-content: center;
+  padding: 4px;
+  list-style: none;
+  margin: 0;
+}
+
+.NavigationMenuLink {
+  display: block;
+  padding: 8px 12px;
+  outline: none;
+  user-select: none;
+  font-weight: 500;
+  text-decoration: none;
+  line-height: 1;
+  font-size: 15px;
+  color: white;
+  transition: transform .5s;
+}
+
+.active {
+  color: black;
+  background: linear-gradient(360deg, $selected-orange-darker, $selected-orange 70%, #FBAA74);
+  animation-duration: 35s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-fill-mode: both;
+  animation-play-state: running;
+  animation-name: border-radius-blob;
+  animation-timeline: auto;
+  animation-range-start: normal;
+}
+
+.NavigationMenuLink:hover:not(.active) {
+  transform: scale(1.1);
+}
+
+@keyframes border-radius-blob {
+  0%, 100% {
+    border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+  }
+  14% {
+    border-radius: 6% 60% 54% 46% / 49% 60% 40% 51%;
+  }
+  28% {
+    border-radius: 54% 46% 38% 62% / 49% 70% 30% 51%;
+  }
+  42% {
+    border-radius: 61% 39% 55% 45% / 61% 38% 62% 39%;
+  }
+  56% {
+    border-radius: 61% 39% 67% 33% / 70% 50% 50% 30%;
+  }
+  70% {
+    border-radius: 50% 50% 34% 66% / 56% 68% 32% 44%;
+  }
+  84% {
+    border-radius: 46% 54% 50% 50% / 35% 61% 39% 65%;
+  }
+}

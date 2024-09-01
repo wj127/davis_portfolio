@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import styles from 'src/app/landing.module.scss';
-import { TerminalCursor } from 'src/app/components/terminal-cursor';
-import { TerminalText } from 'src/app/components/terminal-text';
+import ConsoleStyles from '@/app/components/console/console.module.scss';
+import { TerminalCursor } from '@/app/components/console/terminal-cursor';
+import { TerminalText } from '@/app/components/console/terminal-text';
 import { Source_Code_Pro } from 'next/font/google';
 
 const sourceCodePro = Source_Code_Pro({
@@ -24,22 +24,22 @@ export const Console: React.FC = () => {
   const [currentIndex, setCurrentIndex] = React.useState(0);
 
   return (
-    <div className={`${styles.consoleWrapper} ${sourceCodePro.variable}`}>
-      <div className={styles.consoleTop}>
-        <div className={styles.buttonContainer}>
-          <div id={styles.buttonCancel} className={styles.button} />
-          <div id={styles.buttonMinimize} className={styles.button} />
-          <div id={styles.buttonMaximize} className={styles.button} />
+    <div className={`${ConsoleStyles.consoleWrapper} ${sourceCodePro.variable}`}>
+      <div className={ConsoleStyles.consoleTop}>
+        <div className={ConsoleStyles.buttonContainer}>
+          <div id={ConsoleStyles.buttonCancel} className={ConsoleStyles.button} />
+          <div id={ConsoleStyles.buttonMinimize} className={ConsoleStyles.button} />
+          <div id={ConsoleStyles.buttonMaximize} className={ConsoleStyles.button} />
         </div>
       </div>
       <div>
         {currentIndex > 0 &&
           texts.slice(0, currentIndex).map((text, index) => (
-            <div className={styles.consoleTextWrapper} key={index}>
+            <div className={ConsoleStyles.consoleTextWrapper} key={index}>
               <TerminalText displayedText={text} showCursor={false} />
             </div>
           ))}
-        <div className={styles.consoleTextWrapper}>
+        <div className={ConsoleStyles.consoleTextWrapper}>
           <TerminalCursor
             key={currentIndex}
             textToDisplay={texts.at(currentIndex) ?? ''}

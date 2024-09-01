@@ -1,5 +1,5 @@
 import styles from 'src/app/landing.module.scss';
-import { Console } from 'src/app/components/console';
+import { Console } from '@/app/components/console/console';
 
 export default function Home() {
   return (

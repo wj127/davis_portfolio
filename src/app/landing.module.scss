@@ -1,103 +1,10 @@
-$start-color: #004400;
-$end-color: #000000;
+@import "src/styles/varibales";
 
 .mainDiv {
   width: 100vw;
   height: 100vh;
-  //background: radial-gradient(#858585, #5C5C5C, #333333, #0A0A0A);
   background: radial-gradient(circle, $start-color, $end-color);
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.consoleWrapper {
-  width: 65%;
-  height: 65%;
-  background-color: #00000078;
-  //opacity: 0.5;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  border: 2px solid #595858;
-  overflow-y: scroll;
-
-  p, span {
-    opacity: 1;
-  }
-}
-
-.consoleTextWrapper {
-  padding: 17px 13px 0 10px;
-}
-
-.consoleTop {
-  width: 100%;
-  height: fit-content;
-  background-color: #595858;
-}
-
-.terminalTextWrapper {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.cursor {
-  color: transparent;
-  display: inline-block;
-  width: 10px;
-  background-color: lime;
-  //margin-left: 5px;
-  animation: blink 1s step-start infinite;
-
-  @keyframes blink {
-    50% {
-      background-color: transparent;
-    }
-  }
-}
-
-.terminalText {
-  font-family: var(--font-source-code-pro), serif;
-  font-weight: 400;
-  color: white;
-  margin-left: 7px;
-}
-
-.buttonContainer {
-  display: flex;
-  justify-content: flex-start;
-  height: inherit;
-  align-items: center;
-  margin: 7px;
-}
-
-.button {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  margin-right: 10px;
-  cursor: pointer;
-}
-
-#buttonCancel {
-  background-color: red;
-}
-
-#buttonMinimize {
-  background-color: #f6d732;
-}
-
-#buttonMaximize {
-  background-color: lime;
-}
-
-.consoleTextPre {
-  font-family: var(--font-source-code-pro), serif;
-  font-weight: 200;
-  font-style: italic;
-  color: #FAA066;
-  white-space: pre;
-  margin-right: 7px;
 }
