@@ -1,7 +1,20 @@
 @import "src/styles/varibales";
 
-.NavigationMenuRoot {
+.NavbarContainer {
+  position: relative;
   background-color: $end-color;
+}
+
+.NavigationMenuRoot {
+  transition: max-height 0.3s ease-in-out;
+  //transition: max-height 3s ease-out, opacity 1s ease-out;
+
+  max-height: 0;
+  overflow: hidden;
+  position: relative;
+  opacity: 0;
+
+  background-color: inherit;
   display: flex;
   justify-content: center;
   width: 100vw;
@@ -13,6 +26,29 @@
     margin: 10px 0;
     width: 100%;
   }
+}
+
+.Open {
+  max-height: fit-content;
+  opacity: 1;
+  height: 6vh;
+}
+
+.ToggleButton {
+  display: inline;
+  background: $selected-gray;
+  color: black;
+  border: none;
+  border-radius: 0 0 7px 7px;
+  font-size: 15px;
+  cursor: pointer;
+  position: absolute;
+  left: 10px;
+  bottom: -17px;
+}
+
+.ToggleButton:focus {
+  outline: none;
 }
 
 .NavigationMenuList {
