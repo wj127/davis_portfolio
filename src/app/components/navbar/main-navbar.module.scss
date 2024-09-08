@@ -1,8 +1,30 @@
 @import "src/styles/varibales";
 
 .NavbarContainer {
-  position: relative;
-  background-color: $end-color;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.03);
+  //filter: blur(8px);
+  //-webkit-filter: blur(8px);
+  backdrop-filter: blur(18px);
+  display: grid;
+  grid-template-columns: 20% auto;
+  grid-template-rows: 100%;
+  width: 100%;
+}
+
+.ImageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background: inherit;
+}
+
+.ImageLogo {
+  border-radius: 50px;
+  animation: growAndShake 3s ease-in-out;
+  animation-delay: 3s;
 }
 
 .NavigationMenuRoot {
@@ -11,19 +33,19 @@
 
   max-height: 0;
   overflow: hidden;
-  position: relative;
+  //position: relative;
   opacity: 0;
 
   background-color: inherit;
   display: flex;
   justify-content: center;
-  width: 100vw;
+  width: 100%;
   z-index: 1;
-  border-bottom: 3px solid $selected-gray;
+  //border-bottom: 3px solid $selected-gray;
 
   > div {
-    position: unset;
-    margin: 10px 0;
+    //position: unset;
+    //margin: 10px 0;
     width: 100%;
   }
 }
@@ -53,11 +75,13 @@
 
 .NavigationMenuList {
   display: flex;
-  gap: 5%;
-  justify-content: center;
+  gap: 1%;
+  justify-content: flex-start;
+  align-items: center;
   padding: 4px;
   list-style: none;
   margin: 0;
+  height: 100%;
 }
 
 .NavigationMenuLink {
@@ -113,5 +137,85 @@
   }
   84% {
     border-radius: 46% 54% 50% 50% / 35% 61% 39% 65%;
+  }
+}
+
+.glitch{
+  color:white;
+  font-size:100px;
+  position:relative;
+  width:400px;
+  margin:0 auto;
+}
+
+@keyframes noise-anim{
+  $steps:20;
+  @for $i from 0 through $steps{
+    #{percentage($i*(1/$steps))}{
+      clip:rect(random(100)+px,9999px,random(100)+px,0);
+    }
+  }
+}
+.glitch:after{
+  content:attr(data-text);
+  position:absolute;
+  left:2px;
+  text-shadow:-1px 0 red;
+  top:0;
+  color:white;
+  background:black;
+  overflow:hidden;
+  clip:rect(0,900px,0,0);
+  animation:noise-anim 2s infinite linear alternate-reverse;
+}
+
+@keyframes noise-anim-2{
+  $steps:20;
+  @for $i from 0 through $steps{
+    #{percentage($i*(1/$steps))}{
+      clip:rect(random(100)+px,9999px,random(100)+px,0);
+    }
+  }
+}
+.glitch:before{
+  content:attr(data-text);
+  position:absolute;
+  left:-2px;
+  text-shadow:1px 0 blue;
+  top:0;
+  color:white;
+  background:black;
+  overflow:hidden;
+  clip:rect(0,900px,0,0);
+  animation:noise-anim-2 3s infinite linear alternate-reverse;
+}
+
+@keyframes growAndShake {
+  0% {
+    transform: scale(1) translateX(0);
+  }
+  25% {
+    transform: scale(1.1) translateX(0);
+  }
+  50% {
+    transform: scale(1) translateX(0);
+  }
+  60% {
+    transform: scale(1) translateX(-5px);
+  }
+  70% {
+    transform: scale(1) translateX(5px);
+  }
+  80% {
+    transform: scale(1) translateX(-5px);
+  }
+  90% {
+    transform: scale(1) translateX(5px);
+  }
+  100% {
+    transform: scale(1) translateX(0);
+  }
+  100%, 120% {
+    transform: scale(1) translateX(0); /* No movement during the delay */
   }
 }
