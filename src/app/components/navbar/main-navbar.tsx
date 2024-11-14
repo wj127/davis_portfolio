@@ -6,7 +6,7 @@ import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import NavBarStyles from '@/app/components/navbar/main-navbar.module.scss';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
-import MrDavisLogo from '@public/MrDavis.png';
+import MrDavisLogoGIF from '@public/MrDavis2.gif';
 
 export const MainNavbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -18,32 +18,49 @@ export const MainNavbar: React.FC = () => {
 
   return (
     <div className={NavBarStyles.NavbarContainer}>
-      <div className={NavBarStyles.ImageContainer}>
-        <Image alt='logo image' src={MrDavisLogo} width={50} height={50} className={NavBarStyles.ImageLogo} />
-        <p>Mr Davis</p>
+      <div className={NavBarStyles.InnerWrapper}>
+        <div className={NavBarStyles.ImageContainer}>
+          <Image
+            alt='logo image'
+            src={MrDavisLogoGIF}
+            width={50}
+            height={50}
+            unoptimized
+            className={NavBarStyles.ImageLogo}
+          />
+          <p className={NavBarStyles.TextGlitch}>
+            <span aria-hidden='true'>
+              <i>Mr</i>Davis
+            </span>
+            <i>Mr</i>Davis
+            <span aria-hidden='true'>
+              <i>Mr</i>Davis
+            </span>
+          </p>
+        </div>
+        <NavigationMenu.Root
+          orientation='horizontal'
+          className={`${NavBarStyles.NavigationMenuRoot} ${isOpen ? NavBarStyles.Open : ''}`}
+        >
+          <NavigationMenu.List className={NavBarStyles.NavigationMenuList}>
+            <NavigationMenu.Item>
+              <CustomLink href='/'>Home</CustomLink>
+            </NavigationMenu.Item>
+
+            <NavigationMenu.Item>
+              <CustomLink href='/cv'>CV</CustomLink>
+            </NavigationMenu.Item>
+
+            <NavigationMenu.Item>
+              <CustomLink href='/work-experience'>Work Experience</CustomLink>
+            </NavigationMenu.Item>
+
+            <NavigationMenu.Item>
+              <CustomLink href='/blog'>Blog</CustomLink>
+            </NavigationMenu.Item>
+          </NavigationMenu.List>
+        </NavigationMenu.Root>
       </div>
-      <NavigationMenu.Root
-        orientation='horizontal'
-        className={`${NavBarStyles.NavigationMenuRoot} ${isOpen ? NavBarStyles.Open : ''}`}
-      >
-        <NavigationMenu.List className={NavBarStyles.NavigationMenuList}>
-          <NavigationMenu.Item>
-            <CustomLink href='/'>Home</CustomLink>
-          </NavigationMenu.Item>
-
-          <NavigationMenu.Item>
-            <CustomLink href='/cv'>CV</CustomLink>
-          </NavigationMenu.Item>
-
-          <NavigationMenu.Item>
-            <CustomLink href='/work-experience'>Work Experience</CustomLink>
-          </NavigationMenu.Item>
-
-          <NavigationMenu.Item>
-            <CustomLink href='/blog'>Blog</CustomLink>
-          </NavigationMenu.Item>
-        </NavigationMenu.List>
-      </NavigationMenu.Root>
       {/*<button className={NavBarStyles.ToggleButton} onClick={toggleMenu} aria-expanded={isOpen}>*/}
       {/*  {isOpen ? '▲' : '▼'}*/}
       {/*</button>*/}
