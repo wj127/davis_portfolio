@@ -19,36 +19,30 @@ export const MainNavbar: React.FC = () => {
   return (
     <div className={NavBarStyles.NavbarContainer}>
       <div className={NavBarStyles.InnerWrapper}>
-        <Link href='/'>
-          <div className={NavBarStyles.ImageContainer}>
-            <Image
-              alt='logo image'
-              src={MrDavisLogoGIF}
-              width={50}
-              height={50}
-              unoptimized
-              className={NavBarStyles.ImageLogo}
-            />
-            <p className={NavBarStyles.TextGlitch}>
-              <span aria-hidden='true'>
-                <i>Mr</i>Davis
-              </span>
+        <Link href='/' className={NavBarStyles.ImageContainer}>
+          <Image
+            alt='logo image'
+            src={MrDavisLogoGIF}
+            width={50}
+            height={50}
+            unoptimized
+            className={NavBarStyles.ImageLogo}
+          />
+          <p className={NavBarStyles.TextGlitch}>
+            <span aria-hidden='true'>
               <i>Mr</i>Davis
-              <span aria-hidden='true'>
-                <i>Mr</i>Davis
-              </span>
-            </p>
-          </div>
+            </span>
+            <i>Mr</i>Davis
+            <span aria-hidden='true'>
+              <i>Mr</i>Davis
+            </span>
+          </p>
         </Link>
         <NavigationMenu.Root
           orientation='horizontal'
           className={`${NavBarStyles.NavigationMenuRoot} ${isOpen ? NavBarStyles.Open : ''}`}
         >
           <NavigationMenu.List className={NavBarStyles.NavigationMenuList}>
-            <NavigationMenu.Item>
-              <CustomLink href='/'>Home</CustomLink>
-            </NavigationMenu.Item>
-
             <NavigationMenu.Item>
               <CustomLink href='/cv'>CV</CustomLink>
             </NavigationMenu.Item>
