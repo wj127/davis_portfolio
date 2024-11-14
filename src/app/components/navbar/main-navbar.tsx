@@ -19,25 +19,27 @@ export const MainNavbar: React.FC = () => {
   return (
     <div className={NavBarStyles.NavbarContainer}>
       <div className={NavBarStyles.InnerWrapper}>
-        <div className={NavBarStyles.ImageContainer}>
-          <Image
-            alt='logo image'
-            src={MrDavisLogoGIF}
-            width={50}
-            height={50}
-            unoptimized
-            className={NavBarStyles.ImageLogo}
-          />
-          <p className={NavBarStyles.TextGlitch}>
-            <span aria-hidden='true'>
+        <Link href='/'>
+          <div className={NavBarStyles.ImageContainer}>
+            <Image
+              alt='logo image'
+              src={MrDavisLogoGIF}
+              width={50}
+              height={50}
+              unoptimized
+              className={NavBarStyles.ImageLogo}
+            />
+            <p className={NavBarStyles.TextGlitch}>
+              <span aria-hidden='true'>
+                <i>Mr</i>Davis
+              </span>
               <i>Mr</i>Davis
-            </span>
-            <i>Mr</i>Davis
-            <span aria-hidden='true'>
-              <i>Mr</i>Davis
-            </span>
-          </p>
-        </div>
+              <span aria-hidden='true'>
+                <i>Mr</i>Davis
+              </span>
+            </p>
+          </div>
+        </Link>
         <NavigationMenu.Root
           orientation='horizontal'
           className={`${NavBarStyles.NavigationMenuRoot} ${isOpen ? NavBarStyles.Open : ''}`}
