@@ -1,28 +1,30 @@
 @import "src/styles/varibales";
 
-.NavbarContainer {
+.NavbarContainer, .NavbarContainer:hover {
   position: fixed;
   top: 0;
   left: 0;
   width: 37%;
-  //background-color: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(9px);
   z-index: 1000; /* Ensure it stays above other content */
   background: linear-gradient(to right, rgba(10,10,50,1) 54%, rgba(10,10,50,0) 100%);
 
-  //position: absolute;
-  //background-color: rgba(255, 255, 255, 0.03);
-  ////filter: blur(8px);
-  ////-webkit-filter: blur(8px);
-  //backdrop-filter: blur(18px);
-  ////display: grid;
-  ////grid-template-columns: 20% auto;
-  ////grid-template-rows: 100%;
-  //width: 100%;
+  transition: all 0.8s ease-in;
+}
+
+.Shrink {
+  width: 10%;
+}
+
+.NavbarContainer.Shrink .NavigationMenuLink  {
+  color: transparent;
+
+  &:hover {
+    color: white;
+  }
 }
 
 .InnerWrapper {
-  //position: relative;
   display: flex;
   align-items: center;
   gap: 3rem;
@@ -51,11 +53,9 @@
 
 .NavigationMenuRoot {
   transition: max-height 0.3s ease-in-out;
-  //transition: max-height 3s ease-out, opacity 1s ease-out;
 
   max-height: 0;
   overflow: hidden;
-  //position: relative;
   opacity: 0;
 
   background-color: inherit;
@@ -63,11 +63,8 @@
   justify-content: center;
   width: 80%;
   z-index: 1;
-  //border-bottom: 3px solid $selected-gray;
 
   > div {
-    //position: unset;
-    //margin: 10px 0;
     width: 100%;
   }
 }
@@ -75,7 +72,6 @@
 .Open {
   max-height: fit-content;
   opacity: 1;
-  //height: 6vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -119,7 +115,7 @@
   line-height: 1;
   font-size: 15px;
   color: white;
-  transition: transform .5s;
+  transition: transform .5s, display 0.8s ease-in, font-size 0.3s ease, color 0.8s ease;
 
   &:hover {
     color: #73d9cc;
