@@ -5,29 +5,86 @@
   top: 0;
   left: 0;
   width: 37%;
+  height: 90px;
+  margin-top: 0;
   backdrop-filter: blur(9px);
-  z-index: 1000; /* Ensure it stays above other content */
+  clip-path: unset;
+  z-index: 1000;
   background: linear-gradient(to right, rgba(10,10,50,1) 54%, rgba(10,10,50,0) 100%);
+}
 
-  transition: all 0.8s ease-in;
+.NavbarContainer,
+.NavbarContainer:hover,
+.NavbarContainer.Shrink,
+.NavbarContainer.Shrink:hover {
+  transition:
+    width 0.8s ease-in,
+    height 0.8s ease-in,
+    background 0.8s ease-in,
+    clip-path 0.8s ease-in,
+    opacity 0.8s ease-in,
+    visibility 0.8s ease-in;
 }
 
 .Shrink {
-  width: 10%;
+  width: 5%;
+  clip-path: circle(25%);
+  background: rgba(10, 10, 50, 0.9);
+  overflow: hidden;
 }
 
-.NavbarContainer.Shrink .NavigationMenuLink  {
-  color: transparent;
+.NavbarContainer.Shrink .NavigationMenuLink:not(.active),
+.NavbarContainer.Shrink .ImageContainer  {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease-in, visibility 0.8s ease-in;
+}
 
-  &:hover {
-    color: white;
+.NavbarContainer.Shrink .NavigationMenuLink.active {
+  opacity: 1;
+  visibility: visible;
+  padding: 5px;
+}
+
+.NavbarContainer.Shrink:hover .NavigationMenuLink {
+  opacity: 1;
+  visibility: visible;
+
+  &.active {
+    color: #73d9cc;
   }
+}
+
+.NavbarContainer.Shrink:hover .ImageContainer {
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+}
+
+.NavbarContainer.Shrink .NavigationMenuList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.NavbarContainer.Shrink:hover .NavigationMenuList {
+  justify-content: flex-start;
+}
+
+.NavbarContainer.Shrink .InnerWrapper {
+  justify-content: center;
+}
+
+.NavbarContainer.Shrink:hover .InnerWrapper {
+  justify-content: flex-start;
 }
 
 .InnerWrapper {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 3rem;
+  height: 100%;
 }
 
 .ImageContainer {
@@ -44,6 +101,10 @@
     margin-left: 0.5rem;
     color: white;
   }
+}
+
+.ImageContainer.active {
+  background-color: #F86E12;
 }
 
 .ImageLogo {
@@ -115,26 +176,19 @@
   line-height: 1;
   font-size: 15px;
   color: white;
-  transition: transform .5s, display 0.8s ease-in, font-size 0.3s ease, color 0.8s ease;
+  transition: transform .5s;
+
+  text-align: center;
+  white-space: normal; /* Allows text to wrap */
+  word-wrap: break-word; /* Breaks long words if necessary */
 
   &:hover {
     color: #73d9cc;
   }
 }
 
-.active {
+.NavigationMenuLink.active {
   color: #73d9cc;
-  //background: linear-gradient(360deg, $selected-orange-darker, $selected-orange 70%, #FBAA74);
-  //animation-duration: 35s;
-  //animation-timing-function: ease-in-out;
-  //animation-delay: 0s;
-  //animation-iteration-count: infinite;
-  //animation-direction: alternate;
-  //animation-fill-mode: both;
-  //animation-play-state: running;
-  //animation-name: border-radius-blob;
-  //animation-timeline: auto;
-  //animation-range-start: normal;
 }
 
 .NavigationMenuLink:hover:not(.active) {
