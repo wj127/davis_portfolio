@@ -37,6 +37,7 @@
 .NavbarContainer.Shrink .ImageContainer  {
   opacity: 0;
   visibility: hidden;
+  width: 0;
   transition: opacity 0.8s ease-in, visibility 0.8s ease-in;
 }
 
@@ -49,6 +50,7 @@
 .NavbarContainer.Shrink:hover .NavigationMenuLink {
   opacity: 1;
   visibility: visible;
+  width: auto;
 
   &.active {
     color: #73d9cc;
@@ -59,16 +61,25 @@
   display: flex;
   opacity: 1;
   visibility: visible;
+  width: auto;
 }
 
 .NavbarContainer.Shrink .NavigationMenuList {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  li:not(:has(.active)) {
+    width: 0;
+  }
 }
 
 .NavbarContainer.Shrink:hover .NavigationMenuList {
   justify-content: flex-start;
+
+  li {
+    width: auto;
+  }
 }
 
 .NavbarContainer.Shrink .InnerWrapper {
@@ -93,7 +104,7 @@
   justify-content: center;
   align-items: center;
   height: 100%;
-  //width: 30%;
+  width: auto;
   background: inherit;
   text-decoration: none;
 
@@ -164,10 +175,15 @@
   list-style: none;
   margin: 0;
   height: 100%;
+
+  li {
+    width: auto;
+  }
 }
 
 .NavigationMenuLink {
   display: block;
+  width: auto;
   padding: 8px 12px;
   outline: none;
   user-select: none;
@@ -177,10 +193,6 @@
   font-size: 15px;
   color: white;
   transition: transform .5s;
-
-  text-align: center;
-  white-space: normal; /* Allows text to wrap */
-  word-wrap: break-word; /* Breaks long words if necessary */
 
   &:hover {
     color: #73d9cc;
