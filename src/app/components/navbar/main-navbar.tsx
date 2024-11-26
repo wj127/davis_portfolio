@@ -22,14 +22,25 @@ const options: IntersectionObserverInit = {
 };
 
 export const MainNavbar: React.FC = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isOpen, setIsOpen] = useState(true);
   const [isShrink, setIsShrink] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [isExpanded, setIsExpanded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const navBarRef = React.useRef<HTMLDivElement>(null);
   const sentinelRef = React.useRef<HTMLDivElement>(null);
+  const [isClient, setIsClient] = useState(false);
+
+  // This useEffect is the way to maintain the SSRed HTML equal to the first client render during Hydration, as I'm using resources like window here that is not
+  // available in the server side. This way I can avoid the hydration mismatch error.
+  useEffect(() => setIsClient(true), []);
+
+  const isMobile = isClient && typeof window !== 'undefined' ? window.innerWidth <= 1024 : false;
 
   const navBarCallback = useCallback(
     () => (entries: IntersectionObserverEntry[]) => {
+      if (isMobile) return;
       if (!entries.at(0)?.isIntersecting) {
         document.getElementById('root-nav')?.classList.add(NavBarStyles.Shrink);
         setIsShrink(true);
@@ -38,7 +49,7 @@ export const MainNavbar: React.FC = () => {
         setIsShrink(false);
       }
     },
-    [],
+    [isMobile],
   );
 
   useObserverApi({
@@ -61,22 +72,18 @@ export const MainNavbar: React.FC = () => {
     else setIsShrink(false);
   }, [navBarRef.current?.classList]);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const mustAbbreveate = isShrink && !isHovered;
+  const mustAbbreviate = (isShrink && !isHovered) || (isMobile && !isExpanded);
 
   return (
     <>
       <div ref={sentinelRef} style={{ position: 'absolute', top: '100px' }} />
-      <div
+      <nav
         id='root-nav'
-        className={NavBarStyles.NavbarContainer}
+        className={isMobile ? NavBarStyles.NavbarContainerMobile : NavBarStyles.NavbarContainer}
         ref={navBarRef}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        role='navigation'
       >
         <div className={NavBarStyles.InnerWrapper}>
           <NavigationMenu.Root
@@ -94,6 +101,7 @@ export const MainNavbar: React.FC = () => {
                         width={50}
                         height={50}
                         unoptimized
+                        priority
                         className={NavBarStyles.ImageLogo}
                       />
                       <p className={NavBarStyles.TextGlitch}>
@@ -111,11 +119,11 @@ export const MainNavbar: React.FC = () => {
               </NavigationMenu.Item>
 
               <NavigationMenu.Item>
-                <CustomLink href='/cv'>{mustAbbreveate ? 'CV' : 'Curriculum Vitae'}</CustomLink>
+                <CustomLink href='/cv'>{mustAbbreviate ? 'CV' : 'Curriculum Vitae'}</CustomLink>
               </NavigationMenu.Item>
 
               <NavigationMenu.Item>
-                <CustomLink href='/work-experience'>{mustAbbreveate ? 'WE' : 'Work Experience'}</CustomLink>
+                <CustomLink href='/work-experience'>{mustAbbreviate ? 'WE' : 'Work Experience'}</CustomLink>
               </NavigationMenu.Item>
 
               <NavigationMenu.Item>
@@ -124,10 +132,7 @@ export const MainNavbar: React.FC = () => {
             </NavigationMenu.List>
           </NavigationMenu.Root>
         </div>
-        {/*<button className={NavBarStyles.ToggleButton} onClick={toggleMenu} aria-expanded={isOpen}>*/}
-        {/*  {isOpen ? '▲' : '▼'}*/}
-        {/*</button>*/}
-      </div>
+      </nav>
     </>
   );
 };
