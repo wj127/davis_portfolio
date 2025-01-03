@@ -25,6 +25,32 @@
   background: rgba(10, 10, 50, 1);
   overflow: hidden;
   z-index: 1000;
+  margin-left: 1rem;
+}
+
+.NavbarContainerMobile.Expanded {
+  width: 100%;
+  height: 100vh; /* Or desired height */
+  border-radius: 0;
+  background: radial-gradient(circle at top left, rgba(10, 10, 50, 1) 62%, rgba(10, 10, 50, 0) 145%);
+  clip-path: circle(150% at top left);
+  margin-left: 0;
+  /* Other styles */
+
+  .InnerWrapper {
+    flex-direction: column;
+  }
+
+  .NavigationMenuLink:not(.active),
+  .ImageContainer {
+    opacity: 1;
+    visibility: visible;
+    width: auto;
+  }
+
+  .NavigationMenuList {
+    flex-direction: column;
+  }
 }
 
 .NavbarContainer,
@@ -48,11 +74,19 @@
 }
 
 .NavbarContainer.Shrink .NavigationMenuLink:not(.active),
-.NavbarContainer.Shrink .ImageContainer  {
+.NavbarContainer.Shrink .ImageContainer
+{
   opacity: 0;
   visibility: hidden;
   width: 0;
   transition: opacity 0.8s ease-in, visibility 0.8s ease-in;
+}
+
+.NavbarContainerMobile .NavigationMenuLink:not(.active),
+.NavbarContainerMobile .ImageContainer {
+  opacity: 0;
+  visibility: hidden;
+  width: 0;
 }
 
 .NavbarContainer.Shrink .NavigationMenuLink.active {
@@ -78,7 +112,9 @@
   width: auto;
 }
 
-.NavbarContainer.Shrink .NavigationMenuList {
+.NavbarContainer.Shrink .NavigationMenuList,
+.NavbarContainerMobile .NavigationMenuList
+{
   display: flex;
   justify-content: center;
   align-items: center;

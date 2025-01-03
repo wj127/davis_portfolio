@@ -25,7 +25,6 @@ export const MainNavbar: React.FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isOpen, setIsOpen] = useState(true);
   const [isShrink, setIsShrink] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isExpanded, setIsExpanded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const navBarRef = React.useRef<HTMLDivElement>(null);
@@ -73,13 +72,22 @@ export const MainNavbar: React.FC = () => {
   }, [navBarRef.current?.classList]);
 
   const mustAbbreviate = (isShrink && !isHovered) || (isMobile && !isExpanded);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const isLinkDisabled = isMobile && !isExpanded;
+
+  const onNavbarClickedForMobile = () => {
+    if (!isMobile) return;
+    if (!isExpanded) setIsExpanded(true);
+    else setIsExpanded(false);
+  };
 
   return (
     <>
       <div ref={sentinelRef} style={{ position: 'absolute', top: '100px' }} />
       <nav
         id='root-nav'
-        className={isMobile ? NavBarStyles.NavbarContainerMobile : NavBarStyles.NavbarContainer}
+        // TODO: Fix by sending nothing on the Server and applying an animation on the client side that will make the navbar appear
+        className={`${isMobile ? NavBarStyles.NavbarContainerMobile : NavBarStyles.NavbarContainer} ${isExpanded ? NavBarStyles.Expanded : ''}`}
         ref={navBarRef}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -87,12 +95,13 @@ export const MainNavbar: React.FC = () => {
       >
         <div className={NavBarStyles.InnerWrapper}>
           <NavigationMenu.Root
-            orientation='horizontal'
+            orientation={isMobile && isExpanded ? 'vertical' : 'horizontal'}
             className={`${NavBarStyles.NavigationMenuRoot} ${isOpen ? NavBarStyles.Open : ''}`}
+            onClick={onNavbarClickedForMobile}
           >
             <NavigationMenu.List className={NavBarStyles.NavigationMenuList}>
               <NavigationMenu.Item>
-                <CustomLink href='/' className={NavBarStyles.ImageContainer}>
+                <CustomLink href='/' className={NavBarStyles.ImageContainer} isDisabled={isLinkDisabled}>
                   {
                     <>
                       <Image
@@ -119,15 +128,21 @@ export const MainNavbar: React.FC = () => {
               </NavigationMenu.Item>
 
               <NavigationMenu.Item>
-                <CustomLink href='/cv'>{mustAbbreviate ? 'CV' : 'Curriculum Vitae'}</CustomLink>
+                <CustomLink href='/cv' isDisabled={isLinkDisabled}>
+                  {mustAbbreviate ? 'CV' : 'Curriculum Vitae'}
+                </CustomLink>
               </NavigationMenu.Item>
 
               <NavigationMenu.Item>
-                <CustomLink href='/work-experience'>{mustAbbreviate ? 'WE' : 'Work Experience'}</CustomLink>
+                <CustomLink href='/work-experience' isDisabled={isLinkDisabled}>
+                  {mustAbbreviate ? 'WE' : 'Work Experience'}
+                </CustomLink>
               </NavigationMenu.Item>
 
               <NavigationMenu.Item>
-                <CustomLink href='/blog'>Blog</CustomLink>
+                <CustomLink href='/blog' isDisabled={isLinkDisabled}>
+                  Blog
+                </CustomLink>
               </NavigationMenu.Item>
             </NavigationMenu.List>
           </NavigationMenu.Root>
@@ -137,7 +152,11 @@ export const MainNavbar: React.FC = () => {
   );
 };
 
-const CustomLink: React.FC<React.ComponentProps<typeof Link>> = ({ href, ...props }) => {
+const CustomLink: React.FC<React.ComponentProps<typeof Link> & { isDisabled: boolean }> = ({
+  href,
+  isDisabled,
+  ...props
+}) => {
   const pathname = usePathname();
   const isActive = href === pathname;
 
@@ -147,6 +166,7 @@ const CustomLink: React.FC<React.ComponentProps<typeof Link>> = ({ href, ...prop
         href={href}
         {...props}
         className={`${props.className ? props.className : NavBarStyles.NavigationMenuLink} ${isActive ? NavBarStyles.active : ''}`}
+        {...(isDisabled ? { onClick: (e) => e.preventDefault() } : {})}
       />
     </NavigationMenu.Link>
   );
