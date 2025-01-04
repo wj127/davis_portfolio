@@ -100,6 +100,11 @@ export const MainNavbar: React.FC = () => {
             onClick={onNavbarClickedForMobile}
           >
             <NavigationMenu.List className={NavBarStyles.NavigationMenuList}>
+              {isMobile && isExpanded && (
+                <button className={NavBarStyles.CloseButton} onClick={() => setIsExpanded(false)}>
+                  x
+                </button>
+              )}
               <NavigationMenu.Item>
                 <CustomLink href='/' className={NavBarStyles.ImageContainer} isDisabled={isLinkDisabled}>
                   {
