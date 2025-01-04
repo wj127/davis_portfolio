@@ -57,13 +57,15 @@
   .CloseButton {
     display: block;
     position: absolute;
-    top: 17px;
-    left: 230px;
-    background: none;
-    border: none;
+    top: 9px;
+    left: 7px;
+    background: transparent;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1rem;
     opacity: 1;
+    border-radius: 50%;
+    border: 2px solid white;
+
 
     animation: become-visible 2s ease-in-out;
   }
@@ -95,7 +97,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
-    padding: 2rem 4rem 0 2rem;
+    padding: 2.5rem 4rem 0 3rem;
     position: relative;
   }
 
