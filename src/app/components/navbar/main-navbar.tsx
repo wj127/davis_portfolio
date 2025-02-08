@@ -15,7 +15,7 @@ const options: IntersectionObserverInit = {
   threshold: 0,
 };
 
-export const MainNavbar: React.FC = () => {
+export const MainNavbar: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isOpen, setIsOpen] = useState(true);
   const [isShrink, setIsShrink] = useState(false);
@@ -23,13 +23,6 @@ export const MainNavbar: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
   const navBarRef = React.useRef<HTMLDivElement>(null);
   const sentinelRef = React.useRef<HTMLDivElement>(null);
-  const [isClient, setIsClient] = useState(false);
-
-  // This useEffect is the way to maintain the SSRed HTML equal to the first client render during Hydration, as I'm using resources like window here that is not
-  // available in the server side. This way I can avoid the hydration mismatch error.
-  useEffect(() => setIsClient(true), []);
-
-  const isMobile = isClient && typeof window !== 'undefined' ? window.innerWidth <= 1024 : false;
 
   const navBarCallback = useCallback(
     () => (entries: IntersectionObserverEntry[]) => {
