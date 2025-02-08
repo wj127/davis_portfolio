@@ -9,12 +9,6 @@ import Image from 'next/image';
 import MrDavisLogoGIF from '@public/MrDavis2.gif';
 import { useObserverApi } from '@/app/hooks/observer-api/use-oberser-api';
 
-// const navBarCallback: IntersectionObserverCallback = (entries) => {
-//   if (!entries.at(0)?.isIntersecting) {
-//     document.getElementById('root-nav')?.classList.add(NavBarStyles.Shrink);
-//   } else document.getElementById('root-nav')?.classList.remove(NavBarStyles.Shrink);
-// };
-
 const options: IntersectionObserverInit = {
   root: null,
   rootMargin: '0px',
@@ -87,7 +81,7 @@ export const MainNavbar: React.FC = () => {
       <nav
         id='root-nav'
         // TODO: Fix by sending nothing on the Server and applying an animation on the client side that will make the navbar appear
-        className={`${isMobile ? NavBarStyles.NavbarContainerMobile : NavBarStyles.NavbarContainer} ${isExpanded ? NavBarStyles.Expanded : ''}`}
+        className={`${NavBarStyles.NavBarMain} ${isMobile ? NavBarStyles.NavbarContainerMobile : NavBarStyles.NavbarContainer} ${isExpanded ? NavBarStyles.Expanded : ''}`}
         ref={navBarRef}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
