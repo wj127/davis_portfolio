@@ -69,11 +69,10 @@ export const MainNavbar: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
   };
 
   return (
-    <>
+    <header>
       <div ref={sentinelRef} style={{ position: 'absolute', top: '100px' }} />
       <nav
         id='root-nav'
-        // TODO: Fix by sending nothing on the Server and applying an animation on the client side that will make the navbar appear
         className={`${NavBarStyles.NavBarMain} ${isMobile ? NavBarStyles.NavbarContainerMobile : NavBarStyles.NavbarContainer} ${isExpanded ? NavBarStyles.Expanded : ''}`}
         ref={navBarRef}
         onMouseEnter={handleMouseEnter}
@@ -96,6 +95,7 @@ export const MainNavbar: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
                 <CustomLink href='/' className={NavBarStyles.ImageContainer} isDisabled={isLinkDisabled}>
                   {
                     <>
+                      <i className='bx bx-x' />
                       <Image
                         alt='logo image'
                         src={MrDavisLogoGIF}
@@ -140,7 +140,7 @@ export const MainNavbar: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
           </NavigationMenu.Root>
         </div>
       </nav>
-    </>
+    </header>
   );
 };
 
