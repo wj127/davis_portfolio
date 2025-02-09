@@ -95,7 +95,6 @@ export const MainNavbar: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
                 <CustomLink href='/' className={NavBarStyles.ImageContainer} isDisabled={isLinkDisabled}>
                   {
                     <>
-                      <i className='bx bx-x' />
                       <Image
                         alt='logo image'
                         src={MrDavisLogoGIF}
