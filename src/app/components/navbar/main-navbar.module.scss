@@ -49,13 +49,31 @@
     transition: padding 0.8s ease-in;
   }
 
-  .NavigationMenuLink:not(.active),
-  .ImageContainer {
+  .NavigationMenuLink:not(.active) {
     opacity: 0;
     visibility: hidden;
     width: 0;
 
+    &.ImageContainer {
+      opacity: 0;
+      visibility: hidden;
+      width: 0;
+    }
+
     transition: opacity 0.8s ease-in, visibility 0.8s ease-in;
+  }
+
+  .ImageContainer.active {
+    opacity: 1;
+    visibility: visible;
+    width: auto;
+    gap: 0;
+
+    > p {
+      visibility: hidden;
+      width: 0;
+      display: none;
+    }
   }
 }
 
@@ -245,7 +263,7 @@
 }
 
 .ImageContainer.active {
-  background-color: #F86E12;
+  //background-color: #F86E12;
 }
 
 .ImageLogo {
