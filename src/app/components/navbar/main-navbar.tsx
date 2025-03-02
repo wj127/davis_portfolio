@@ -107,15 +107,9 @@ export const MainNavbar: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
                         priority
                         className={NavBarStyles.ImageLogo}
                       />
-                      <p className={NavBarStyles.TextGlitch}>
-                        <span aria-hidden='true'>
-                          <i>Mr</i>Davis
-                        </span>
+                      <GlitchText>
                         <i>Mr</i>Davis
-                        <span aria-hidden='true'>
-                          <i>Mr</i>Davis
-                        </span>
-                      </p>
+                      </GlitchText>
                     </>
                   }
                 </CustomLink>
@@ -123,19 +117,19 @@ export const MainNavbar: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
 
               <NavigationMenu.Item>
                 <CustomLink href='/cv' isDisabled={isLinkDisabled}>
-                  {mustAbbreviate ? 'CV' : 'Curriculum Vitae'}
+                  <GlitchText>{mustAbbreviate ? 'CV' : 'Curriculum Vitae'}</GlitchText>
                 </CustomLink>
               </NavigationMenu.Item>
 
               <NavigationMenu.Item>
                 <CustomLink href='/work-experience' isDisabled={isLinkDisabled}>
-                  {mustAbbreviate ? 'WE' : 'Work Experience'}
+                  <GlitchText>{mustAbbreviate ? 'WE' : 'Work Experience'}</GlitchText>
                 </CustomLink>
               </NavigationMenu.Item>
 
               <NavigationMenu.Item>
                 <CustomLink href='/blog' isDisabled={isLinkDisabled}>
-                  Blog
+                  <GlitchText>Blog</GlitchText>
                 </CustomLink>
               </NavigationMenu.Item>
             </NavigationMenu.List>
@@ -163,5 +157,15 @@ const CustomLink: React.FC<React.ComponentProps<typeof Link> & { isDisabled: boo
         {...(isDisabled ? { onClick: (e) => e.preventDefault() } : {})}
       />
     </NavigationMenu.Link>
+  );
+};
+
+const GlitchText: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  return (
+    <p>
+      <span aria-hidden='true'>{children}</span>
+      {children}
+      <span aria-hidden='true'>{children}</span>
+    </p>
   );
 };
