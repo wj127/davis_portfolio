@@ -8,6 +8,9 @@ import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import MrDavisLogoGIF from '@public/MrDavis2.gif';
 import { useObserverApi } from '@/app/hooks/observer-api/use-oberser-api';
+import { Bruno_Ace_SC } from 'next/font/google';
+
+const brunoAce = Bruno_Ace_SC({ weight: '400', subsets: ['latin'] });
 
 const options: IntersectionObserverInit = {
   root: null,
@@ -69,7 +72,7 @@ export const MainNavbar: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
   };
 
   return (
-    <header>
+    <header className={brunoAce.className}>
       <div ref={sentinelRef} style={{ position: 'absolute', top: '100px' }} />
       <nav
         id='root-nav'
