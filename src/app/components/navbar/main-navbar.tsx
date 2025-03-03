@@ -7,6 +7,7 @@ import NavBarStyles from '@/app/components/navbar/main-navbar.module.scss';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import MrDavisLogoGIF from '@public/MrDavis2.gif';
+// import MrDavisTransparentLogo from '@public/MrDavis-transparentbg.png';
 import { useObserverApi } from '@/app/hooks/observer-api/use-oberser-api';
 import { Bruno_Ace_SC } from 'next/font/google';
 
