@@ -7,7 +7,7 @@ import NavBarStyles from '@/app/components/navbar/main-navbar.module.scss';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import MrDavisLogoGIF from '@public/MrDavis2.gif';
-// import MrDavisTransparentLogo from '@public/MrDavis-transparentbg.png';
+import MrDavisTransparentLogo from '@public/MrDavis-transparentbg.png';
 import { useObserverApi } from '@/app/hooks/observer-api/use-oberser-api';
 import { Bruno_Ace_SC } from 'next/font/google';
 
@@ -99,15 +99,7 @@ export const MainNavbar: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
                 <CustomLink href='/' className={NavBarStyles.ImageContainer} isDisabled={isLinkDisabled}>
                   {
                     <>
-                      <Image
-                        alt='logo image'
-                        src={MrDavisLogoGIF}
-                        width={50}
-                        height={50}
-                        unoptimized
-                        priority
-                        className={NavBarStyles.ImageLogo}
-                      />
+                      <LogoImage />
                       <GlitchText>
                         <i>Mr</i>Davis
                       </GlitchText>
@@ -168,5 +160,22 @@ const GlitchText: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       {children}
       <span aria-hidden='true'>{children}</span>
     </p>
+  );
+};
+
+const LogoImage: React.FC = () => {
+  const pathname = usePathname();
+  const isActive = pathname === '/';
+
+  return (
+    <Image
+      alt='logo image'
+      src={isActive ? MrDavisLogoGIF : MrDavisTransparentLogo}
+      width={50}
+      height={50}
+      unoptimized
+      priority
+      className={NavBarStyles.ImageLogo}
+    />
   );
 };
