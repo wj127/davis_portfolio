@@ -22,14 +22,54 @@ const texts = [
 
 export const Console: React.FC = () => {
   const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [hasClosed, setHasClosed] = React.useState(false);
+  const [isMinimized, setIsMinimized] = React.useState(false);
+  const [isExpanded, setIsExpanded] = React.useState(false);
+
+  if (hasClosed) return null;
+
+  if (isMinimized) {
+    return (
+      <div className={ConsoleStyles.minimizedConsole} onClick={() => setIsMinimized(false)}>
+        <div className={ConsoleStyles.buttonContainer}>
+          <div
+            id={ConsoleStyles.buttonCancel}
+            className={ConsoleStyles.button}
+            onClick={(e) => {
+              e.stopPropagation();
+              setHasClosed(true);
+            }}
+          />
+          <div
+            id={ConsoleStyles.buttonMaximize}
+            className={ConsoleStyles.button}
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsMinimized(false);
+            }}
+          />
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className={`${ConsoleStyles.consoleWrapper} ${sourceCodePro.variable}`}>
+    <div
+      className={`${ConsoleStyles.consoleWrapper} ${isExpanded ? ConsoleStyles.isExpanded : ''} ${sourceCodePro.variable}`}
+    >
       <div className={ConsoleStyles.consoleTop}>
         <div className={ConsoleStyles.buttonContainer}>
-          <div id={ConsoleStyles.buttonCancel} className={ConsoleStyles.button} />
-          <div id={ConsoleStyles.buttonMinimize} className={ConsoleStyles.button} />
-          <div id={ConsoleStyles.buttonMaximize} className={ConsoleStyles.button} />
+          <div id={ConsoleStyles.buttonCancel} className={ConsoleStyles.button} onClick={() => setHasClosed(true)} />
+          <div
+            id={ConsoleStyles.buttonMinimize}
+            className={ConsoleStyles.button}
+            onClick={() => setIsMinimized(true)}
+          />
+          <div
+            id={ConsoleStyles.buttonMaximize}
+            className={ConsoleStyles.button}
+            onClick={() => setIsExpanded(!isExpanded)}
+          />
         </div>
       </div>
       <div>
