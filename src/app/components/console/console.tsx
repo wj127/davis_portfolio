@@ -14,10 +14,13 @@ const sourceCodePro = Source_Code_Pro({
 });
 
 const texts = [
-  'Hey! This is Davis. Welcome to my website :D',
-  'I am a software engineer with a passion for web development',
-  'I am a full stack developer with experience in React, Node.js, and Python',
-  'I am also a cybersecurity enthusiast and a CTF player',
+  'Hey you, yeah YOU! 🫵🏼',
+  "Don't be shy, let's get to know each other 😉",
+  "I'm Davis, a huble entrepreneur and occasional angel investor.",
+  'I also work full time as a software engineer with a passion for creating amazing things.',
+  "I'm an entrepreneurial software engineer who aligns technical decisions with business growth, customer retention, and product quality.",
+  'Having contributed to multiple ventures, I leverage strategic business insights in my coding approach that emphasizes in rigorous testing and scalable engineering solutions that directly drive business success 🚀.',
+  'Now, I DARE you go and check the rest of my portfolio. 😏',
 ];
 
 export const Console: React.FC = () => {
