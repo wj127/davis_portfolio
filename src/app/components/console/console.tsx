@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import ConsoleStyles from '@/app/components/console/console.module.scss';
 import { TerminalCursor } from '@/app/components/console/terminal-cursor';
 import { TerminalText } from '@/app/components/console/terminal-text';
@@ -16,7 +16,7 @@ const sourceCodePro = Source_Code_Pro({
 const texts = [
   'Hey you, yeah YOU! 🫵🏼',
   "Don't be shy, let's get to know each other 😉",
-  "I'm Davis, a huble entrepreneur and occasional angel investor.",
+  "I'm Davis, a humble entrepreneur and occasional angel investor.",
   'I also work full time as a software engineer with a passion for creating amazing things.',
   "I'm an entrepreneurial software engineer who aligns technical decisions with business growth, customer retention, and product quality.",
   'Having contributed to multiple ventures, I leverage strategic business insights in my coding approach that emphasizes in rigorous testing and scalable engineering solutions that directly drive business success 🚀.',
@@ -28,6 +28,13 @@ export const Console: React.FC = () => {
   const [hasClosed, setHasClosed] = React.useState(false);
   const [isMinimized, setIsMinimized] = React.useState(false);
   const [isExpanded, setIsExpanded] = React.useState(false);
+  const scrollableAreaRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollableAreaRef.current) {
+      scrollableAreaRef.current.scrollTop = scrollableAreaRef.current.scrollHeight;
+    }
+  }, [currentIndex]);
 
   if (hasClosed) return null;
 
@@ -75,7 +82,7 @@ export const Console: React.FC = () => {
           />
         </div>
       </div>
-      <div>
+      <div ref={scrollableAreaRef}>
         {currentIndex > 0 &&
           texts.slice(0, currentIndex).map((text, index) => (
             <div className={ConsoleStyles.consoleTextWrapper} key={index}>
