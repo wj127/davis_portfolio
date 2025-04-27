@@ -29,6 +29,14 @@
   border-top-right-radius: 0;
   z-index: 900;
   transition: all 0.2s ease;
+
+  @media screen and (max-width: 500px) {
+    top: 98px;
+  }
+
+  @media screen and (min-width: 3780px) {
+    top: 110px;
+  }
 }
 
 .minimizedConsole {
@@ -77,7 +85,6 @@
   display: inline-block;
   width: 10px;
   background-color: lime;
-  //margin-left: 5px;
   animation: blink 1s step-start infinite;
 
   @keyframes blink {
