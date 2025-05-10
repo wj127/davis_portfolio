@@ -1,0 +1,108 @@
+@import "src/styles/varibales";
+
+// TOC Container - positioned in the lower left corner
+.tocContainer {
+  position: fixed;
+  bottom: 4%;
+  margin-left: 4%;
+  z-index: 100;
+  max-height: 80vh;
+  overflow-x: visible;
+
+  @media screen and (min-width: 2500px) {
+    margin-left: 2%;
+  }
+}
+
+// Timeline
+.timeline {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+// Timeline Items
+.timelineItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  
+  &:last-child {
+    .timelineLine {
+      display: none;
+    }
+  }
+
+  &:hover {
+    .timelineDot {
+      transform: scale(1.1);
+      border-color: $selected-orange;
+      
+      + .timelineLine {
+        transform: translateX(15px) skewX(-15deg);
+        background: linear-gradient(to bottom, $selected-orange, rgba(255, 255, 255, 0.3));
+      }
+      
+      .dateInfo {
+        .date, .month, .year {
+          color: $selected-orange;
+        }
+      }
+    }
+    
+    &:last-child .timelineDot {
+      transform: scale(1.1);
+    }
+    
+    &:not(:last-child) .timelineDot {
+      transform: scale(1.1) translateX(25px);
+    }
+  }
+}
+
+// Timeline Dot (Circle with date)
+.timelineDot {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(40, 44, 52, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+// Timeline Connecting Line
+.timelineLine {
+  width: 2px;
+  height: 40px;
+  background-color: rgba(20, 19, 19, 0.974);
+  margin: 5px 0;
+  transition: all 0.3s ease;
+  
+  @media (max-width: 576px) {
+    height: 30px;
+  }
+}
+
+// Date Information
+.dateInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  text-align: center;
+  
+  .year {
+    color: white;
+    font-size: .7rem;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+} 
