@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   description: 'Welcome to my portfolio',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const viewport = cookieStore.get('viewport')?.value;
   const isMobile = viewport === 'mobile';
   return (

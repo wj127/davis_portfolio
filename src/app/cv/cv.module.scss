@@ -9,3 +9,24 @@
   height: 100vh;
   background-color: #FAA066;
 }
+
+.horizontalContainer {
+  display: flex;                        /* Lay out children in a row */
+  overflow-x: auto;                     /* Enable horizontal scrolling */
+  scroll-snap-type: x mandatory;        /* Snap to each section */
+  height: 100vh;                        /* Full viewport height */
+}
+
+.yearSection {
+  flex: 0 0 100%;                       /* Each section = full viewport width */
+  //scroll-snap-align: start;             /* Snap alignment */
+  /* Optional styling… */
+  display: flex;                        /* Center content */
+  justify-content: center;              /* Center horizontally */
+  align-items: center;                  /* Center vertically */
+
+  & h1 {
+    font-size: 7rem;                    /* Adjust font size as needed */
+    color: black;                       /* Text color */
+  }
+}
