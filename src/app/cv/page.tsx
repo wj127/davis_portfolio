@@ -41,7 +41,7 @@ export default function CurriculumVitae() {
 
   return (
     <div className={brunoAce.className}>
-      <Toc activeYear={activeYear} />
+      <Toc activeYear={activeYear} sectionRefs={sectionRefs} containerRef={containerRef} />
       <div ref={containerRef} className={styles.horizontalContainer}>
         {timelineYears.map((year) => (
           <section
