@@ -12,9 +12,16 @@
 
 .horizontalContainer {
   display: flex;                        /* Lay out children in a row */
-  overflow-x: auto;                     /* Enable horizontal scrolling */
-  scroll-snap-type: x mandatory;        /* Snap to each section */
+  flex-direction: column;              /* Column layout for smaller screens */
   height: 100vh;                        /* Full viewport height */
+  width: 100vw;                         /* Full viewport width */
+  overflow-y: scroll;                  /* Hide vertical overflow */
+
+  @media screen and (min-width: 1025px) {
+    flex-direction: row;                /* Row layout for larger screens */
+    overflow-x: auto;                     /* Enable horizontal scrolling */
+    scroll-snap-type: x mandatory;        /* Snap to each section */
+  }
 }
 
 .yearSection {
