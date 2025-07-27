@@ -7,12 +7,12 @@ import { TimeLineSections } from '@/app/cv/constants/sections';
 // Static array of years for the timeline
 const timelineYears = TimeLineSections.map(({ year }) => year);
 
-export const Toc: React.FC = () => {
+export const Toc: React.FC<{ activeYear: number }> = ({ activeYear }) => {
   return (
     <div className={styles.tocContainer}>
       <div className={styles.timeline}>
         {timelineYears.map((year, index) => (
-          <div className={styles.timelineItem} key={index}>
+          <div className={[styles.timelineItem, year === activeYear ? styles.active : ''].join(' ')} key={index}>
             <div className={styles.timelineDot}>
               <div className={styles.dateInfo}>
                 <span className={styles.year}>{year}</span>

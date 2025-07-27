@@ -35,7 +35,7 @@
     }
   }
 
-  &:hover {
+  &:hover, &.active {
     .timelineDot {
       transform: scale(1.1);
       border-color: $selected-orange;
