@@ -30,3 +30,22 @@
     color: black;                       /* Text color */
   }
 }
+
+.companySection {
+  flex: 0 0 100%;                       /* Each section = full viewport width */
+  display: flex;                        /* Center content */
+  justify-content: center;              /* Center horizontally */
+  align-items: center;                  /* Center vertically */
+  background-color: #F86E12;            /* Background color for company section */
+
+  & h2 {
+    font-size: 5rem;                    /* Adjust font size as needed */
+    color: black;                       /* Text color */
+  }
+}
+
+.companyLogo {
+  width: 500px;                         /* Adjust logo size */
+  height: auto;                         /* Maintain aspect ratio */
+  margin-left: 100px;                         /* Spacing around the logo */
+}

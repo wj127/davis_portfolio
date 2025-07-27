@@ -1,13 +1,13 @@
 'use client';
 
 import { Toc } from 'src/app/cv/components/toc/Toc';
-import { useEffect, useRef } from 'react';
+import { Fragment, useEffect, useRef } from 'react';
 import styles from 'src/app/cv/cv.module.scss';
 import { Bruno_Ace_SC } from 'next/font/google';
+import Image from 'next/image';
+import { TimeLineSections } from '@/app/cv/constants/sections';
 
 const brunoAce = Bruno_Ace_SC({ weight: '400', subsets: ['latin'] });
-
-const timelineYears = [2023, 2020, 2018, 2015, 2012];
 
 export default function CurriculumVitae() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -35,17 +35,20 @@ export default function CurriculumVitae() {
       {/*</section>*/}
       {/*<section className={CVStyles.sectionTwo}></section>*/}
       <div ref={containerRef} className={styles.horizontalContainer}>
-        {timelineYears.map((year) => (
-          <section
-            key={year}
-            /* @ts-ignore */
-            ref={(el) => (sectionRefs.current[year] = el)}
-            className={styles.yearSection}
-            id={`year-${year}`}
-          >
-            <h1>{year}</h1>
-            {/* Your content here */}
-          </section>
+        {TimeLineSections.map(({ year, id, logo }) => (
+          <Fragment key={id}>
+            <section
+              /* @ts-ignore */
+              ref={(el) => (sectionRefs.current[year] = el)}
+              className={styles.yearSection}
+              id={id}
+            >
+              <h1>{year}</h1>
+            </section>
+            <section className={styles.companySection}>
+              <Image src={logo} alt='InAtlas Logo' width={500} height={500} className={styles.companyLogo} />
+            </section>
+          </Fragment>
         ))}
       </div>
     </div>

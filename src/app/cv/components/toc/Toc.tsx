@@ -2,9 +2,10 @@
 
 import React from 'react';
 import styles from 'src/app/cv/components/toc/Toc.module.scss';
+import { TimeLineSections } from '@/app/cv/constants/sections';
 
 // Static array of years for the timeline
-const timelineYears = [2023, 2020, 2018, 2015, 2012];
+const timelineYears = TimeLineSections.map(({ year }) => year);
 
 export const Toc: React.FC = () => {
   return (
