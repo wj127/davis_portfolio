@@ -6,10 +6,9 @@ import styles from 'src/app/cv/cv.module.scss';
 import { Bruno_Ace_SC } from 'next/font/google';
 import { useTocObserver } from '@/app/cv/hooks/toc-observer';
 import Image from 'next/image';
-import { TimeLineSections } from '@/app/cv/constants/sections';
+import { TimeLineSections, timelineYears } from '@/app/cv/constants/sections';
 
 const brunoAce = Bruno_Ace_SC({ weight: '400', subsets: ['latin'] });
-const timelineYears = TimeLineSections.map(({ year }) => year);
 
 export default function CurriculumVitae() {
   const [activeYear, setActiveYear] = useState(timelineYears[0]);

@@ -20,13 +20,13 @@ export const TimeLineSections = [
   {
     year: 2021,
     colour: '#f0f0f0',
-    id: 'year-2021-bis',
+    id: 'year-2021',
     logo: ProptexLogo,
   },
   {
-    year: 2021,
+    year: 2016,
     colour: '#f0f0f0',
-    id: 'year-2021',
+    id: 'year-2016',
     logo: InAtlasLogo,
   },
   {
@@ -36,3 +36,5 @@ export const TimeLineSections = [
     logo: BCNUniLogo,
   },
 ] as const;
+
+export const timelineYears = TimeLineSections.map(({ year }) => year).filter(Boolean);

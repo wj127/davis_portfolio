@@ -1,4 +1,5 @@
-import { MutableRefObject, RefObject, useEffect } from 'react';
+import { Dispatch, MutableRefObject, RefObject, SetStateAction, useEffect } from 'react';
+import { timelineYears as TimelineYears } from '@/app/cv/constants/sections';
 
 export const useTocObserver = ({
   timelineYears,
@@ -9,7 +10,7 @@ export const useTocObserver = ({
   timelineYears: number[];
   sectionRefs: MutableRefObject<Record<number, HTMLElement | null>>;
   containerRef: RefObject<HTMLDivElement>;
-  setActiveYear: (year: number) => void;
+  setActiveYear: Dispatch<SetStateAction<(typeof TimelineYears)[number]>>;
 }) => {
   useEffect(() => {
     if (!containerRef.current) return;
@@ -22,7 +23,7 @@ export const useTocObserver = ({
             const yearMatch = target.id?.match(/year-(\d+)/);
             if (yearMatch?.[1]) {
               const year = Number(yearMatch[1]);
-              setActiveYear(year);
+              setActiveYear(year as (typeof TimelineYears)[number]);
             }
           }
         });
