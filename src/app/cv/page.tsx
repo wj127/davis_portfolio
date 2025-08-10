@@ -29,11 +29,9 @@ export default function CurriculumVitae() {
     const container = containerRef.current;
     function onWheel(wheelEvent: WheelEvent) {
       if (!container) return;
-      wheelEvent.preventDefault(); // Stop vertical scroll
-      container.scrollBy({
-        left: wheelEvent.deltaY, // Use vertical delta to scroll horizontally
-        // behavior: 'smooth',
-      });
+      wheelEvent.preventDefault();
+      // With row-reverse, positive left scroll moves visually right-to-left
+      container.scrollBy({ left: -wheelEvent.deltaY });
     }
     container?.addEventListener('wheel', onWheel, { passive: false });
     return () => container?.removeEventListener('wheel', onWheel);

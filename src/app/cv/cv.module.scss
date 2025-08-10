@@ -18,7 +18,7 @@
   overflow-y: scroll;                  /* Hide vertical overflow */
 
   @media screen and (min-width: 1025px) {
-    flex-direction: row;                /* Row layout for larger screens */
+    flex-direction: row-reverse;        /* Reverse row layout for larger screens to show latest at initial view */
     overflow-x: auto;                     /* Enable horizontal scrolling */
     scroll-snap-type: x mandatory;        /* Snap to each section */
   }
