@@ -32,6 +32,14 @@
   justify-content: center;              /* Center horizontally */
   align-items: center;                  /* Center vertically */
 
+  > div {
+    width: 100%;                        /* Full width for the inner div */
+    flex-direction: column;
+    display: flex;                      /* Flexbox for inner content */
+    justify-content: center;            /* Center horizontally */
+    align-items: center;                /* Center vertically */
+  }
+
   & h1 {
     font-size: 7rem;                    /* Adjust font size as needed */
     color: black;                       /* Text color */
@@ -54,5 +62,22 @@
 .companyLogo {
   width: 500px;                         /* Adjust logo size */
   height: auto;                         /* Maintain aspect ratio */
-  margin-left: 100px;                         /* Spacing around the logo */
+  margin-left: 100px;                   /* Spacing around the logo */
+
+  opacity: 0;                           /* hidden before reveal */
+  transition: transform 1600ms ease, opacity 1600ms ease;
+  will-change: transform, opacity;      /* Hint for smoother animation */
+
+  &[data-index-type='even'] {
+    transform: translateY(160px);       /* start from bottom for even */
+  }
+
+  &[data-index-type='odd'] {
+    transform: translateY(-160px);      /* start from top for odd */
+  }
+
+  &[data-visible='true'] {
+    transform: translateY(0);           /* move to center when visible */
+    opacity: 1;
+  }
 }
