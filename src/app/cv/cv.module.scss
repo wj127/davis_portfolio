@@ -47,15 +47,22 @@
 }
 
 .companySection {
-  flex: 0 0 100%;                       /* Each section = full viewport width */
+  //flex: 0 0 100%;                       /* Each section = full viewport width */
+  flex: 0 0 80%;
   display: flex;                        /* Center content */
-  justify-content: center;              /* Center horizontally */
+  flex-direction: row-reverse;
+  justify-content: flex-start;              /* Center horizontally */
   align-items: center;                  /* Center vertically */
   background-color: #F86E12;            /* Background color for company section */
 
   & h2 {
     font-size: 5rem;                    /* Adjust font size as needed */
     color: black;                       /* Text color */
+  }
+
+  & p {
+    max-width: 600px;                /* Limit paragraph width */
+    margin-left: 13rem;                /* Spacing between text and logo */
   }
 }
 

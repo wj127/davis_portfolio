@@ -12,7 +12,7 @@ export type RevealContentObserverProps = {
 export const useRevealContentObserver = ({
   targetRefs,
   threshold = 1,
-  rootMargin = '0px',
+  rootMargin = '0px', // Adjust as needed
   revealOnce = true,
   visibleAttrName = 'data-visible',
 }: RevealContentObserverProps) => {
