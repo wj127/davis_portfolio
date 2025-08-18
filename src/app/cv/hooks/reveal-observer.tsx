@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import styles from 'src/app/cv/cv.module.scss';
 
 export type RevealContentObserverProps = {
   targetRefs: (HTMLElement | null)[];
@@ -23,6 +24,13 @@ export const useRevealContentObserver = ({
           const target = entry.target as HTMLElement;
           if (entry.isIntersecting) {
             target.setAttribute(visibleAttrName, 'true');
+
+            // NEW: reset any accidental pre-reveal scroll and arm a short delay
+            if (target.matches?.(`.${styles.yScroll}`)) {
+              target.scrollTop = 0;
+              target.setAttribute('data-activate-at', String(Date.now() + 250)); // 250ms guard
+            }
+
             if (revealOnce) observer.unobserve(target);
           }
         });

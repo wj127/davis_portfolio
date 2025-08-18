@@ -23,7 +23,7 @@
   @media screen and (min-width: 1025px) {
     flex-direction: row-reverse;        /* Reverse row layout for larger screens to show latest at initial view */
     overflow-x: auto;                     /* Enable horizontal scrolling */
-    scroll-snap-type: x mandatory;        /* Snap to each section */
+    scroll-snap-type: x proximity;        /* Snap to each section */
   }
 }
 
@@ -93,6 +93,11 @@
 
   /* Hide scrollbar for Firefox */
   scrollbar-width: none;
+}
+
+.yScroll:not([data-visible="true"]) {
+  pointer-events: none;      /* ignore wheel/clicks while hidden */
+  overflow-y: hidden;        /* avoid any accidental inner scroll */
 }
 
 .companyLogo {

@@ -10,7 +10,6 @@ import { TimeLineSections, timelineYears } from '@/app/cv/constants/sections';
 import { useRevealContentObserver } from '@/app/cv/hooks/reveal-observer';
 
 const brunoAce = Bruno_Ace_SC({ weight: '400', subsets: ['latin'] });
-const Y_SCROLL_SELECTOR = `.${styles.yScroll}`;
 
 export default function CurriculumVitae() {
   const [activeYear, setActiveYear] = useState(timelineYears[0]);
@@ -34,38 +33,37 @@ export default function CurriculumVitae() {
     if (isMobile) return;
     const container = containerRef.current;
 
-    const canScrollVert = (el: HTMLElement, deltaY: number) => {
+    const canScrollVert = (el: HTMLElement, dy: number) => {
       const { scrollTop, scrollHeight, clientHeight } = el;
-      if (scrollHeight <= clientHeight) return false; // no overflow
-      if (deltaY < 0) return scrollTop > 0; // up: not at top
-      if (deltaY > 0) return scrollTop + clientHeight < scrollHeight - 1; // down: not at bottom
+      if (scrollHeight <= clientHeight) return false;
+      if (dy < 0) return scrollTop > 0; // up
+      if (dy > 0) return scrollTop + clientHeight < scrollHeight - 1; // down
       return false;
     };
 
-    const onWheel = (wheelEvent: WheelEvent) => {
-      // If the gesture is already horizontal (trackpad), don’t interfere.
-      if (Math.abs(wheelEvent.deltaX) > Math.abs(wheelEvent.deltaY)) return;
+    const isActiveYScroller = (el: HTMLElement | null) => {
+      if (!el) return false;
+      const visible = el.getAttribute('data-visible') === 'true';
+      if (!visible) return false;
+      const activateAt = Number(el.getAttribute('data-activate-at') ?? 0);
+      return Date.now() >= activateAt; // honor the 250ms guard
+    };
 
-      const target = wheelEvent.target as HTMLElement | null;
-      const yScroller = target?.closest(Y_SCROLL_SELECTOR) as HTMLElement | null;
+    const onWheel = (e: WheelEvent) => {
+      // Trackpads: if strong horizontal intent, don't interfere
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
 
-      // If we're inside a whitelisted vertical scroller that can still scroll in this direction, let it handle the wheel
-      if (yScroller && canScrollVert(yScroller, wheelEvent.deltaY)) {
-        const computedStyle = window.getComputedStyle(yScroller);
-        const matrix = new DOMMatrix(computedStyle.transform);
-        const isVisible = matrix.m41 === 0; // m41 is translateX
-        if (!isVisible) return;
+      const target = e.target as HTMLElement | null;
+      const yScroller = target?.closest(`.${styles.yScroll}`) as HTMLElement | null;
 
-        wheelEvent.preventDefault();
-        // Manually scroll with reduced speed
-        yScroller.scrollBy({ top: wheelEvent.deltaY * 0.5, behavior: 'smooth' });
-        return; // no preventDefault -> vertical scroll proceeds
+      if (isActiveYScroller(yScroller) && canScrollVert(yScroller!, e.deltaY)) {
+        e.preventDefault();
+        yScroller!.scrollBy({ top: e.deltaY, behavior: 'smooth' }); // 'auto' feels most native
+      } else {
+        // IMPORTANT: never fall through to default; take horizontal control
+        e.preventDefault();
+        container?.scrollBy({ left: -e.deltaY }); // row-reverse compensation
       }
-
-      // Otherwise, translate wheel to horizontal timeline scroll
-      wheelEvent.preventDefault();
-      // With row-reverse, positive left scroll moves visually right-to-left
-      container?.scrollBy({ left: -wheelEvent.deltaY, behavior: 'auto' });
     };
 
     // function onWheel(wheelEvent: WheelEvent) {
