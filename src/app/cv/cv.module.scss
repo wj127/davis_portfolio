@@ -17,10 +17,13 @@
   width: 100vw;                         /* Full viewport width */
   overflow-y: scroll;                  /* Hide vertical overflow */
 
+  overscroll-behavior-x: contain;
+  overscroll-behavior-y: none;
+
   @media screen and (min-width: 1025px) {
-    flex-direction: row;                /* Row layout for larger screens */
+    flex-direction: row-reverse;        /* Reverse row layout for larger screens to show latest at initial view */
     overflow-x: auto;                     /* Enable horizontal scrolling */
-    scroll-snap-type: x mandatory;        /* Snap to each section */
+    scroll-snap-type: x proximity;        /* Snap to each section */
   }
 }
 
@@ -32,8 +35,90 @@
   justify-content: center;              /* Center horizontally */
   align-items: center;                  /* Center vertically */
 
+  > div {
+    width: 100%;                        /* Full width for the inner div */
+    flex-direction: column;
+    display: flex;                      /* Flexbox for inner content */
+    justify-content: center;            /* Center horizontally */
+    align-items: center;                /* Center vertically */
+  }
+
   & h1 {
     font-size: 7rem;                    /* Adjust font size as needed */
     color: black;                       /* Text color */
+  }
+}
+
+.companySection {
+  //flex: 0 0 100%;                       /* Each section = full viewport width */
+  flex: 0 0 80%;
+  display: flex;                        /* Center content */
+  flex-direction: row-reverse;
+  justify-content: flex-start;              /* Center horizontally */
+  align-items: center;                  /* Center vertically */
+  background-color: #F86E12;            /* Background color for company section */
+
+  & h2 {
+    font-size: 5rem;                    /* Adjust font size as needed */
+    color: black;                       /* Text color */
+  }
+
+  & div {
+    width: 60%;                        /* Limit paragraph width */
+    margin-left: 13rem;                /* Spacing between text and logo */
+
+    opacity: 0;                           /* hidden before reveal */
+    transform: translateX(-100px);        /* start from left */
+    transition: transform 1200ms ease-out, opacity 1200ms ease-out;
+    will-change: transform, opacity, scale; /* Hint for smoother animation */
+
+    &[data-visible='true'] {
+      transform: translateX(0);           /* slide to original position */
+      opacity: 1;
+    }
+  }
+}
+
+.yScroll {
+  max-height: 50vh;              /* adjust taste */
+  overflow-y: auto;
+  overscroll-behavior: auto;  /* don’t bubble until top/bottom */
+  padding-right: 1rem;           /* room for scrollbar */
+  scrollbar-gutter: stable;      /* avoid layout jump when bar appears */
+
+  /* Hide scrollbar for webkit browsers */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for Firefox */
+  scrollbar-width: none;
+}
+
+.yScroll:not([data-visible="true"]) {
+  pointer-events: none;      /* ignore wheel/clicks while hidden */
+  overflow-y: hidden;        /* avoid any accidental inner scroll */
+}
+
+.companyLogo {
+  width: 500px;                         /* Adjust logo size */
+  height: auto;                         /* Maintain aspect ratio */
+  margin-left: 100px;                   /* Spacing around the logo */
+
+  opacity: 0;                           /* hidden before reveal */
+  transition: transform 1600ms ease, opacity 1600ms ease;
+  will-change: transform, opacity;      /* Hint for smoother animation */
+
+  &[data-index-type='even'] {
+    transform: translateY(160px);       /* start from bottom for even */
+  }
+
+  &[data-index-type='odd'] {
+    transform: translateY(-160px);      /* start from top for odd */
+  }
+
+  &[data-visible='true'] {
+    transform: translateY(0);           /* move to center when visible */
+    opacity: 1;
   }
 }

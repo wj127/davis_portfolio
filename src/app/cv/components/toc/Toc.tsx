@@ -1,27 +1,13 @@
 'use client';
 
-import React, { MutableRefObject, RefObject } from 'react';
+import React from 'react';
 import styles from 'src/app/cv/components/toc/Toc.module.scss';
+import { TimeLineSections } from '@/app/cv/constants/sections';
 
 // Static array of years for the timeline
-const timelineYears = [2023, 2020, 2018, 2015, 2012];
+const timelineYears = TimeLineSections.map(({ year }) => year);
 
-export const Toc: React.FC<{
-  activeYear: number;
-  sectionRefs: MutableRefObject<Record<number, HTMLElement | null>>;
-  containerRef: RefObject<HTMLDivElement>;
-}> = ({ activeYear, containerRef, sectionRefs }) => {
-  const scrollToYear = (year: number) => {
-    const section = sectionRefs.current[year];
-    if (section && containerRef.current) {
-      section.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-        inline: 'nearest',
-      });
-    }
-  };
-
+export const Toc: React.FC<{ activeYear: number }> = ({ activeYear }) => {
   return (
     <div className={styles.tocContainer}>
       <div className={styles.timeline}>
@@ -29,7 +15,10 @@ export const Toc: React.FC<{
           <div
             className={[styles.timelineItem, year === activeYear ? styles.active : ''].join(' ')}
             key={index}
-            onClick={() => scrollToYear(year)}
+            onClick={() => {
+              const element = document.getElementById(`year-${year}`);
+              element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }}
           >
             <div className={styles.timelineDot}>
               <div className={styles.dateInfo}>
