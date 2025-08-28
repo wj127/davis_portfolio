@@ -19,6 +19,10 @@
   display: flex;
   flex-direction: column;
   position: relative;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row-reverse;
+  }
 }
 
 // Timeline Items
@@ -28,6 +32,10 @@
   align-items: center;
   position: relative;
   cursor: pointer;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row-reverse;
+  }
   
   &:last-child {
     .timelineLine {
@@ -43,6 +51,10 @@
       + .timelineLine {
         transform: translateX(15px) skewX(-15deg);
         background: linear-gradient(to bottom, $selected-orange, rgba(255, 255, 255, 0.3));
+
+        @media screen and (min-width: 768px) {
+          transform: translateY(-15px) skewY(-15deg);
+        }
       }
       
       .dateInfo {
@@ -58,6 +70,10 @@
     
     &:not(:last-child) .timelineDot {
       transform: scale(1.1) translateX(25px);
+
+      @media screen and (min-width: 768px) {
+        transform: scale(1.1) translateY(-25px);
+      }
     }
   }
 }
@@ -84,6 +100,12 @@
   background-color: rgba(20, 19, 19, 0.974);
   margin: 5px 0;
   transition: all 0.3s ease;
+
+  @media screen and (min-width: 768px) {
+    width: 40px;
+    height: 2px;
+    margin: 0 5px;
+  }
   
   @media (max-width: 576px) {
     height: 30px;
