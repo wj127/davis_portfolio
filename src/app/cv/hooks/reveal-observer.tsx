@@ -7,15 +7,17 @@ export type RevealContentObserverProps = {
   rootMargin?: string;
   revealOnce?: boolean;
   visibleAttrName?: string; // attribute toggled on target when visible
+  activateDelayMs?: number; // new: how long to delay vertical handoff after reveal
 };
 
 // Observes provided elements and toggles a data attribute when they become visible.
 export const useRevealContentObserver = ({
   targetRefs,
-  threshold = 1,
-  rootMargin = '0px', // Adjust as needed
+  threshold = 0.35,
+  rootMargin = '0px 15% 0px 15%', // Adjust as needed
   revealOnce = true,
   visibleAttrName = 'data-visible',
+  activateDelayMs = 1200, // match CSS transition in `yScroll`
 }: RevealContentObserverProps) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -27,11 +29,14 @@ export const useRevealContentObserver = ({
 
             // NEW: reset any accidental pre-reveal scroll and arm a short delay
             if (target.matches?.(`.${styles.yScroll}`)) {
-              target.scrollTop = 0;
-              target.setAttribute('data-activate-at', String(Date.now() + 250)); // 250ms guard
+              const targetRect = entry.boundingClientRect;
+              const rootRect = entry.rootBounds;
+              if (targetRect.left > rootRect!.left) target.scrollTop = target.scrollHeight;
+              else target.scrollTop = 0;
+              target.setAttribute('data-activate-at', String(Date.now() + activateDelayMs));
             }
 
-            if (revealOnce) observer.unobserve(target);
+            // if (revealOnce) observer.unobserve(target);
           }
         });
       },
@@ -48,5 +53,5 @@ export const useRevealContentObserver = ({
       });
       observer.disconnect();
     };
-  }, [targetRefs, threshold, rootMargin, revealOnce, visibleAttrName]);
+  }, [targetRefs, threshold, rootMargin, revealOnce, visibleAttrName, activateDelayMs]);
 };

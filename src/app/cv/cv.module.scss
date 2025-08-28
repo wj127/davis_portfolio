@@ -82,7 +82,7 @@
 .yScroll {
   max-height: 50vh;              /* adjust taste */
   overflow-y: auto;
-  overscroll-behavior: auto;  /* don’t bubble until top/bottom */
+  overscroll-behavior: contain;  /* don’t bubble until top/bottom */
   padding-right: 1rem;           /* room for scrollbar */
   scrollbar-gutter: stable;      /* avoid layout jump when bar appears */
 

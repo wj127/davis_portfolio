@@ -11,6 +11,8 @@ import { useRevealContentObserver } from '@/app/cv/hooks/reveal-observer';
 
 const brunoAce = Bruno_Ace_SC({ weight: '400', subsets: ['latin'] });
 
+const BUFFER = 24;
+
 export default function CurriculumVitae() {
   const [activeYear, setActiveYear] = useState(timelineYears[0]);
   const [isFirstRender, setIsFirstRender] = useState(false);
@@ -32,38 +34,89 @@ export default function CurriculumVitae() {
     const isMobile = window.innerWidth <= 1025; // Adjust this breakpoint as needed
     if (isMobile) return;
     const container = containerRef.current;
+    if (!container) return;
 
-    const canScrollVert = (el: HTMLElement, dy: number) => {
-      const { scrollTop, scrollHeight, clientHeight } = el;
-      if (scrollHeight <= clientHeight) return false;
-      if (dy < 0) return scrollTop > 0; // up
-      if (dy > 0) return scrollTop + clientHeight < scrollHeight - 1; // down
+    const lockRef = {
+      armedElement: null as HTMLElement | null,
+      activeElement: null as HTMLElement | null,
+      expiresAt: 0,
+    };
+
+    const canScrollVert = (element: HTMLElement, deltaY: number, useBuffer = false) => {
+      const { scrollTop, scrollHeight, clientHeight: innerElementHeight } = element;
+      const top = useBuffer ? BUFFER : 0;
+      const bottom = useBuffer ? BUFFER : 0;
+      if (scrollHeight <= innerElementHeight) return false;
+      if (deltaY < 0) return scrollTop > top; // up
+      if (deltaY > 0) return scrollTop + innerElementHeight < scrollHeight - 1 - bottom; // down
       return false;
     };
 
     const isActiveYScroller = (el: HTMLElement | null) => {
       if (!el) return false;
-      const visible = el.getAttribute('data-visible') === 'true';
-      if (!visible) return false;
+      if (el.getAttribute('data-visible') !== 'true') return false;
       const activateAt = Number(el.getAttribute('data-activate-at') ?? 0);
       return Date.now() >= activateAt; // honor the 250ms guard
     };
 
-    const onWheel = (e: WheelEvent) => {
+    const onWheel = (wheelEvent: WheelEvent) => {
       // Trackpads: if strong horizontal intent, don't interfere
-      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+      if (Math.abs(wheelEvent.deltaX) > Math.abs(wheelEvent.deltaY)) return;
 
-      const target = e.target as HTMLElement | null;
+      const target = wheelEvent.target as HTMLElement | null;
       const yScroller = target?.closest(`.${styles.yScroll}`) as HTMLElement | null;
 
-      if (isActiveYScroller(yScroller) && canScrollVert(yScroller!, e.deltaY)) {
-        e.preventDefault();
-        yScroller!.scrollBy({ top: e.deltaY, behavior: 'smooth' }); // 'auto' feels most native
-      } else {
-        // IMPORTANT: never fall through to default; take horizontal control
-        e.preventDefault();
-        container?.scrollBy({ left: -e.deltaY }); // row-reverse compensation
+      if (!yScroller) {
+        lockRef.armedElement = null;
+        lockRef.activeElement = null;
+        wheelEvent.preventDefault();
+        container?.scrollBy({ left: -wheelEvent.deltaY }); // row-reverse compensation
+        return;
       }
+
+      // checks if the yScroller's "data-activate-at" is in the past
+      if (isActiveYScroller(yScroller)) {
+        // if vertically locked to this element, consume wheel vertically
+        if (lockRef.activeElement === yScroller) {
+          if (canScrollVert(yScroller, wheelEvent.deltaY)) {
+            wheelEvent.preventDefault();
+            yScroller.scrollBy({ top: wheelEvent.deltaY });
+            return;
+          } else {
+            // reached an edge: release vertical lock and fall back to horizontal
+            lockRef.activeElement = null;
+          }
+        }
+
+        // not locked: require a second wheel within a short window to engage vertical
+        const now = Date.now();
+        if (lockRef.armedElement === yScroller && now < lockRef.expiresAt) {
+          // only engage if we’re not at the edge (use small buffer so it doesn’t start at the very top/bottom)
+          if (canScrollVert(yScroller, wheelEvent.deltaY, true)) {
+            lockRef.activeElement = yScroller;
+            wheelEvent.preventDefault();
+            yScroller.scrollBy({ top: wheelEvent.deltaY });
+            return;
+          }
+          // if buffer blocks, let it be horizontal this tick
+        } else {
+          // arm this scroller and eat no vertical yet
+          lockRef.armedElement = yScroller;
+          lockRef.expiresAt = now + 800; // ms window
+          // do not vertical-scroll on first tick -> improves intent
+        }
+      }
+
+      // if (isActiveYScroller(yScroller) && canScrollVert(yScroller!, wheelEvent.deltaY)) {
+      //   wheelEvent.preventDefault();
+      //   yScroller!.scrollBy({ top: e.deltaY }); // 'auto' feels most native
+      // } else {
+      //   // IMPORTANT: never fall through to default; take horizontal control
+      //   e.preventDefault();
+      //   container?.scrollBy({ left: -e.deltaY }); // row-reverse compensation
+      // }
+      wheelEvent.preventDefault();
+      container?.scrollBy({ left: -wheelEvent.deltaY }); // row-reverse compensation
     };
 
     // function onWheel(wheelEvent: WheelEvent) {
@@ -79,46 +132,51 @@ export default function CurriculumVitae() {
 
   return (
     <div className={brunoAce.className}>
+      {/* @ts-ignore */}
       <Toc activeYear={activeYear} sectionRefs={sectionRefs} containerRef={containerRef} />
       <div ref={containerRef} className={styles.horizontalContainer}>
-        {TimeLineSections.map(({ year, id, logo, subTitle, gradientColor, content, colour }, index) => (
-          <Fragment key={id}>
-            <section
-              /* @ts-ignore */
-              ref={(sectionElement) => (sectionRefs.current[year] = sectionElement)}
-              className={styles.yearSection}
-              style={{
-                background: `linear-gradient(90deg, ${gradientColor} 0%, ${gradientColor} 8%, color-mix(in srgb, ${gradientColor} 85%, #3599CA 15%) 15%, color-mix(in srgb, ${gradientColor} 70%, #3599CA 30%) 22%, color-mix(in srgb, ${gradientColor} 50%, #3599CA 50%) 30%, color-mix(in srgb, ${gradientColor} 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%)`,
-              }}
-              id={id}
-            >
-              <div>
-                <h1>{year}</h1>
-                <h3>{subTitle}</h3>
-              </div>
-            </section>
-            <section className={styles.companySection} style={{ background: gradientColor }}>
-              <Image
-                src={logo}
-                alt='InAtlas Logo'
-                data-index-type={index % 2 === 0 ? 'even' : 'odd'}
-                className={styles.companyLogo}
-                ref={(imageElement) => {
-                  contentRefs.current.push(imageElement);
+        {TimeLineSections.map(({ year, id, logo, subTitle, gradientColor, content, colour }, index) => {
+          const imgIndex = index * 2;
+          const divIndex = imgIndex + 1;
+          return (
+            <Fragment key={id}>
+              <section
+                /* @ts-ignore */
+                ref={(sectionElement) => (sectionRefs.current[year] = sectionElement)}
+                className={styles.yearSection}
+                style={{
+                  background: `linear-gradient(90deg, ${gradientColor} 0%, ${gradientColor} 8%, color-mix(in srgb, ${gradientColor} 85%, #3599CA 15%) 15%, color-mix(in srgb, ${gradientColor} 70%, #3599CA 30%) 22%, color-mix(in srgb, ${gradientColor} 50%, #3599CA 50%) 30%, color-mix(in srgb, ${gradientColor} 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%)`,
                 }}
-              />
-              <div
-                className={styles.yScroll}
-                ref={(divElement) => {
-                  contentRefs.current.push(divElement);
-                }}
-                style={{ color: colour }}
+                id={id}
               >
-                {content}
-              </div>
-            </section>
-          </Fragment>
-        ))}
+                <div>
+                  <h1>{year}</h1>
+                  <h3>{subTitle}</h3>
+                </div>
+              </section>
+              <section className={styles.companySection} style={{ background: gradientColor }}>
+                <Image
+                  src={logo}
+                  alt='InAtlas Logo'
+                  data-index-type={index % 2 === 0 ? 'even' : 'odd'}
+                  className={styles.companyLogo}
+                  ref={(imageElement) => {
+                    contentRefs.current[imgIndex] = imageElement;
+                  }}
+                />
+                <div
+                  className={styles.yScroll}
+                  ref={(divElement) => {
+                    contentRefs.current[divIndex] = divElement;
+                  }}
+                  style={{ color: colour }}
+                >
+                  {content}
+                </div>
+              </section>
+            </Fragment>
+          );
+        })}
       </div>
     </div>
   );
