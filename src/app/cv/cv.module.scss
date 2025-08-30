@@ -36,16 +36,24 @@
   align-items: center;                  /* Center vertically */
 
   > div {
-    width: 100%;                        /* Full width for the inner div */
+    width: 60%;                        /* Full width for the inner div */
     flex-direction: column;
     display: flex;                      /* Flexbox for inner content */
     justify-content: center;            /* Center horizontally */
     align-items: center;                /* Center vertically */
+
+    @media screen and (min-width: 768px) {
+      width: 100%;
+    }
   }
 
   & h1 {
-    font-size: 7rem;                    /* Adjust font size as needed */
+    font-size: 4rem;                    /* Adjust font size as needed */
     color: black;                       /* Text color */
+
+    @media screen and (min-width: 768px) {
+      font-size: 7rem;
+    }
   }
 }
 
@@ -53,10 +61,15 @@
   //flex: 0 0 100%;                       /* Each section = full viewport width */
   flex: 0 0 80%;
   display: flex;                        /* Center content */
-  flex-direction: row-reverse;
-  justify-content: flex-start;              /* Center horizontally */
+  flex-direction: column;
+  justify-content: center;              /* Center horizontally */
   align-items: center;                  /* Center vertically */
   background-color: #F86E12;            /* Background color for company section */
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+  }
 
   & h2 {
     font-size: 5rem;                    /* Adjust font size as needed */
