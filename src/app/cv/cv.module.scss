@@ -76,7 +76,7 @@
     color: black;                       /* Text color */
   }
 
-  & div {
+  & > div {
     width: 60%;                        /* Limit paragraph width */
     margin-left: 13rem;                /* Spacing between text and logo */
 
@@ -93,7 +93,6 @@
 }
 
 .yScroll {
-  position: absolute;
   max-height: 50vh;              /* adjust taste */
   overflow-y: auto;
   overscroll-behavior: contain;  /* don’t bubble until top/bottom */
@@ -107,6 +106,22 @@
 
   /* Hide scrollbar for Firefox */
   scrollbar-width: none;
+
+  ul {
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+
+    li {
+      margin-bottom: 0.5rem;
+      margin-left: 1rem;
+      line-height: 1.4;
+    }
+  }
+
+  p {
+    margin: 1rem 0;
+    font-weight: 600;
+  }
 }
 
 .yScroll:not([data-visible="true"]) {

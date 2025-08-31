@@ -4,15 +4,16 @@
 .carouselContainer {
   position: relative;
   width: 100%;
-  height: 100%;
-  background-color: aquamarine;
+  max-height: 50vh;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .navigationContainer {
   position: absolute;
-  left: 1rem;
+  left: -5rem;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -79,6 +80,8 @@
   scroll-behavior: smooth;
   display: flex;
   flex-direction: column;
+  margin-left: 3rem;
+  padding-right: 3rem;
 }
 
 .slide {
@@ -98,30 +101,24 @@
 
 .slideContent {
   width: 100%;
-  height: 100%;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  
-  // Apply the yScroll styles for scrollable content
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  padding-right: 1rem;
-  scrollbar-gutter: stable;
+  height: auto;
+  padding: 0;
+  margin: 0;
 
-  // Hide scrollbar for webkit browsers
-  &::-webkit-scrollbar {
-    display: none;
+  ul {
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+
+    li {
+      margin-bottom: 0.5rem;
+      margin-left: 1rem;
+      line-height: 1.4;
+    }
   }
 
-  // Hide scrollbar for Firefox
-  scrollbar-width: none;
-
-  &:not([data-visible="true"]) {
-    pointer-events: none;
-    overflow-y: hidden;
+  p {
+    margin: 1rem 0;
+    font-weight: 600;
   }
 }
 

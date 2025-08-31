@@ -28,12 +28,16 @@ export const useRevealContentObserver = ({
             target.setAttribute(visibleAttrName, 'true');
 
             // NEW: reset any accidental pre-reveal scroll and arm a short delay
-            if (target.matches?.(`.${styles.yScroll}`)) {
+            const yScrollElement = target.matches?.(`.${styles.yScroll}`)
+              ? target
+              : (target.querySelector(`.${styles.yScroll}`) as HTMLElement);
+
+            if (yScrollElement) {
               const targetRect = entry.boundingClientRect;
               const rootRect = entry.rootBounds;
               if (targetRect.left > rootRect!.left) target.scrollTop = target.scrollHeight;
               else target.scrollTop = 0;
-              target.setAttribute('data-activate-at', String(Date.now() + activateDelayMs));
+              yScrollElement.setAttribute('data-activate-at', String(Date.now() + activateDelayMs));
             }
 
             // if (revealOnce) observer.unobserve(target);

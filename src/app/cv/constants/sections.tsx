@@ -17,7 +17,7 @@ export const TimeLineSections = [
     id: 'year-2024',
     logo: HainokoLogo,
     gradientColor: '#18282f',
-    content: <HainokTextContent />,
+    content: HainokTextContent,
   },
   {
     year: 2022,
@@ -26,7 +26,7 @@ export const TimeLineSections = [
     id: 'year-2022',
     logo: THMLogo,
     gradientColor: '#232c40',
-    content: <THMTextContent />,
+    content: THMTextContent,
   },
   {
     year: 2021,
@@ -35,7 +35,7 @@ export const TimeLineSections = [
     id: 'year-2021',
     logo: ProptexLogo,
     gradientColor: '#fdfdfd',
-    content: <ProptexTextContent />,
+    content: ProptexTextContent,
   },
   {
     year: 2016,
@@ -44,7 +44,7 @@ export const TimeLineSections = [
     id: 'year-2016',
     logo: InAtlasLogo,
     gradientColor: '#9d9d9d',
-    content: <InAtlasTextContent />,
+    content: InAtlasTextContent,
   },
   {
     year: 2013,
@@ -53,7 +53,7 @@ export const TimeLineSections = [
     id: 'year-2013',
     logo: BCNUniLogo,
     gradientColor: '#ffffff',
-    content: <UBTextContent />,
+    content: UBTextContent,
   },
 ] as const;
 
