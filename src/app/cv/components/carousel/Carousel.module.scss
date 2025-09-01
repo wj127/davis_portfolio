@@ -9,6 +9,10 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+
+  @media screen and (min-width: 768px) {
+    margin: 0;
+  }
 }
 
 .navigationContainer {
@@ -80,8 +84,15 @@
   scroll-behavior: smooth;
   display: flex;
   flex-direction: column;
-  margin-left: 3rem;
-  padding-right: 3rem;
+  margin-left: 0;
+  padding: 2rem;
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    margin-left: 3rem;
+    padding: 0 3rem 0 0;
+    text-align: unset;
+  }
 }
 
 .slide {

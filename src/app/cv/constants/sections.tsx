@@ -17,6 +17,7 @@ export const TimeLineSections = [
     id: 'year-2024',
     logo: HainokoLogo,
     gradientColor: '#18282f',
+    className: 'hainokBackground',
     content: HainokTextContent,
   },
   {
@@ -26,6 +27,7 @@ export const TimeLineSections = [
     id: 'year-2022',
     logo: THMLogo,
     gradientColor: '#232c40',
+    className: 'thmBackground',
     content: THMTextContent,
   },
   {
@@ -35,6 +37,7 @@ export const TimeLineSections = [
     id: 'year-2021',
     logo: ProptexLogo,
     gradientColor: '#fdfdfd',
+    className: 'proptexBackground',
     content: ProptexTextContent,
   },
   {
@@ -44,6 +47,7 @@ export const TimeLineSections = [
     id: 'year-2016',
     logo: InAtlasLogo,
     gradientColor: '#9d9d9d',
+    className: 'inAtlasBackground',
     content: InAtlasTextContent,
   },
   {
@@ -53,6 +57,7 @@ export const TimeLineSections = [
     id: 'year-2013',
     logo: BCNUniLogo,
     gradientColor: '#ffffff',
+    className: 'ubBackground',
     content: UBTextContent,
   },
 ] as const;
