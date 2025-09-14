@@ -9,6 +9,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  margin: 5rem 0 7rem 0;
 
   @media screen and (min-width: 768px) {
     margin: 0;
@@ -17,13 +18,17 @@
 
 .navigationContainer {
   position: absolute;
-  left: -5rem;
+  right: 1rem;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
   gap: 1rem;
   z-index: 10;
+
+  @media screen and (min-width: 768px) {
+    left: -5rem;
+  }
 }
 
 .navButton {
@@ -135,13 +140,19 @@
 
 .breadcrumbContainer {
   position: absolute;
-  right: 1.5rem;
-  top: 50%;
+  right: 40%;
+  top: -7%;
   transform: translateY(-50%);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 0.75rem;
   z-index: 10;
+
+  @media screen and (min-width: 768px) {
+    right: 1.5rem;
+    top: 50%;
+    flex-direction: column;
+  }
 }
 
 .breadcrumb {
@@ -179,13 +190,6 @@
 
 // Responsive adjustments
 @media screen and (max-width: 768px) {
-  .navigationContainer {
-    left: 0.5rem;
-  }
-
-  .breadcrumbContainer {
-    right: 0.5rem;
-  }
 
   .navButton {
     width: 2.5rem;
@@ -213,13 +217,6 @@
 }
 
 @media screen and (max-width: 480px) {
-  .navigationContainer {
-    left: 0.25rem;
-  }
-
-  .breadcrumbContainer {
-    right: 0.25rem;
-  }
 
   .navButton {
     width: 2rem;
