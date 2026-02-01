@@ -24,3 +24,4 @@ export type CarouselBreadcrumbsProps = {
   totalSlides: number;
   onSlideClick: (index: number) => void;
 };
+

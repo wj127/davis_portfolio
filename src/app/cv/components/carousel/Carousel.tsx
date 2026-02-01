@@ -106,3 +106,4 @@ export const Carousel = ({ slides, className = '', slideClassName = '', onSlideC
     </div>
   );
 };
+
