@@ -76,9 +76,13 @@
     color: black;                       /* Text color */
   }
 
-  & div {
+  & > div {
     width: 60%;                        /* Limit paragraph width */
-    margin-left: 13rem;                /* Spacing between text and logo */
+    margin-left: 0;
+
+    @media screen and (min-width: 768px) {
+      margin-left: 13rem;                /* Spacing between text and logo */
+    }
 
     opacity: 0;                           /* hidden before reveal */
     transform: translateX(-100px);        /* start from left */
@@ -93,7 +97,6 @@
 }
 
 .yScroll {
-  position: absolute;
   max-height: 50vh;              /* adjust taste */
   overflow-y: auto;
   overscroll-behavior: contain;  /* don’t bubble until top/bottom */
@@ -107,6 +110,22 @@
 
   /* Hide scrollbar for Firefox */
   scrollbar-width: none;
+
+  ul {
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+
+    li {
+      margin-bottom: 0.5rem;
+      margin-left: 1rem;
+      line-height: 1.4;
+    }
+  }
+
+  p {
+    margin: 1rem 0;
+    font-weight: 600;
+  }
 }
 
 .yScroll:not([data-visible="true"]) {
@@ -115,13 +134,18 @@
 }
 
 .companyLogo {
-  width: 500px;                         /* Adjust logo size */
+  width: 70%;                         /* Adjust logo size */
   height: auto;                         /* Maintain aspect ratio */
-  margin-left: 100px;                   /* Spacing around the logo */
+  margin-left: 0;                   /* Spacing around the logo */
 
   opacity: 0;                           /* hidden before reveal */
   transition: transform 1600ms ease, opacity 1600ms ease;
   will-change: transform, opacity;      /* Hint for smoother animation */
+
+  @media screen and (min-width: 768px) {
+    width: 500px;
+    margin-left: 100px;
+  }
 
   &[data-index-type='even'] {
     transform: translateY(160px);       /* start from bottom for even */
@@ -134,5 +158,46 @@
   &[data-visible='true'] {
     transform: translateY(0);           /* move to center when visible */
     opacity: 1;
+  }
+}
+
+$hainokGradientColor: #18282f;
+$thmGradientColor: #232c40;
+$proptextGradientColor: #fdfdfd;
+$inatlasGradientColor: #9d9d9d;
+$ubGradientColor: #ffffff;
+
+.hainokBackground {
+  background: linear-gradient(0deg, $hainokGradientColor 0%, $hainokGradientColor 8%, color-mix(in srgb, $hainokGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $hainokGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $hainokGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $hainokGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
+  @media screen and (min-width: 768px) {
+    background: linear-gradient(90deg, $hainokGradientColor 0%, $hainokGradientColor 8%, color-mix(in srgb, $hainokGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $hainokGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $hainokGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $hainokGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
+  }
+}
+
+.thmBackground {
+  background: linear-gradient(0deg, $thmGradientColor 0%, $thmGradientColor 8%, color-mix(in srgb, $thmGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $thmGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $thmGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $thmGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
+  @media screen and (min-width: 768px) {
+    background: linear-gradient(90deg, $thmGradientColor 0%, $thmGradientColor 8%, color-mix(in srgb, $thmGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $thmGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $thmGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $thmGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
+  }
+}
+
+.proptexBackground {
+  background: linear-gradient(0deg, $proptextGradientColor 0%, $proptextGradientColor 8%, color-mix(in srgb, $proptextGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $proptextGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $proptextGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $proptextGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
+  @media screen and (min-width: 768px) {
+    background: linear-gradient(90deg, $proptextGradientColor 0%, $proptextGradientColor 8%, color-mix(in srgb, $proptextGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $proptextGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $proptextGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $proptextGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
+  }
+}
+
+.inAtlasBackground {
+  background: linear-gradient(0deg, $inatlasGradientColor 0%, $inatlasGradientColor 8%, color-mix(in srgb, $inatlasGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $inatlasGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $inatlasGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $inatlasGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
+  @media screen and (min-width: 768px) {
+    background: linear-gradient(90deg, $inatlasGradientColor 0%, $inatlasGradientColor 8%, color-mix(in srgb, $inatlasGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $inatlasGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $inatlasGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $inatlasGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
+  }
+}
+
+.ubBackground {
+  background: linear-gradient(0deg, $ubGradientColor 0%, $ubGradientColor 8%, color-mix(in srgb, $ubGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $ubGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $ubGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $ubGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
+  @media screen and (min-width: 768px) {
+    background: linear-gradient(90deg, $ubGradientColor 0%, $ubGradientColor 8%, color-mix(in srgb, $ubGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $ubGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $ubGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $ubGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
   }
 }

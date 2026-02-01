@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { Toc } from 'src/app/cv/components/toc/Toc';
 import { Fragment, useEffect, useRef, useState } from 'react';
 import styles from 'src/app/cv/cv.module.scss';
@@ -8,6 +9,7 @@ import { useTocObserver } from '@/app/cv/hooks/toc-observer';
 import Image from 'next/image';
 import { TimeLineSections, timelineYears } from '@/app/cv/constants/sections';
 import { useRevealContentObserver } from '@/app/cv/hooks/reveal-observer';
+import { Carousel } from '@/app/cv/components';
 
 const brunoAce = Bruno_Ace_SC({ weight: '400', subsets: ['latin'] });
 
@@ -107,24 +109,9 @@ export default function CurriculumVitae() {
         }
       }
 
-      // if (isActiveYScroller(yScroller) && canScrollVert(yScroller!, wheelEvent.deltaY)) {
-      //   wheelEvent.preventDefault();
-      //   yScroller!.scrollBy({ top: e.deltaY }); // 'auto' feels most native
-      // } else {
-      //   // IMPORTANT: never fall through to default; take horizontal control
-      //   e.preventDefault();
-      //   container?.scrollBy({ left: -e.deltaY }); // row-reverse compensation
-      // }
       wheelEvent.preventDefault();
       container?.scrollBy({ left: -wheelEvent.deltaY }); // row-reverse compensation
     };
-
-    // function onWheel(wheelEvent: WheelEvent) {
-    //   if (!container) return;
-    //   wheelEvent.preventDefault();
-    //   // With row-reverse, positive left scroll moves visually right-to-left
-    //   container.scrollBy({ left: -wheelEvent.deltaY });
-    // }
 
     container?.addEventListener('wheel', onWheel, { passive: false });
     return () => container?.removeEventListener('wheel', onWheel);
@@ -135,7 +122,7 @@ export default function CurriculumVitae() {
       {/* @ts-ignore */}
       <Toc activeYear={activeYear} sectionRefs={sectionRefs} containerRef={containerRef} />
       <div ref={containerRef} className={styles.horizontalContainer}>
-        {TimeLineSections.map(({ year, id, logo, subTitle, gradientColor, content, colour }, index) => {
+        {TimeLineSections.map(({ year, id, logo, subTitle, gradientColor, content, colour, className }, index) => {
           const imgIndex = index * 2;
           const divIndex = imgIndex + 1;
           return (
@@ -143,10 +130,7 @@ export default function CurriculumVitae() {
               <section
                 /* @ts-ignore */
                 ref={(sectionElement) => (sectionRefs.current[year] = sectionElement)}
-                className={styles.yearSection}
-                style={{
-                  background: `linear-gradient(90deg, ${gradientColor} 0%, ${gradientColor} 8%, color-mix(in srgb, ${gradientColor} 85%, #3599CA 15%) 15%, color-mix(in srgb, ${gradientColor} 70%, #3599CA 30%) 22%, color-mix(in srgb, ${gradientColor} 50%, #3599CA 50%) 30%, color-mix(in srgb, ${gradientColor} 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%)`,
-                }}
+                className={`${styles.yearSection} ${styles[className] || ''}`}
                 id={id}
               >
                 <div>
@@ -164,15 +148,43 @@ export default function CurriculumVitae() {
                     contentRefs.current[imgIndex] = imageElement;
                   }}
                 />
-                <div
-                  className={styles.yScroll}
-                  ref={(divElement) => {
-                    contentRefs.current[divIndex] = divElement;
-                  }}
-                  style={{ color: colour }}
-                >
-                  {content}
-                </div>
+                {React.isValidElement(content) ? (
+                  <div
+                    className={styles.yScroll}
+                    ref={(divElement) => {
+                      contentRefs.current[divIndex] = divElement;
+                    }}
+                    style={{ color: colour }}
+                  >
+                    {content}
+                  </div>
+                ) : (
+                  <Carousel
+                    ref={(divElement) => {
+                      contentRefs.current[divIndex] = divElement;
+                    }}
+                    // @ts-ignore
+                    slides={(content as any).map((element, innerIndex) => {
+                      const carouselDivIndex = divIndex + innerIndex + 1;
+                      return {
+                        id: element.key,
+                        content: (
+                          <div
+                            key={element.key}
+                            className={styles.yScroll}
+                            ref={(divElement) => {
+                              contentRefs.current[carouselDivIndex] = divElement;
+                            }}
+                            style={{ color: colour }}
+                            data-visible='true'
+                          >
+                            {element.content}
+                          </div>
+                        ),
+                      };
+                    })}
+                  />
+                )}
               </section>
             </Fragment>
           );
