@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import styles from '@/app/cv/components/carousel/Carousel.module.scss';
-import { CarouselProps } from '@/app/cv/components';
+import styles from '@/app/work-experience/components/carousel/Carousel.module.scss';
+import { CarouselProps } from '@/app/work-experience/components';
 
 export const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
   ({ slides, className = '', slideClassName = '', onSlideChange }, ref) => {

@@ -3,11 +3,11 @@ import THMLogo from '@public/company-logos/thmlogo-gray_scale.png';
 import ProptexLogo from '@public/company-logos/proptex-logo.png';
 import InAtlasLogo from '@public/company-logos/inatlas-based-on-location-logo.png';
 import BCNUniLogo from '@public/company-logos/universitat_de_barcelona-logo.png';
-import { HainokTextContent } from '@/app/cv/constants/text/hainok';
-import { THMTextContent } from '@/app/cv/constants/text/thm';
-import { ProptexTextContent } from '@/app/cv/constants/text/proptex';
-import { InAtlasTextContent } from '@/app/cv/constants/text/inatlas';
-import { UBTextContent } from '@/app/cv/constants/text/ub';
+import { HainokTextContent } from '@/app/work-experience/constants/text/hainok';
+import { THMTextContent } from '@/app/work-experience/constants/text/thm';
+import { ProptexTextContent } from '@/app/work-experience/constants/text/proptex';
+import { InAtlasTextContent } from '@/app/work-experience/constants/text/inatlas';
+import { UBTextContent } from '@/app/work-experience/constants/text/ub';
 
 export const TimeLineSections = [
   {

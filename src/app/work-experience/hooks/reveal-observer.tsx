@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import styles from 'src/app/cv/cv.module.scss';
+import styles from '@/app/work-experience/work-experience.module.scss';
 
 export type RevealContentObserverProps = {
   targetRefs: (HTMLElement | null)[];

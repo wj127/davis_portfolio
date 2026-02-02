@@ -1,5 +1,5 @@
 import { Dispatch, MutableRefObject, RefObject, SetStateAction, useEffect } from 'react';
-import { timelineYears as TimelineYears } from '@/app/cv/constants/sections';
+import { timelineYears as TimelineYears } from '@/app/work-experience/constants/sections';
 
 export const useTocObserver = ({
   timelineYears,

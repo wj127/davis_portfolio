@@ -63,7 +63,7 @@ export const MainNavbar: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
   }, [navBarRef.current?.classList]);
 
   const mustAbbreviate = (isShrink && !isHovered) || (isMobile && !isExpanded);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const isLinkDisabled = isMobile && !isExpanded;
 
   const onNavbarClickedForMobile = () => {
@@ -109,14 +109,14 @@ export const MainNavbar: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
               </NavigationMenu.Item>
 
               <NavigationMenu.Item>
-                <CustomLink href='/cv' isDisabled={isLinkDisabled}>
-                  <GlitchText>{mustAbbreviate ? 'CV' : 'Curriculum Vitae'}</GlitchText>
+                <CustomLink href='/work-experience' isDisabled={isLinkDisabled}>
+                  <GlitchText>{mustAbbreviate ? 'WE' : 'Work Experience'}</GlitchText>
                 </CustomLink>
               </NavigationMenu.Item>
 
               <NavigationMenu.Item>
-                <CustomLink href='/work-experience' isDisabled={isLinkDisabled}>
-                  <GlitchText>{mustAbbreviate ? 'WE' : 'Work Experience'}</GlitchText>
+                <CustomLink href='/about-me' isDisabled={isLinkDisabled}>
+                  <GlitchText>{mustAbbreviate ? 'AM' : 'About Me'}</GlitchText>
                 </CustomLink>
               </NavigationMenu.Item>
 

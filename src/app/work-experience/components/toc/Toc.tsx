@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import styles from 'src/app/cv/components/toc/Toc.module.scss';
-import { TimeLineSections } from '@/app/cv/constants/sections';
+import styles from '@/app/work-experience/components/toc/Toc.module.scss';
+import { TimeLineSections } from '@/app/work-experience/constants/sections';
 
 // Static array of years for the timeline
 const timelineYears = TimeLineSections.map(({ year }) => year);

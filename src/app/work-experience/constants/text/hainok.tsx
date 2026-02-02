@@ -1,4 +1,4 @@
-import { CarouselSlide } from '@/app/cv/components';
+import { CarouselSlide } from '@/app/work-experience/components';
 
 export const HainokTextContent: CarouselSlide[] = [
   {
