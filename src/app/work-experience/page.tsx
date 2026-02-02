@@ -23,6 +23,7 @@ export default function CurriculumVitae() {
   const contentRefs = useRef<(HTMLElement | null)[]>([]);
   useTocObserver({ timelineYears, sectionRefs, containerRef, setActiveYear });
   useRevealContentObserver({
+    // eslint-disable-next-line react-hooks/refs
     targetRefs: contentRefs.current,
   });
 
@@ -119,7 +120,7 @@ export default function CurriculumVitae() {
 
   return (
     <div className={brunoAce.className}>
-      {/* @ts-ignore */}
+      {/* @ts-expect-error - need to fix the types */}
       <Toc activeYear={activeYear} sectionRefs={sectionRefs} containerRef={containerRef} />
       <div ref={containerRef} className={styles.horizontalContainer}>
         {TimeLineSections.map(({ year, id, logo, subTitle, gradientColor, content, colour, className }, index) => {
@@ -128,7 +129,7 @@ export default function CurriculumVitae() {
           return (
             <Fragment key={id}>
               <section
-                /* @ts-ignore */
+                /* @ts-expect-error - same, need to fix the types here */
                 ref={(sectionElement) => (sectionRefs.current[year] = sectionElement)}
                 className={`${styles.yearSection} ${styles[className] || ''}`}
                 id={id}
@@ -163,14 +164,13 @@ export default function CurriculumVitae() {
                     ref={(divElement) => {
                       contentRefs.current[divIndex] = divElement;
                     }}
-                    // @ts-ignore
-                    slides={(content as any).map((element, innerIndex) => {
+                    slides={content.map((element, innerIndex) => {
                       const carouselDivIndex = divIndex + innerIndex + 1;
                       return {
-                        id: element.key,
+                        id: element.id,
                         content: (
                           <div
-                            key={element.key}
+                            key={element.id}
                             className={styles.yScroll}
                             ref={(divElement) => {
                               contentRefs.current[carouselDivIndex] = divElement;
