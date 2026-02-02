@@ -1,6 +1,6 @@
-import { CarouselSlide } from '@/app/work-experience/components';
+import { CompanySectionContent } from '@/app/work-experience/types';
 
-export const HainokTextContent: CarouselSlide[] = [
+export const HainokTextContent: CompanySectionContent[] = [
   {
     id: 'hainok-slide-1',
     content: (

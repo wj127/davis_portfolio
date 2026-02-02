@@ -1,6 +1,6 @@
-import { CarouselSlide } from '@/app/work-experience/components';
+import { CompanySectionContent } from '@/app/work-experience/types';
 
-export const InAtlasTextContent: CarouselSlide[] = [
+export const InAtlasTextContent: CompanySectionContent[] = [
   {
     id: 'inatlas-slide-1',
     content: (

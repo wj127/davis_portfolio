@@ -1,6 +1,6 @@
-import { CarouselSlide } from '@/app/work-experience/components';
+import { CompanySectionContent } from '@/app/work-experience/types';
 
-export const ProptexTextContent: CarouselSlide[] = [
+export const ProptexTextContent: CompanySectionContent[] = [
   {
     id: 'proptex-slide-1',
     content: (

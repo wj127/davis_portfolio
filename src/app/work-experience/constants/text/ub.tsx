@@ -1,6 +1,6 @@
-import { CarouselSlide } from '@/app/work-experience/components';
+import { CompanySectionContent } from '@/app/work-experience/types';
 
-export const UBTextContent: CarouselSlide[] = [
+export const UBTextContent: CompanySectionContent[] = [
   {
     id: 'ub-slide-1',
     content: (
