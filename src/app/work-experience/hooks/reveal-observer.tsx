@@ -27,10 +27,11 @@ export const useRevealContentObserver = ({
           if (entry.isIntersecting) {
             target.setAttribute(visibleAttrName, 'true');
 
-            // NEW: reset any accidental pre-reveal scroll and arm a short delay
+            // Find scrollable element (yScroll class or expandable content with data-visible)
             const yScrollElement = target.matches?.(`.${styles.yScroll}`)
               ? target
-              : (target.querySelector(`.${styles.yScroll}`) as HTMLElement);
+              : (target.querySelector(`.${styles.yScroll}`) as HTMLElement) ||
+                (target.querySelector('[data-visible]') as HTMLElement);
 
             if (yScrollElement) {
               const targetRect = entry.boundingClientRect;

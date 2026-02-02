@@ -28,45 +28,73 @@
 }
 
 .yearSection {
-  flex: 0 0 100%;                       /* Each section = full viewport width */
+  flex: 0 0 auto;                       /* Auto height on mobile */
+  min-height: 100vh;
   //scroll-snap-align: start;             /* Snap alignment */
   /* Optional styling… */
   display: flex;                        /* Center content */
   justify-content: center;              /* Center horizontally */
   align-items: center;                  /* Center vertically */
+  padding: 2rem 0;
+
+  @media screen and (min-width: 1025px) {
+    flex: 0 0 100%;                     /* Full viewport width on desktop */
+    min-height: unset;
+    padding: 0;
+  }
 
   > div {
-    width: 60%;                        /* Full width for the inner div */
+    width: 80%;                        /* Wider on mobile */
     flex-direction: column;
     display: flex;                      /* Flexbox for inner content */
     justify-content: center;            /* Center horizontally */
     align-items: center;                /* Center vertically */
+    text-align: center;
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 1025px) {
       width: 100%;
     }
   }
 
   & h1 {
-    font-size: 4rem;                    /* Adjust font size as needed */
+    font-size: 3rem;                    /* Smaller on mobile */
     color: black;                       /* Text color */
+    margin: 0 0 0.25rem 0;
 
     @media screen and (min-width: 768px) {
+      font-size: 5rem;
+    }
+
+    @media screen and (min-width: 1025px) {
       font-size: 7rem;
+    }
+  }
+
+  & h3 {
+    font-size: 0.85rem;
+    margin: 0;
+    opacity: 0.7;
+
+    @media screen and (min-width: 768px) {
+      font-size: 1rem;
     }
   }
 }
 
 .companySection {
-  //flex: 0 0 100%;                       /* Each section = full viewport width */
-  flex: 0 0 80%;
+  flex: 0 0 auto;
+  min-height: 70vh;
   display: flex;                        /* Center content */
   flex-direction: column;
   justify-content: center;              /* Center horizontally */
   align-items: center;                  /* Center vertically */
   background-color: #F86E12;            /* Background color for company section */
+  padding: 0 2rem 2rem 2rem;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1025px) {
+    flex: 0 0 80%;
+    min-height: unset;
+    padding: 0;
     flex-direction: row-reverse;
     justify-content: flex-start;
   }
@@ -75,25 +103,32 @@
     font-size: 5rem;                    /* Adjust font size as needed */
     color: black;                       /* Text color */
   }
+}
 
-  & > div {
-    width: 60%;                        /* Limit paragraph width */
-    margin-left: 0;
+// Desktop content wrapper with reveal animation
+.contentWrapper {
+  width: 100%;
+  margin-left: 6rem;
+  text-align: left;
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: transform 1200ms ease-out, opacity 1200ms ease-out;
+  will-change: transform, opacity, scale;
 
-    @media screen and (min-width: 768px) {
-      margin-left: 13rem;                /* Spacing between text and logo */
-    }
-
-    opacity: 0;                           /* hidden before reveal */
-    transform: translateX(-100px);        /* start from left */
-    transition: transform 1200ms ease-out, opacity 1200ms ease-out;
-    will-change: transform, opacity, scale; /* Hint for smoother animation */
-
-    &[data-visible='true'] {
-      transform: translateX(0);           /* slide to original position */
-      opacity: 1;
-    }
+  &[data-visible='true'] {
+    transform: translateX(0);
+    opacity: 1;
   }
+}
+
+// Mobile content wrapper - no reveal animation needed
+.mobileContentWrapper {
+  width: 80%;
+  margin: 0 0 0 1rem;
+  text-align: right;
+  // Ensure content is visible on mobile (no reveal animation)
+  opacity: 1;
+  transform: none;
 }
 
 .yScroll {
@@ -134,30 +169,55 @@
 }
 
 .companyLogo {
-  width: 70%;                         /* Adjust logo size */
+  width: 50%;                         /* Smaller on mobile */
+  max-width: 200px;
   height: auto;                         /* Maintain aspect ratio */
-  margin-left: 0;                   /* Spacing around the logo */
+  margin: 1rem 0 1.5rem 0;              /* Spacing around the logo */
 
   opacity: 0;                           /* hidden before reveal */
   transition: transform 1600ms ease, opacity 1600ms ease;
   will-change: transform, opacity;      /* Hint for smoother animation */
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1025px) {
     width: 500px;
+    max-width: unset;
     margin-left: 100px;
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
   &[data-index-type='even'] {
-    transform: translateY(160px);       /* start from bottom for even */
+    transform: translateY(80px);       /* smaller offset on mobile */
+    
+    @media screen and (min-width: 1025px) {
+      transform: translateY(160px);       /* start from bottom for even */
+    }
   }
 
   &[data-index-type='odd'] {
-    transform: translateY(-160px);      /* start from top for odd */
+    transform: translateY(-80px);      /* smaller offset on mobile */
+    
+    @media screen and (min-width: 1025px) {
+      transform: translateY(-160px);      /* start from top for odd */
+    }
   }
 
   &[data-visible='true'] {
     transform: translateY(0);           /* move to center when visible */
     opacity: 1;
+  }
+}
+
+// Content section separator for grouped slides (both mobile and desktop)
+.contentSection {
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+
+  &:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
   }
 }
 

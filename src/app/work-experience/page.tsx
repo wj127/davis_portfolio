@@ -9,15 +9,18 @@ import { useTocObserver } from '@/app/work-experience/hooks/toc-observer';
 import Image from 'next/image';
 import { TimeLineSections, timelineYears } from '@/app/work-experience/constants/sections';
 import { useRevealContentObserver } from '@/app/work-experience/hooks/reveal-observer';
-import { Carousel } from '@/app/work-experience/components';
+import { ExpandableContent } from '@/app/work-experience/components';
 
 const brunoAce = Bruno_Ace_SC({ weight: '400', subsets: ['latin'] });
 
 const BUFFER = 24;
 
+const MOBILE_BREAKPOINT = 1025;
+
 export default function CurriculumVitae() {
   const [activeYear, setActiveYear] = useState(timelineYears[0]);
   const [isFirstRender, setIsFirstRender] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<Record<number, HTMLElement | null>>({});
   const contentRefs = useRef<(HTMLElement | null)[]>([]);
@@ -30,11 +33,18 @@ export default function CurriculumVitae() {
   // little hack to ensure you can safely access client APIs after SSR
   useEffect(() => {
     setIsFirstRender(true);
-  }, [setIsFirstRender]);
+    setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT);
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (!isFirstRender) return;
-    const isMobile = window.innerWidth <= 1025; // Adjust this breakpoint as needed
     if (isMobile) return;
     const container = containerRef.current;
     if (!container) return;
@@ -67,7 +77,9 @@ export default function CurriculumVitae() {
       if (Math.abs(wheelEvent.deltaX) > Math.abs(wheelEvent.deltaY)) return;
 
       const target = wheelEvent.target as HTMLElement | null;
-      const yScroller = target?.closest(`.${styles.yScroll}`) as HTMLElement | null;
+      // Check for both yScroll class and expandable content with data-visible
+      const yScroller = (target?.closest(`.${styles.yScroll}`) ||
+        target?.closest('[data-visible="true"]')) as HTMLElement | null;
 
       if (!yScroller) {
         lockRef.armedElement = null;
@@ -116,7 +128,7 @@ export default function CurriculumVitae() {
 
     container?.addEventListener('wheel', onWheel, { passive: false });
     return () => container?.removeEventListener('wheel', onWheel);
-  }, [isFirstRender]);
+  }, [isFirstRender, isMobile]);
 
   return (
     <div className={brunoAce.className}>
@@ -149,42 +161,29 @@ export default function CurriculumVitae() {
                     contentRefs.current[imgIndex] = imageElement;
                   }}
                 />
-                {React.isValidElement(content) ? (
-                  <div
-                    className={styles.yScroll}
-                    ref={(divElement) => {
-                      contentRefs.current[divIndex] = divElement;
-                    }}
-                    style={{ color: colour }}
+                {/* Unified ExpandableContent for both mobile and desktop */}
+                <div
+                  className={isMobile ? styles.mobileContentWrapper : styles.contentWrapper}
+                  ref={(divElement) => {
+                    contentRefs.current[divIndex] = divElement;
+                  }}
+                >
+                  <ExpandableContent
+                    colour={colour}
+                    maxCollapsedHeight={isMobile ? 250 : 400}
+                    maxExpandedHeight={isMobile ? undefined : 500}
+                    scrollClassName={styles.yScroll}
+                    isMobile={isMobile}
                   >
-                    {content}
-                  </div>
-                ) : (
-                  <Carousel
-                    ref={(divElement) => {
-                      contentRefs.current[divIndex] = divElement;
-                    }}
-                    slides={content.map((element, innerIndex) => {
-                      const carouselDivIndex = divIndex + innerIndex + 1;
-                      return {
-                        id: element.id,
-                        content: (
-                          <div
-                            key={element.id}
-                            className={styles.yScroll}
-                            ref={(divElement) => {
-                              contentRefs.current[carouselDivIndex] = divElement;
-                            }}
-                            style={{ color: colour }}
-                            data-visible='true'
-                          >
+                    {React.isValidElement(content)
+                      ? content
+                      : content.map((element) => (
+                          <div key={element.id} className={styles.contentSection}>
                             {element.content}
                           </div>
-                        ),
-                      };
-                    })}
-                  />
-                )}
+                        ))}
+                  </ExpandableContent>
+                </div>
               </section>
             </Fragment>
           );

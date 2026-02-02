@@ -16,7 +16,7 @@ const eslintConfig = defineConfig([
     'out/**',
     'build/**',
     'next-env.d.ts',
-    'index.ts',
+    '**/index.ts',
   ]),
   {
     rules: {
