@@ -1,0 +1,27 @@
+{
+  "Navbar": {
+    "home": "<i>Mr</i>Davis",
+    "homeShort": "MrD",
+    "workExperience": "Work Experience",
+    "workExperienceShort": "WE",
+    "aboutMe": "About Me",
+    "aboutMeShort": "AM",
+    "blog": "Blog",
+    "menu": "Menu",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu"
+  },
+  "HomePage": {
+    "title": "Welcome to my portfolio",
+    "description": "Welcome to my portfolio"
+  },
+  "WorkExperience": {
+    "title": "Work Experience"
+  },
+  "AboutMe": {
+    "title": "About Me"
+  },
+  "LanguageSwitcher": {
+    "label": "Change language"
+  }
+}

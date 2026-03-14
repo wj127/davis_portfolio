@@ -1,0 +1,27 @@
+{
+  "Navbar": {
+    "home": "<i>Mr</i>Davis",
+    "homeShort": "MrD",
+    "workExperience": "Experiencia Laboral",
+    "workExperienceShort": "EL",
+    "aboutMe": "Sobre Mí",
+    "aboutMeShort": "SM",
+    "blog": "Blog",
+    "menu": "Menú",
+    "openMenu": "Abrir menú de navegación",
+    "closeMenu": "Cerrar menú de navegación"
+  },
+  "HomePage": {
+    "title": "Bienvenido a mi portafolio",
+    "description": "Bienvenido a mi portafolio"
+  },
+  "WorkExperience": {
+    "title": "Experiencia Laboral"
+  },
+  "AboutMe": {
+    "title": "Sobre Mí"
+  },
+  "LanguageSwitcher": {
+    "label": "Cambiar idioma"
+  }
+}

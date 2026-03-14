@@ -11,6 +11,7 @@ import MrDavisTransparentLogo from '@public/MrDavis-transparentbg.png';
 import { useObserverApi } from '@/app/hooks/observer-api/use-oberser-api';
 import { Bruno_Ace_SC } from 'next/font/google';
 import { X, Home, Briefcase, User, BookOpen } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 const brunoAce = Bruno_Ace_SC({ weight: '400', subsets: ['latin'] });
 
@@ -22,6 +23,7 @@ const options: IntersectionObserverInit = {
 
 export const MainNavbar: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
   const pathname = usePathname();
+  const mainNavbarTranslations = useTranslations('Navbar');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isOpen, setIsOpen] = useState(true);
   const [isShrink, setIsShrink] = useState(false);
@@ -62,6 +64,7 @@ export const MainNavbar: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
     if (!navBarRef.current) return;
     if (navBarRef.current.classList.contains(NavBarStyles.Shrink)) setIsShrink(true);
     else setIsShrink(false);
+    // eslint-disable-next-line react-hooks/refs
   }, [navBarRef.current?.classList]);
 
   const mustAbbreviate = (isShrink && !isHovered) || (isMobile && !isExpanded);
@@ -78,15 +81,15 @@ export const MainNavbar: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
   const getActiveLabel = () => {
     switch (pathname) {
       case '/':
-        return 'MrD';
+        return mainNavbarTranslations('homeShort');
       case '/work-experience':
-        return 'WE';
+        return mainNavbarTranslations('workExperienceShort');
       case '/about-me':
-        return 'AM';
+        return mainNavbarTranslations('aboutMeShort');
       case '/blog':
-        return 'Blog';
+        return mainNavbarTranslations('blog');
       default:
-        return 'Menu';
+        return mainNavbarTranslations('menu');
     }
   };
 
@@ -100,7 +103,7 @@ export const MainNavbar: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
         <button
           className={`${NavBarStyles.MobileTrigger} ${isExpanded ? NavBarStyles.Hidden : ''}`}
           onClick={handleMobileToggle}
-          aria-label='Open navigation menu'
+          aria-label={mainNavbarTranslations('openMenu')}
         >
           <GlitchText>{getActiveLabel()}</GlitchText>
         </button>
@@ -114,16 +117,18 @@ export const MainNavbar: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
         >
           <div className={NavBarStyles.MobileMenuContent}>
             {/* Close Button */}
-            <button className={NavBarStyles.MobileCloseButton} onClick={closeMobileMenu} aria-label='Close navigation menu'>
+            <button
+              className={NavBarStyles.MobileCloseButton}
+              onClick={closeMobileMenu}
+              aria-label={mainNavbarTranslations('closeMenu')}
+            >
               <X size={24} strokeWidth={2} />
             </button>
 
             {/* Logo Section */}
             <div className={NavBarStyles.MobileLogoSection}>
               <LogoImage />
-              <GlitchText>
-                <i>Mr</i>Davis
-              </GlitchText>
+              <GlitchText>{mainNavbarTranslations.rich('home', { i: (chunks) => <i>{chunks}</i> })}</GlitchText>
             </div>
 
             {/* Navigation Links */}
@@ -131,25 +136,25 @@ export const MainNavbar: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
               <NavigationMenu.List className={NavBarStyles.MobileNavigationList}>
                 <NavigationMenu.Item>
                   <MobileNavLink href='/' icon={<Home size={20} />} onClick={closeMobileMenu}>
-                    <i>Mr</i>Davis
+                    {mainNavbarTranslations.rich('home', { i: (chunks) => <i>{chunks}</i> })}
                   </MobileNavLink>
                 </NavigationMenu.Item>
 
                 <NavigationMenu.Item>
                   <MobileNavLink href='/work-experience' icon={<Briefcase size={20} />} onClick={closeMobileMenu}>
-                    Work Experience
+                    {mainNavbarTranslations('workExperience')}
                   </MobileNavLink>
                 </NavigationMenu.Item>
 
                 <NavigationMenu.Item>
                   <MobileNavLink href='/about-me' icon={<User size={20} />} onClick={closeMobileMenu}>
-                    About Me
+                    {mainNavbarTranslations('aboutMe')}
                   </MobileNavLink>
                 </NavigationMenu.Item>
 
                 <NavigationMenu.Item>
                   <MobileNavLink href='/blog' icon={<BookOpen size={20} />} onClick={closeMobileMenu}>
-                    Blog
+                    {mainNavbarTranslations('blog')}
                   </MobileNavLink>
                 </NavigationMenu.Item>
               </NavigationMenu.List>
@@ -173,32 +178,39 @@ export const MainNavbar: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
         role='navigation'
       >
         <div className={NavBarStyles.InnerWrapper}>
-          <NavigationMenu.Root orientation='horizontal' className={`${NavBarStyles.NavigationMenuRoot} ${isOpen ? NavBarStyles.Open : ''}`}>
+          <NavigationMenu.Root
+            orientation='horizontal'
+            className={`${NavBarStyles.NavigationMenuRoot} ${isOpen ? NavBarStyles.Open : ''}`}
+          >
             <NavigationMenu.List className={NavBarStyles.NavigationMenuList}>
               <NavigationMenu.Item>
                 <CustomLink href='/' className={NavBarStyles.ImageContainer} isDisabled={false}>
                   <LogoImage />
-                  <GlitchText>
-                    <i>Mr</i>Davis
-                  </GlitchText>
+                  <GlitchText>{mainNavbarTranslations.rich('home', { i: (chunks) => <i>{chunks}</i> })}</GlitchText>
                 </CustomLink>
               </NavigationMenu.Item>
 
               <NavigationMenu.Item>
                 <CustomLink href='/work-experience' isDisabled={false}>
-                  <GlitchText>{mustAbbreviate ? 'WE' : 'Work Experience'}</GlitchText>
+                  <GlitchText>
+                    {mustAbbreviate
+                      ? mainNavbarTranslations('workExperienceShort')
+                      : mainNavbarTranslations('workExperience')}
+                  </GlitchText>
                 </CustomLink>
               </NavigationMenu.Item>
 
               <NavigationMenu.Item>
                 <CustomLink href='/about-me' isDisabled={false}>
-                  <GlitchText>{mustAbbreviate ? 'AM' : 'About Me'}</GlitchText>
+                  <GlitchText>
+                    {mustAbbreviate ? mainNavbarTranslations('aboutMeShort') : mainNavbarTranslations('aboutMe')}
+                  </GlitchText>
                 </CustomLink>
               </NavigationMenu.Item>
 
               <NavigationMenu.Item>
                 <CustomLink href='/blog' isDisabled={false}>
-                  <GlitchText>Blog</GlitchText>
+                  <GlitchText>{mainNavbarTranslations('blog')}</GlitchText>
                 </CustomLink>
               </NavigationMenu.Item>
             </NavigationMenu.List>

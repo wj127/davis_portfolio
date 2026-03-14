@@ -1,0 +1,100 @@
+@import "src/styles/varibales";
+
+.wrapper {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 1001;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba($bluish, 0.3);
+  background: rgba(10, 10, 50, 0.8);
+  cursor: pointer;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    border-color: rgba($bluish, 0.6);
+    box-shadow: 0 0 12px rgba($bluish, 0.2);
+    transform: scale(1.08);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $bluish;
+    outline-offset: 2px;
+  }
+
+  &[data-pending] {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}
+
+.flagImage {
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.content {
+  min-width: 48px;
+  padding: 4px;
+  border-radius: 10px;
+  background: rgba(10, 10, 50, 0.95);
+  border: 1px solid rgba($bluish, 0.25);
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.5),
+    0 0 16px rgba($bluish, 0.1);
+  z-index: 1100;
+  animation: slideIn 0.15s ease;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  outline: none;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+
+  &:hover,
+  &[data-highlighted] {
+    background: rgba($bluish, 0.12);
+    transform: scale(1.1);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px $bluish;
+  }
+}
+
+.activeItem {
+  background: rgba($bluish, 0.08);
+  box-shadow: inset 0 0 0 1px rgba($bluish, 0.3);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
