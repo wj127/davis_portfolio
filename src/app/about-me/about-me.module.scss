@@ -35,14 +35,15 @@
 .panel {
   position: relative;
   z-index: 1;
-  width: min(1080px, calc(100% - 2rem));
+  width: min(1080px, calc(100% - 1.5rem));
   margin: 0 auto;
-  padding: 5rem 0 3rem;
+  padding: 4rem 0 2rem;
+  text-align: center;
 }
 
 .eyebrow {
-  margin-bottom: 1.25rem;
-  font-size: clamp(1.2rem, 2vw, 1.75rem);
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
 }
 
 .heroGrid {
@@ -58,40 +59,42 @@
 
 .heroCard,
 .photoCard {
-  min-height: 260px;
+  min-height: 220px;
 }
 
 .heroCard {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 2rem 2rem 2rem 2rem;
+  align-items: center;
+  padding: 1.5rem;
 }
 
 .cardLabel {
   display: inline-flex;
-  margin-bottom: 1rem;
-  font-size: 0.82rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.75rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--text-muted);
 }
 
 .heroText {
-  font-size: clamp(1rem, 2vw, 1rem);
-  line-height: 1.32;
+  font-size: 0.92rem;
+  line-height: 1.45;
 }
 
 .photoCard {
   display: grid;
   place-items: center;
-  padding: 2rem;
+  padding: 1.5rem;
 }
 
 .tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  justify-content: center;
+  gap: 0.5rem;
   margin-bottom: 1rem;
 }
 
@@ -100,9 +103,9 @@
   border-radius: 999px;
   background: var(--tab-surface);
   color: var(--text-main);
-  padding: 0.9rem 1.1rem;
+  padding: 0.65rem 0.85rem;
   font-family: var(--font-source-code-pro), monospace;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   cursor: pointer;
   transition:
     transform 180ms ease,
@@ -120,27 +123,29 @@
 }
 
 .contentCard {
-  padding: 1.75rem 1.5rem 1.75rem 0;
-  margin-bottom: 1.5rem;
+  padding: 1.25rem 1rem;
+  margin-bottom: 1.25rem;
   font-family: var(--font-source-code-pro), monospace;
-  line-height: 1.72;
+  font-size: 0.88rem;
+  line-height: 1.65;
 
   p+p {
-    margin-top: 1.1rem;
+    margin-top: 1rem;
   }
 }
 
 .ctaCard {
-  padding: 1.75rem 1.5rem 2rem 0;
-  min-height: 180px;
+  padding: 1.25rem 1rem;
+  min-height: 140px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 
   p {
     max-width: 46ch;
-    font-size: 1.05rem;
-    line-height: 1.6;
+    font-size: 0.92rem;
+    line-height: 1.55;
   }
 }
 
@@ -149,6 +154,12 @@
     width: min(2080px, calc(100% - 10rem));
     padding-top: 8rem;
     padding-bottom: 4rem;
+    text-align: left;
+  }
+
+  .eyebrow {
+    margin-bottom: 1.25rem;
+    font-size: clamp(1.2rem, 2vw, 1.75rem);
   }
 
   .heroCard,
@@ -156,12 +167,33 @@
     min-height: 320px;
   }
 
-  .heroText {
-    font-size: clamp(1.45rem, 2vw, 1.8rem);
+  .heroCard {
+    align-items: flex-start;
+    padding: 2rem 2rem 2rem 0;
   }
 
-  .heroCard {
-    padding: 2rem 2rem 2rem 0;
+  .cardLabel {
+    margin-bottom: 1rem;
+    font-size: 0.82rem;
+  }
+
+  .heroText {
+    font-size: clamp(1.45rem, 2vw, 1.8rem);
+    line-height: 1.32;
+  }
+
+  .photoCard {
+    padding: 2rem;
+  }
+
+  .tabs {
+    justify-content: flex-start;
+    gap: 0.75rem;
+  }
+
+  .tab {
+    padding: 0.9rem 1.1rem;
+    font-size: 0.95rem;
   }
 
   .heroCard,
@@ -170,8 +202,20 @@
     border-radius: 32px;
   }
 
-  .contentCard,
+  .contentCard {
+    padding: 2rem 2rem 2rem 0;
+    font-size: 1rem;
+    line-height: 1.72;
+  }
+
   .ctaCard {
     padding: 2rem 2rem 2rem 0;
+    min-height: 180px;
+    align-items: flex-start;
+
+    p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
   }
 }

@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import styles from '@app/about-me/sections/sections.module.scss';
+import styles from '@/app/about-me/sections/sections.module.scss';
 
 export const BeyondTheResumeSection = () => {
   const translations = useTranslations('AboutMe');

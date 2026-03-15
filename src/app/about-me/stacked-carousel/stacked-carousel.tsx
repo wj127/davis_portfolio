@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import styles from '@app/about-me/stacked-carousel/stacked-carousel.module.scss';
+import styles from '@/app/about-me/stacked-carousel/stacked-carousel.module.scss';
 
 const PHOTO_PATHS = [
   '/about-me/stacked-carousel/17857424409151159.jpg',
