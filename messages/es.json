@@ -19,7 +19,65 @@
     "title": "Experiencia Laboral"
   },
   "AboutMe": {
-    "title": "Sobre Mí"
+    "title": "Sobre Mí",
+    "soWhoAmI": "¿Quién diablos soy yo?",
+    "whoAmIDescription1": "No soy nadie mediático o en el punto de mira... ¡No aún!! 😜. Sin embargo, la gente suele decir que dejo una impresión duradera y mi huella personal en cada cosa que hago. Tal vez estén en lo cierto, tal vez no... ¡tendrás que descubrirlo tú mismo 😉.",
+    "whoAmIDescription2": "Lo que sí puedo decirte es que soy un tío muy ambicioso que creció en una familia empresarial llena de problemas y desafíos que moldearon la persona que soy hoy, con un toque de modestia. Me especialicé en ingeniería de software, lentamente inclinándome hacia la emprendeduría y el desarrollo de negocios, siempre buscando crear la diferencia y dejar una huella duradera.",
+    "howIThink": {
+      "title": "Cómo pienso",
+      "description": "Diría que mi forma de razonar es un poco obsesiva, tanto para bien como para mal, ya que analizo absolutamente todo hasta el más mínimo detalle e intento prever todos los escenarios y resultados posibles. Dicho esto, puedo contarte:",
+      "theGoods": {
+        "title": "Las cosas buenas",
+        "1": "Tengo constantemente en mente al usuario final y su experiencia, para ofrecer el mejor valor y resultado posible.",
+        "2": "Siempre estoy pensando en cómo expandir los límites del mercado y conseguir que los no-clientes se conviertan en clientes.",
+        "3": "No veo ningún problema como imposible de resolver, solo como un desafío que superar.",
+        "4": "Abordo los problemas desde una perspectiva analítica y científica, es decir, planteo hipótesis y las pongo a prueba para encontrar las mejores soluciones."
+      },
+      "theBads": {
+        "title": "Las cosas malas",
+        "1": "A veces pienso demasiado las cosas, hasta el punto de hacerme refutar mis propias ideas y conclusiones porque preví una rama que podría poner en peligro el resultado.",
+        "2": "Los problemas simples a menudo se complican demasiado por mi propio análisis, haciéndome perder el foco en las soluciones más sencillas.",
+        "3": "Como mi sobreanálisis va tan profundo, se me hace difícil expresar mis ideas y conclusiones de manera clara y concisa con palabras... Gracias a dios que existe Excalidraw 😂."
+      },
+      "conclusion": "Conclusión: \"No soy una persona perfecta, pero soy un trabajo en progreso y siempre busco mejorar a mí mismo y mis formas de pensar. Además, personalmente creo que hay que tener un poco de yan en tu yin para estar equilibrado.\""
+    },
+    "whatImGoodAt": {
+      "title": "En qué soy bueno",
+      "description": "Oh, qué pregunta tan difícil de responder... ¿por qué? porque soy demasiado exigente conmigo mismo y por lo tanto nunca me veo realmente bueno en nada. Pero, viéndome desde una perspectiva en tercera persona, puedo decirte:",
+      "1": "Aprendo muy rápido y soy capaz de adaptarme a nuevas tecnologías y entornos rápidamente. Hoy en día aún más rápido gracias a la IA 🤣.",
+      "2": "Nunca j*didamente abandono (algunos dirán que es terquedad, pero me gusta pensar que es perseverancia jeje) nada de lo que empiezo, sin importar lo difícil que sea.",
+      "3": "Comprometerme con la empresa. Una vez en el barco somos una sola tripulación que navega junta hacia el mismo objetivo. Puedo dejar mi ego en la puerta y centrarme en el equipo y el objetivo.",
+      "4": "Tomar decisiones desde una perspectiva de negocio, no desde una perspectiva personal o puramente técnica.",
+      "5": "Trabajar, gestionar y colaborar con personas. A pesar de amar la soledad a veces, disfruto compartiendo ideas, fracasos y conocimientos con los demás.",
+      "6": "Mantener altos estándares y expectativas en la calidad del trabajo y el resultado, no solo en los aspectos técnicos. ¿Recuerdas que soy demasiado exigente conmigo mismo?...🫣",
+      "7": "Soy un poco perfeccionista, a veces hasta el punto de ser un poco pesado. Pero, también soy un poco realista, sé que la perfección no siempre es posible y soy capaz de aceptarlo.",
+      "conclusion": "Conclusión: \"Hay muchas más por supuesto, intentar resumir mis habilidades en unos pocos puntos es condenadamente complicado...especialmente cuando apenas te ves bueno en algo (es broma... o quizás no). Te reto a descubrir el resto por ti mismo.\""
+    },
+    "beyondTheResume": {
+      "title": "Más allá del currículum",
+      "description": "Esta sección es quizás la que más he disfrutado escribiendo, ya que puedo contarte un poco más de mí de lo que mi currículum podría decirte. Así que, aquí va:",
+      "1": "Me encanta leer, pregúntame por mis libros favoritos, te sorprenderás. Ir al gimnasio, desde hace varios años. Ver películas (el séptimo arte es mi pasión), series y especialmente fútbol (a quien le pueda interesar, soy del Real Madrid y Gunner). Estoy embrujado por el surf 🏄🏻‍♂️.",
+      "2": "Soy copropietario e inversor en un negocio de cafetería selecta llamado <laOlaLink>La Ola Sunset Cafe</laOlaLink>.",
+      "3": "Gestiono uno de los negocios familiares, un pub llamado <tascaIratxLink>Tasca Iratxe</tascaIratxLink>.",
+      "4": "He trabajado codo a codo con muchos CEOs y emprendedores, aprendiendo de sus errores y aciertos y absorbiendo las mejores prácticas y enfoques de la comunidad emprendedora como una esponja (no Bob xD). Algunas figuras que podría mencionar son: Luis Falcón Martínez de Marañón de InAtlas o Ashu Savani y Ben Spring de TryHackMe.",
+      "5": "No puedo parar de aprender cosas nuevas, de hecho, si me detengo o entro en un ciclo muy repetitivo de trabajo, empiezo a sentirme aburrido e insatisfecho. Necesito desafíos para alimentar mi curiosidad y mantenerme motivado.",
+      "6": "¿Recuerdas lo que dije sobre mi ambición? pues bien, me inspiran personas como Steven Bartlett (mi favorito), Sara Davies, Daniel Priestley, ...especialmente porque provienen de orígenes muy humildes y han logrado grandes cosas. Creo en no intentar imitarlos sino en encontrar mi propio camino hacia la grandeza.",
+      "7": "Soy padre de dos gatos maravillosos y hermosos llamados Pichi y Luka 🐈🐾.",
+      "conclusion": "Conclusión: \"Como ocurre con la sección 'En qué soy bueno', intentar resumir mis intereses y hobbies en unos pocos puntos es pffff, muy complicado... ¿por qué no reservas una charla conmigo y lo hablamos en detalle?\""
+    },
+    "workWithMe": {
+      "title": "Cómo es trabajar conmigo",
+      "description": "No estoy seguro de ser la mejor persona para responder a esta pregunta, pero puedo contarte lo que pienso al respecto:",
+      "1": "Soy muy buen oyente y soy capaz (o al menos lo intento) de entender las necesidades y expectativas de cualquier stakeholder o accionista.",
+      "2": "Siempre intento robarte una carcajada, una sonrisa o un buen rato, ya que soy un firme creyente de que las buenas vibras en un equipo hacen que la gente trabaje más feliz y, por lo tanto, sea más productiva y comprometida.",
+      "3": "Como líder, no esperes que sea predecible, en el sentido de felicitarte cada vez que logras un objetivo o culparte cada vez que fallas, porque dedico tiempo a leer a las personas y sus comportamientos, conociendo sus fortalezas y debilidades y cómo motivarlas para que den lo mejor de sí.",
+      "4": "Intento infundir la cultura y los valores de la empresa en el equipo lo antes posible para crear un ambiente de culto.",
+      "5": "No descarto las opiniones o ideas de los demás, siempre intento entender la perspectiva de la otra persona y por qué piensa como piensa, incluso si no estoy de acuerdo o si eso significa que estoy equivocado.",
+      "6": "En un rol de liderazgo, intento abstraer al equipo de cualquier microgestión o presión de arriba, ya que creo en el poder de la autonomía y la autogestión.",
+      "7": "Como soy perfeccionista y me exijo demasiado a mí mismo, voy a esperar lo mismo del equipo, siempre delimitado y nivelado a sus capacidades y conocimientos.",
+      "8": "Te voy a hacer hablar como un loro para que expliques tus puntos de vista, pensamientos e ideas, ya que soy un firme creyente de que la comunicación es la clave del éxito.",
+      "conclusion": "Conclusión: \"Estoy lejos de ser el líder perfecto o el compañero perfecto, pero algo que puedo decirte ahora mismo es que he aprendido de mis errores en el pasado y observando a otros verdaderos líderes y mentores en mis experiencias anteriores. Siempre soy el primer juez de mis propias acciones, siempre admitiendo mis errores y teniendo la mente abierta para aprender de los demás. Como dijo el Duque Leto (Casa Atreides): 'Un gran hombre no busca liderar; es llamado a ello. Y responde'\""
+    }
   },
   "LanguageSwitcher": {
     "label": "Cambiar idioma"

@@ -37,7 +37,7 @@
   z-index: 1;
   width: min(1080px, calc(100% - 2rem));
   margin: 0 auto;
-  padding: 7rem 0 3rem;
+  padding: 5rem 0 3rem;
 }
 
 .eyebrow {
@@ -65,7 +65,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 2rem 2rem 2rem 0;
+  padding: 2rem 2rem 2rem 2rem;
 }
 
 .cardLabel {
@@ -78,8 +78,7 @@
 }
 
 .heroText {
-  max-width: 28ch;
-  font-size: clamp(1.45rem, 2vw, 2rem);
+  font-size: clamp(1rem, 2vw, 1rem);
   line-height: 1.32;
 }
 
@@ -87,44 +86,6 @@
   display: grid;
   place-items: center;
   padding: 2rem;
-}
-
-.photoStack {
-  position: relative;
-  width: min(100%, 300px);
-  aspect-ratio: 4 / 5;
-}
-
-.photoPlate,
-.photoPlaceholder {
-  position: absolute;
-  inset: 0;
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.24);
-}
-
-.photoPlate:nth-child(1) {
-  transform: rotate(-8deg) translate(-10px, 8px);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.photoPlate:nth-child(2) {
-  transform: rotate(6deg) translate(10px, -6px);
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.photoPlaceholder {
-  display: grid;
-  place-items: center;
-  padding: 1.5rem;
-  text-align: center;
-  background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06)),
-    linear-gradient(135deg, color-mix(in srgb, var(--mesh-primary) 38%, #ffffff 10%), color-mix(in srgb, var(--mesh-secondary) 28%, transparent));
-  color: #fff9ef;
-  font-size: 1rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .tabs {
@@ -185,7 +146,7 @@
 
 @media screen and (min-width: 768px) {
   .panel {
-    width: min(2080px, calc(100% - 3rem));
+    width: min(2080px, calc(100% - 10rem));
     padding-top: 8rem;
     padding-bottom: 4rem;
   }
@@ -195,9 +156,16 @@
     min-height: 320px;
   }
 
+  .heroText {
+    font-size: clamp(1.45rem, 2vw, 1.8rem);
+  }
+
+  .heroCard {
+    padding: 2rem 2rem 2rem 0;
+  }
+
   .heroCard,
   .photoCard,
-  .contentCard,
   .ctaCard {
     border-radius: 32px;
   }

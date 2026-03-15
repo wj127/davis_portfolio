@@ -19,7 +19,65 @@
     "title": "Work Experience"
   },
   "AboutMe": {
-    "title": "About Me"
+    "title": "About Me",
+    "soWhoAmI": "So who the hell am I?",
+    "whoAmIDescription1": "I am nobody famous or on the spot... just yet!! 😜. However, people say I leave a lasting impression and my personal fingerprint wherever I step into. Maybe they're right, maybe not...guess it's up to you to find out 😉.",
+    "whoAmIDescription2": "What I can tell you is that I'm a very ambitious guy that grew up in an entrepreneurial family full of issues and challenges that made me who I am today, with a spice of modesty. I've specialised in software engineering, slowly leaning towards entrepreneurship and business development, always seeking to make a difference and leave a lasting impact.",
+    "howIThink": {
+      "title": "How I think",
+      "description": "I'd say my rationale is a bit too obsessive, in good and bad ways, as I analyse absoulutely everything to the smallest detail and try to foresee all possible scenarios and outcomes. That said, I can tell you:",
+      "theGoods": {
+        "title": "The goods",
+        "1": "I'm constanly keeping in mind the end user and their experience, to deliver the best possible value and outcome.",
+        "2": "I'm always thinking how to expand the market boundaries and get non-customers to become customers.",
+        "3": "I see no problem as impossible to solve, only as a challenge to overcome.",
+        "4": "I tackle problems from an analytical and scientific perspective, meaning I describe hypotheses and test them to find the best solutions."
+      },
+      "theBads": {
+        "title": "The bads",
+        "1": "I overthink things too much sometimes, to the point of making me refute my own ideas and conclusions because I foresaw a brach that could jeopardize the outcome.",
+        "2": "Simple problems are often overcomplicated by my own analysis, making me lose focus on the simplest solutions.",
+        "3": "Because my overthinking goes too deep, it becomes difficult to express my ideas and conclusions in a clear and concise way with words...Thank god Excalidraw exists 😂."
+      },
+      "conclusion": "Conclusion: \"I'm not a perfect person, but I'm a work in progress and I'm always looking to improve myself and my ways of thinking. Furthermore, I personally think you must have a bit of a yan to your yin in order to be balanced.\""
+    },
+    "whatImGoodAt": {
+      "title": "What I'm good at",
+      "description": "Oh, what a difficult question to answer...why? because I'm too demanding of myself therefor I never truly see myself as good at anything. But, looking myself from a third person perspective, I can tell you:",
+      "1": "I'm a very quick learner and I'm able to adapt to new technologies and environments quickly. Nowadays even faster thanks to AI 🤣.",
+      "2": "I never f*cking quit (some will say this is stubbornness, but I like to think of it as perseverance hehe) at anything I start, no matter how difficult it is.",
+      "3": "Commit to the enterprise. Once in the ship we are just one crew that sails towards the same objective together. I can leave my ego at the door and focus on the team and the objective.",
+      "4": "Take decissions from a business perspective, not from a personal or purely technical perspective.",
+      "5": "Work, manage and collaborate with people. Despite loving loneliness sometimes, I strive sharing thoughts, failures and knowledge with others.",
+      "6": "Keep high standards and expectations on the quality of the work and the outcome, not just the technical aspects. Remeber that I'm too demanding of myself?...🫣",
+      "7": "I'm a bit of a perfectionist, sometimes to the point of being a bit of a pain in the ass. But, I'm also a bit of a realist, I know that perfection is not always possible and I'm able to accept that.",
+      "conclusion": "Conclusion: \"There are many more of course, trying to summarize my skills in a few bullets is way damn complicated...specially when you barely see yourself being good at anything (just kidding...or maybe not). I dare you discover the rest by yourself.\""
+    },
+    "beyondTheResume": {
+      "title": "Beyond the resume",
+      "description": "This section is perhaps the one that I've loved writing, as I can tell you a bit more of myself than what my resume could tell you. So, here it goes:",
+      "1": "I love to read, ask me about my favorite books, you'll be surprised. Go to the gym, for several years now. Watch to movies (the 7th art is my passion), series and specially football (to whom it may concern, I'm a Real Madrid and a Gunner fan). I'm bewitched by surfing 🏄🏻‍♂️.",
+      "2": "I'm co-owner and investor in a refined cafeteria business called <laOlaLink>La Ola Sunset Cafe</laOlaLink>.",
+      "3": "I'm managing one of the family businesses, a pub called <tascaIratxLink>Tasca Iratxe</tascaIratxLink>.",
+      "4": "I've worked side by side with many CEOs and entrepreneurs, learning from their mistakes and successes and absorbing the best practices and approaches of the entrepreneurial community like a sponge (not Bob xD). Some figures I could mention are: Luis Falcón Martinez de Marañón from InAtlas or Ashu Savani and Ben Spring from TryHackMe.",
+      "5": "I cannot stop learning new stuff, in fact, if I stop or enter into a very repetitive cycle of work, I start to feel bored and unfulfilled. Need challenges to fuel my curiosity and keep me motivated.",
+      "6": "Remember what I said about my ambition? well, I'm inspired by people like Steven Bartlett (my favourite one), Sara Davies, Daniel Priestley, ...specially because they come from very humble backgrounds and have achieved great things. I believe in not trying to mimic them but in finding my own path to greatness.",
+      "7": "I am father of two wonderful and beautiful cats named Pichi and Luka 🐈🐾.",
+      "conclusion": "Conclusion: \"As it happens with the 'What I'm good at' section, trying to summarize my interests and hobbies in a few bullets is pffff, very complicated...why don't you book a chat with me and we can talk about it in detail?\""
+    },
+    "workWithMe": {
+      "title": "What it's like to work with me",
+      "description": "I'm not sure if I'm the best person to answer this question, but I can tell you what I think about it:",
+      "1": "I'm a very good listener and I'm able (or at least try) to understand the needs and expectations of any stakeholder or shareholder.",
+      "2": "I'm always trying to steal you a laugh, a smile or a good time, as I'm a strong believer that good vibes in a team make people work happier and therefor more productive and engaged.",
+      "3": "As a leader, don't expect me to be predictable, as in a way of congratulate you every time you achieve a goal or blame you every time you fail, because I spend time reading people and their behaviours, knowing their strengths and weaknesses and how to motivate them to achieve their best.",
+      "4": "I try infusing the company's culture and values into the team asap to create a cult-like environment.",
+      "5": "I don't discard other's opinions or ideas, I always try to understand the perspective of the other person and why they think the way they do, even if I don't agree with them or if that means I'm wrong.",
+      "6": "In a leadership role, I try to abtract the team from any micro-management or pressure from above, as I believe in the power of autonomy and self-management.",
+      "7": "As I'm a perfectionist and demand too much from myself, I'm gonna expect the same from the team, always scoped and leveled to tehir capabilities and knowledge.",
+      "8": "I'm gonna make you talk like a parrot to explain your views, thoughts and ideas, as I'm a strong believer that communication is the key to success.",
+      "conclusion": "Conclusion: \"I am far from being the perfect leader or the perfect companion, but one thing I can tell you right now is that I've learned from my mistakes in the past and by observing other true leaders and mentors in my past experiences. I'm always the first judge of my own actions, always admitting my mistakes and having an open mind to learn from others. As the Duke Letto (House Atreides) said: 'A great man doesn't seek to lead; he's called to it. And he answers'\""
+    }
   },
   "LanguageSwitcher": {
     "label": "Change language"
