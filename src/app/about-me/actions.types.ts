@@ -1,10 +1,10 @@
-type FieldErrors = {
-  email?: string;
-  message?: string;
+export type ContactFormErrors = {
+  email?: string[];
+  message?: string[];
 };
 
 export type ContactFormState = {
   success: boolean;
-  fieldErrors?: FieldErrors;
-  error?: string;
-};
+  message: string;
+  errors?: ContactFormErrors;
+} | null;

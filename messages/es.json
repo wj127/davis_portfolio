@@ -77,9 +77,28 @@
       "7": "Como soy perfeccionista y me exijo demasiado a mí mismo, voy a esperar lo mismo del equipo, siempre delimitado y nivelado a sus capacidades y conocimientos.",
       "8": "Te voy a hacer hablar como un loro para que expliques tus puntos de vista, pensamientos e ideas, ya que soy un firme creyente de que la comunicación es la clave del éxito.",
       "conclusion": "Conclusión: \"Estoy lejos de ser el líder perfecto o el compañero perfecto, pero algo que puedo decirte ahora mismo es que he aprendido de mis errores en el pasado y observando a otros verdaderos líderes y mentores en mis experiencias anteriores. Siempre soy el primer juez de mis propias acciones, siempre admitiendo mis errores y teniendo la mente abierta para aprender de los demás. Como dijo el Duque Leto (Casa Atreides): 'Un gran hombre no busca liderar; es llamado a ello. Y responde'\""
+    },
+    "cta": {
+      "heading": "Creemos Algo Disruptivo",
+      "description": "¿Tienes una idea que rompe moldes? ¿Un proyecto que necesita un pensador obsesivo? Decodifiquémoslo juntos.",
+      "button": "INICIAR_CONTACTO"
     }
   },
   "LanguageSwitcher": {
     "label": "Cambiar idioma"
+  },
+  "ContactForm": {
+    "title": "INICIAR_CONTACTO",
+    "subtitle": "Protocolo: Handshake_Seguro_v4.0",
+    "emailLabel": "Puntero_Identidad (Email)",
+    "emailPlaceholder": "USUARIO@TERMINAL.COM",
+    "messageLabel": "Datos_Carga (Mensaje)",
+    "messagePlaceholder": "INGRESE MENSAJE...",
+    "securityNote": "TRANSMISIÓN SEGURA ACTIVA",
+    "submit": "TRANSMITIR",
+    "sending": "TRANSMITIENDO...",
+    "successMessage": "Transmisión exitosa. Tu mensaje ha sido recibido y decodificado. Espera una respuesta pronto.",
+    "statusLeft": "CANAL: SEGURO",
+    "statusRight": "ESTADO: OPERATIVO"
   }
 }

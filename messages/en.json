@@ -77,9 +77,28 @@
       "7": "As I'm a perfectionist and demand too much from myself, I'm gonna expect the same from the team, always scoped and leveled to tehir capabilities and knowledge.",
       "8": "I'm gonna make you talk like a parrot to explain your views, thoughts and ideas, as I'm a strong believer that communication is the key to success.",
       "conclusion": "Conclusion: \"I am far from being the perfect leader or the perfect companion, but one thing I can tell you right now is that I've learned from my mistakes in the past and by observing other true leaders and mentors in my past experiences. I'm always the first judge of my own actions, always admitting my mistakes and having an open mind to learn from others. As the Duke Letto (House Atreides) said: 'A great man doesn't seek to lead; he's called to it. And he answers'\""
+    },
+    "cta": {
+      "heading": "Let's Create Something Disruptive",
+      "description": "Got an idea that breaks conventions? A project that needs an obsessive thinker? Let's decode it together.",
+      "button": "INITIATE_CONTACT"
     }
   },
   "LanguageSwitcher": {
     "label": "Change language"
+  },
+  "ContactForm": {
+    "title": "INITIATE_CONTACT",
+    "subtitle": "Protocol: Secure_Handshake_v4.0",
+    "emailLabel": "Identity_Pointer (Email)",
+    "emailPlaceholder": "USER@TERMINAL.COM",
+    "messageLabel": "Payload_Data (Message)",
+    "messagePlaceholder": "ENTER MESSAGE...",
+    "securityNote": "SECURE TRANSMISSION ACTIVE",
+    "submit": "TRANSMIT",
+    "sending": "TRANSMITTING...",
+    "successMessage": "Transmission successful. Your message has been received and decoded. Expect a response soon.",
+    "statusLeft": "CHANNEL: SECURE",
+    "statusRight": "STATUS: OPERATIONAL"
   }
 }

@@ -9,7 +9,7 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')],
+    includePaths: [path.join(__dirname, 'src', 'styles')],
   },
 };
 

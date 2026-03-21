@@ -10,6 +10,8 @@ import { HowIThinkSection } from '@/app/about-me/sections/how-i-think';
 import { WhatImGoodAtSection } from '@/app/about-me/sections/what-im-good-at';
 import { BeyondTheResumeSection } from '@/app/about-me/sections/beyond-the-resume';
 import { WorkWithMeSection } from '@/app/about-me/sections/work-with-me';
+import { ContactDialog } from '@/app/about-me/contact-dialog/contact-dialog';
+import { Terminal } from 'lucide-react';
 
 const brunoAce = Bruno_Ace_SC({ weight: '400', subsets: ['latin'] });
 const sourceCodePro = Source_Code_Pro({
@@ -25,6 +27,8 @@ const sections = [
     colors: {
       primary: '#4169e1',
       secondary: '#7dd3fc',
+      gradientColor1: '#b6c4ff',
+      gradientColor2: '#4169e1',
     },
     content: <HowIThinkSection />,
   },
@@ -34,6 +38,8 @@ const sections = [
     colors: {
       primary: '#1f9d55',
       secondary: '#f4b942',
+      gradientColor1: '#1f9d55',
+      gradientColor2: '#f4b942',
     },
     content: <WhatImGoodAtSection />,
   },
@@ -43,6 +49,8 @@ const sections = [
     colors: {
       primary: '#f97316',
       secondary: '#facc15',
+      gradientColor1: '#f97316',
+      gradientColor2: '#facc15',
     },
     content: <BeyondTheResumeSection />,
   },
@@ -52,6 +60,8 @@ const sections = [
     colors: {
       primary: '#e11d48',
       secondary: '#8b5cf6',
+      gradientColor1: '#e11d48',
+      gradientColor2: '#8b5cf6',
     },
     content: <WorkWithMeSection />,
   },
@@ -123,11 +133,28 @@ export default function AboutMePage() {
         </article>
 
         <section className={styles.ctaCard}>
-          <span className={styles.cardLabel}>CTA</span>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ac massa non mauris tempus luctus sed sit
-            amet urna.
-          </p>
+          <div className={styles.ctaContent}>
+            <h2 className={styles.ctaHeading}>{aboutMeTranslations('cta.heading')}</h2>
+            <p className={styles.ctaDescription}>{aboutMeTranslations('cta.description')}</p>
+          </div>
+          <ContactDialog
+            trigger={
+              <button
+                className={styles.glitchButton}
+                type='button'
+                style={
+                  {
+                    '--gradient-color-1': activeTab.colors.gradientColor1,
+                    '--gradient-color-2': activeTab.colors.gradientColor2,
+                  } as CSSProperties
+                }
+              >
+                {aboutMeTranslations('cta.button')}
+                <Terminal size={20} />
+              </button>
+            }
+            colors={activeTab.colors}
+          />
         </section>
       </section>
     </main>

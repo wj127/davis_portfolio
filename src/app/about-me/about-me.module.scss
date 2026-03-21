@@ -1,3 +1,5 @@
+@use '../../styles/mixins' as *;
+
 .page {
   --mesh-primary: #4169e1;
   --mesh-secondary: #7dd3fc;
@@ -141,13 +143,49 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1.5rem;
 
-  p {
-    max-width: 46ch;
-    font-size: 0.92rem;
-    line-height: 1.55;
+  background-color: rgba(2, 31, 57, 0.8);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    background-color: rgba(2, 31, 57, 0.7);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
   }
 }
+
+.ctaContent {
+  flex: 1;
+  text-align: center;
+}
+
+.ctaHeading {
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #e2e2e2 0%, #b6c4ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ctaDescription {
+  font-family: var(--font-source-code-pro), monospace;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.glitchButton {
+  @include glitch-button;
+  flex-shrink: 0;
+}
+
+@include glitch-skew-keyframes;
 
 @media screen and (min-width: 768px) {
   .panel {
@@ -209,13 +247,28 @@
   }
 
   .ctaCard {
-    padding: 2rem 2rem 2rem 0;
+    padding: 2rem;
     min-height: 180px;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+  }
 
-    p {
-      font-size: 1.05rem;
-      line-height: 1.6;
-    }
+  .ctaContent {
+    text-align: left;
+  }
+
+  .ctaHeading {
+    font-size: clamp(1.8rem, 3vw, 2.2rem);
+  }
+
+  .ctaDescription {
+    font-size: 1rem;
+  }
+
+  .glitchButton {
+    padding: 1.25rem 2.5rem;
+    font-size: 1.1rem;
   }
 }
