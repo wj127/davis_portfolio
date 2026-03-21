@@ -79,8 +79,8 @@
       "conclusion": "Conclusion: \"I am far from being the perfect leader or the perfect companion, but one thing I can tell you right now is that I've learned from my mistakes in the past and by observing other true leaders and mentors in my past experiences. I'm always the first judge of my own actions, always admitting my mistakes and having an open mind to learn from others. As the Duke Letto (House Atreides) said: 'A great man doesn't seek to lead; he's called to it. And he answers'\""
     },
     "cta": {
-      "heading": "Let's Create Something Disruptive",
-      "description": "Got an idea that breaks conventions? A project that needs an obsessive thinker? Let's decode it together.",
+      "heading": "Are we breaking the rules of the game?",
+      "description": "If you've made it this far, and most importantly, that you've read who I am...I ask you: Do you have any idea that breaks the mold and is innovative? Any project that needs an obsessive thinker? Any company that needs an expert consultant? I'm open to any type of collaboration that helps improve and change our environment. ¡Let's decode it together! 😉",
       "button": "INITIATE_CONTACT"
     }
   },
@@ -99,6 +99,7 @@
     "sending": "TRANSMITTING...",
     "successMessage": "Transmission successful. Your message has been received and decoded. Expect a response soon.",
     "statusLeft": "CHANNEL: SECURE",
-    "statusRight": "STATUS: OPERATIONAL"
+    "statusRight": "STATUS: OPERATIONAL",
+    "smallHint": "Yes...if you were thinking it, all these small things around the dialog and the texts (like the \"Secure_Handshake_v4.0\" protocol) are fake...just for the sake of the story 😂"
   }
 }

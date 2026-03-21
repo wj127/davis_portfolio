@@ -79,8 +79,8 @@
       "conclusion": "Conclusión: \"Estoy lejos de ser el líder perfecto o el compañero perfecto, pero algo que puedo decirte ahora mismo es que he aprendido de mis errores en el pasado y observando a otros verdaderos líderes y mentores en mis experiencias anteriores. Siempre soy el primer juez de mis propias acciones, siempre admitiendo mis errores y teniendo la mente abierta para aprender de los demás. Como dijo el Duque Leto (Casa Atreides): 'Un gran hombre no busca liderar; es llamado a ello. Y responde'\""
     },
     "cta": {
-      "heading": "Creemos Algo Disruptivo",
-      "description": "¿Tienes una idea que rompe moldes? ¿Un proyecto que necesita un pensador obsesivo? Decodifiquémoslo juntos.",
+      "heading": "¿Rompemos las reglas del juego?",
+      "description": "Si has llegado hasta aquí, y lo más importante, que hayas leído quién soy...te pregunto: ¿Tienes alguna idea que rompa los moldes y sea innovadora? ¿Algún proyecto que necesite un pensador obsesivo? ¿Alguna empresa que necesite un consultor experto? Estoy abierto a cualquier tipo de colaboración que ayude a mejorar y cambiar nuestro entorno. ¡Decodifiquémoslo juntos! 😉",
       "button": "INICIAR_CONTACTO"
     }
   },
@@ -99,6 +99,7 @@
     "sending": "TRANSMITIENDO...",
     "successMessage": "Transmisión exitosa. Tu mensaje ha sido recibido y decodificado. Espera una respuesta pronto.",
     "statusLeft": "CANAL: SEGURO",
-    "statusRight": "ESTADO: OPERATIVO"
+    "statusRight": "ESTADO: OPERATIVO",
+    "smallHint": "Sí...si te lo estabas preguntando, todas estas pequeñas cosas alrededor del diálogo y los textos (como el protocolo \"Handshake_Seguro_v4.0\") son falsos...son solo para darle el toque de realismo a la historia 😂"
   }
 }

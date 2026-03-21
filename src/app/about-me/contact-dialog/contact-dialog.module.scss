@@ -132,6 +132,14 @@
   color: #ffb4ab;
 }
 
+.smallHint {
+  font-family: var(--font-source-code-pro), 'Source Code Pro', monospace;
+  font-size: 0.5625rem;
+  color: #777777;
+  letter-spacing: 0.02em;
+  margin-top: 0.5rem;
+}
+
 .footer {
   display: flex;
   flex-direction: column;

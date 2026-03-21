@@ -68,6 +68,7 @@ const ContactFormContent = ({ colors }: { colors: ContactDialogProps['colors'] }
           required
         />
         {state?.errors?.message && <span className={styles.error}>{state.errors.message[0]}</span>}
+        <span className={styles.smallHint}>{translations('smallHint')}</span>
       </div>
 
       {state && !state.success && !state.errors && <span className={styles.error}>{state.message}</span>}
