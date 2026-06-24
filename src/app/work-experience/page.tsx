@@ -1,148 +1,153 @@
 'use client';
 
-import React from 'react';
-import { Toc } from '@/app/work-experience/components/toc/Toc';
-import { Fragment, useEffect, useRef, useState } from 'react';
-import styles from '@/app/work-experience/work-experience.module.scss';
-import { Bruno_Ace_SC } from 'next/font/google';
-import { useTocObserver } from '@/app/work-experience/hooks/toc-observer';
+import React, { Fragment, useRef, useState } from 'react';
 import Image from 'next/image';
+import { Bruno_Ace_SC } from 'next/font/google';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+import styles from '@/app/work-experience/work-experience.module.scss';
+import { Toc } from '@/app/work-experience/components/toc/Toc';
 import { TimeLineSections, timelineYears } from '@/app/work-experience/constants/sections';
-import { useRevealContentObserver } from '@/app/work-experience/hooks/reveal-observer';
-import { ExpandableContent } from '@/app/work-experience/components';
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const brunoAce = Bruno_Ace_SC({ weight: '400', subsets: ['latin'] });
 
-const BUFFER = 24;
+const DESKTOP_MEDIA_QUERY = '(min-width: 1025px)';
 
-const MOBILE_BREAKPOINT = 1025;
+const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
 
-export default function CurriculumVitae() {
-  const [activeYear, setActiveYear] = useState(timelineYears[0]);
-  const [isFirstRender, setIsFirstRender] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const sectionRefs = useRef<Record<number, HTMLElement | null>>({});
-  const contentRefs = useRef<(HTMLElement | null)[]>([]);
-  useTocObserver({ timelineYears, sectionRefs, containerRef, setActiveYear });
-  useRevealContentObserver({
-    // eslint-disable-next-line react-hooks/refs
-    targetRefs: contentRefs.current,
-  });
+// Visible viewport width, excluding the vertical scrollbar that the pin always introduces.
+// (window.innerWidth includes the scrollbar, which would offset the centering math.)
+const getViewportWidth = () => document.documentElement.clientWidth;
 
-  // little hack to ensure you can safely access client APIs after SSR
-  useEffect(() => {
-    setIsFirstRender(true);
-    setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT);
+export default function WorkExperience() {
+  const [activeYear, setActiveYear] = useState<number>(timelineYears[0]);
+  const pinWrapperRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const yearSectionRefs = useRef<Record<number, HTMLElement | null>>({});
+  const horizontalScrollTriggerRef = useRef<ScrollTrigger | null>(null);
 
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT);
-    };
+  useGSAP(
+    () => {
+      const track = trackRef.current;
+      const pinWrapper = pinWrapperRef.current;
+      if (!track || !pinWrapper) return;
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+      const matchMedia = gsap.matchMedia();
 
-  useEffect(() => {
-    if (!isFirstRender) return;
-    if (isMobile) return;
-    const container = containerRef.current;
-    if (!container) return;
+      matchMedia.add(DESKTOP_MEDIA_QUERY, () => {
+        const getScrollDistance = () => track.scrollWidth - getViewportWidth();
 
-    const lockRef = {
-      armedElement: null as HTMLElement | null,
-      activeElement: null as HTMLElement | null,
-      expiresAt: 0,
-    };
+        // The track rests flush-right (see SCSS), so at x:0 the newest year is shown.
+        // Panning the track rightward (+x) brings the older years (laid out to the
+        // left) into view: a right-to-left camera pan. Starting at x:0 keeps the
+        // pre-hydration paint identical to the first animated frame (no flick).
+        const horizontalTween = gsap.fromTo(
+          track,
+          { x: 0 },
+          {
+            x: () => getScrollDistance(),
+            ease: 'none',
+            scrollTrigger: {
+              trigger: pinWrapper,
+              start: 'top top',
+              end: () => `+=${getScrollDistance()}`,
+              pin: true,
+              scrub: 1,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+            },
+          },
+        );
 
-    const canScrollVert = (element: HTMLElement, deltaY: number, useBuffer = false) => {
-      const { scrollTop, scrollHeight, clientHeight: innerElementHeight } = element;
-      const top = useBuffer ? BUFFER : 0;
-      const bottom = useBuffer ? BUFFER : 0;
-      if (scrollHeight <= innerElementHeight) return false;
-      if (deltaY < 0) return scrollTop > top; // up
-      if (deltaY > 0) return scrollTop + innerElementHeight < scrollHeight - 1 - bottom; // down
-      return false;
-    };
+        horizontalScrollTriggerRef.current = horizontalTween.scrollTrigger ?? null;
 
-    const isActiveYScroller = (el: HTMLElement | null) => {
-      if (!el) return false;
-      if (el.getAttribute('data-visible') !== 'true') return false;
-      const activateAt = Number(el.getAttribute('data-activate-at') ?? 0);
-      return Date.now() >= activateAt; // honor the 250ms guard
-    };
+        timelineYears.forEach((year) => {
+          const yearSection = yearSectionRefs.current[year];
+          if (!yearSection) return;
+          ScrollTrigger.create({
+            trigger: yearSection,
+            containerAnimation: horizontalTween,
+            start: 'left center',
+            end: 'right center',
+            onToggle: (self) => {
+              if (self.isActive) setActiveYear(year);
+            },
+          });
+        });
 
-    const onWheel = (wheelEvent: WheelEvent) => {
-      // Trackpads: if strong horizontal intent, don't interfere
-      if (Math.abs(wheelEvent.deltaX) > Math.abs(wheelEvent.deltaY)) return;
+        const companySections = Array.from(pinWrapper.querySelectorAll<HTMLElement>(`.${styles.companySection}`));
+        companySections.forEach((companySection) => {
+          const revealTargets = [
+            companySection.querySelector<HTMLElement>(`.${styles.companyLogo}`),
+            companySection.querySelector<HTMLElement>(`.${styles.contentWrapper}`),
+          ].filter((revealTarget): revealTarget is HTMLElement => Boolean(revealTarget));
 
-      const target = wheelEvent.target as HTMLElement | null;
-      // Check for both yScroll class and expandable content with data-visible
-      const yScroller = (target?.closest(`.${styles.yScroll}`) ||
-        target?.closest('[data-visible="true"]')) as HTMLElement | null;
+          gsap.from(revealTargets, {
+            autoAlpha: 0,
+            y: 48,
+            duration: 0.8,
+            stagger: 0.12,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: companySection,
+              containerAnimation: horizontalTween,
+              // Track pans content rightward, so panels enter from the left edge:
+              // reveal shortly after a panel's right edge comes into view.
+              start: 'right 25%',
+              toggleActions: 'play none none reverse',
+            },
+          });
+        });
 
-      if (!yScroller) {
-        lockRef.armedElement = null;
-        lockRef.activeElement = null;
-        wheelEvent.preventDefault();
-        container?.scrollBy({ left: -wheelEvent.deltaY }); // row-reverse compensation
-        return;
-      }
+        return () => {
+          horizontalScrollTriggerRef.current = null;
+        };
+      });
+    },
+    { scope: pinWrapperRef },
+  );
 
-      // checks if the yScroller's "data-activate-at" is in the past
-      if (isActiveYScroller(yScroller)) {
-        // if vertically locked to this element, consume wheel vertically
-        if (lockRef.activeElement === yScroller) {
-          if (canScrollVert(yScroller, wheelEvent.deltaY)) {
-            wheelEvent.preventDefault();
-            yScroller.scrollBy({ top: wheelEvent.deltaY });
-            return;
-          } else {
-            // reached an edge: release vertical lock and fall back to horizontal
-            lockRef.activeElement = null;
-          }
-        }
+  const handleSelectYear = (year: number) => {
+    const yearSection = yearSectionRefs.current[year];
+    const track = trackRef.current;
+    if (!yearSection) return;
 
-        // not locked: require a second wheel within a short window to engage vertical
-        const now = Date.now();
-        if (lockRef.armedElement === yScroller && now < lockRef.expiresAt) {
-          // only engage if we’re not at the edge (use small buffer so it doesn’t start at the very top/bottom)
-          if (canScrollVert(yScroller, wheelEvent.deltaY, true)) {
-            lockRef.activeElement = yScroller;
-            wheelEvent.preventDefault();
-            yScroller.scrollBy({ top: wheelEvent.deltaY });
-            return;
-          }
-          // if buffer blocks, let it be horizontal this tick
-        } else {
-          // arm this scroller and eat no vertical yet
-          lockRef.armedElement = yScroller;
-          lockRef.expiresAt = now + 800; // ms window
-          // do not vertical-scroll on first tick -> improves intent
-        }
-      }
+    setActiveYear(year);
 
-      wheelEvent.preventDefault();
-      container?.scrollBy({ left: -wheelEvent.deltaY }); // row-reverse compensation
-    };
+    const horizontalScrollTrigger = horizontalScrollTriggerRef.current;
+    if (!track || !horizontalScrollTrigger || !window.matchMedia(DESKTOP_MEDIA_QUERY).matches) {
+      yearSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
 
-    container?.addEventListener('wheel', onWheel, { passive: false });
-    return () => container?.removeEventListener('wheel', onWheel);
-  }, [isFirstRender, isMobile]);
+    const scrollDistance = track.scrollWidth - getViewportWidth();
+    if (scrollDistance <= 0) return;
+
+    // Track rests flush-right and pans from x:0 to +scrollDistance, so a section is
+    // centered at progress = 1 - its centered offset within the track.
+    const centeredProgress =
+      (yearSection.offsetLeft + yearSection.offsetWidth / 2 - getViewportWidth() / 2) / scrollDistance;
+    const progress = clamp(1 - centeredProgress, 0, 1);
+    const targetScroll =
+      horizontalScrollTrigger.start + progress * (horizontalScrollTrigger.end - horizontalScrollTrigger.start);
+
+    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+  };
 
   return (
     <div className={brunoAce.className}>
-      {/* @ts-expect-error - need to fix the types */}
-      <Toc activeYear={activeYear} sectionRefs={sectionRefs} containerRef={containerRef} />
-      <div ref={containerRef} className={styles.horizontalContainer}>
-        {TimeLineSections.map(({ year, id, logo, subTitle, gradientColor, content, colour, className }, index) => {
-          const imgIndex = index * 2;
-          const divIndex = imgIndex + 1;
-          return (
+      <Toc activeYear={activeYear} onSelectYear={handleSelectYear} />
+      <section ref={pinWrapperRef} className={styles.pinWrapper}>
+        <div ref={trackRef} className={styles.track}>
+          {TimeLineSections.map(({ year, id, logo, subTitle, gradientColor, content, colour, className }) => (
             <Fragment key={id}>
               <section
-                /* @ts-expect-error - same, need to fix the types here */
-                ref={(sectionElement) => (sectionRefs.current[year] = sectionElement)}
+                ref={(yearSectionElement) => {
+                  yearSectionRefs.current[year] = yearSectionElement;
+                }}
                 className={`${styles.yearSection} ${styles[className] || ''}`}
                 id={id}
               >
@@ -152,43 +157,21 @@ export default function CurriculumVitae() {
                 </div>
               </section>
               <section className={styles.companySection} style={{ background: gradientColor }}>
-                <Image
-                  src={logo}
-                  alt='InAtlas Logo'
-                  data-index-type={index % 2 === 0 ? 'even' : 'odd'}
-                  className={styles.companyLogo}
-                  ref={(imageElement) => {
-                    contentRefs.current[imgIndex] = imageElement;
-                  }}
-                />
-                {/* Unified ExpandableContent for both mobile and desktop */}
-                <div
-                  className={isMobile ? styles.mobileContentWrapper : styles.contentWrapper}
-                  ref={(divElement) => {
-                    contentRefs.current[divIndex] = divElement;
-                  }}
-                >
-                  <ExpandableContent
-                    colour={colour}
-                    maxCollapsedHeight={isMobile ? 250 : 400}
-                    maxExpandedHeight={isMobile ? undefined : 500}
-                    scrollClassName={styles.yScroll}
-                    isMobile={isMobile}
-                  >
-                    {React.isValidElement(content)
-                      ? content
-                      : content.map((element) => (
-                          <div key={element.id} className={styles.contentSection}>
-                            {element.content}
-                          </div>
-                        ))}
-                  </ExpandableContent>
+                <Image src={logo} alt={`${year} company logo`} className={styles.companyLogo} />
+                <div className={styles.contentWrapper} style={{ color: colour }}>
+                  {React.isValidElement(content)
+                    ? content
+                    : content.map((contentBlock) => (
+                        <div key={contentBlock.id} className={styles.contentSection}>
+                          {contentBlock.content}
+                        </div>
+                      ))}
                 </div>
               </section>
             </Fragment>
-          );
-        })}
-      </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

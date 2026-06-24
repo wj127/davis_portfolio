@@ -3,22 +3,19 @@
 import React from 'react';
 import styles from '@/app/work-experience/components/toc/Toc.module.scss';
 import { TimeLineSections } from '@/app/work-experience/constants/sections';
+import { TocProps } from '@/app/work-experience/components/toc/Toc.types';
 
-// Static array of years for the timeline
 const timelineYears = TimeLineSections.map(({ year }) => year);
 
-export const Toc: React.FC<{ activeYear: number }> = ({ activeYear }) => {
+export const Toc: React.FC<TocProps> = ({ activeYear, onSelectYear }) => {
   return (
     <div className={styles.tocContainer}>
       <div className={styles.timeline}>
-        {timelineYears.map((year, index) => (
+        {timelineYears.map((year) => (
           <div
             className={[styles.timelineItem, year === activeYear ? styles.active : ''].join(' ')}
-            key={index}
-            onClick={() => {
-              const element = document.getElementById(`year-${year}`);
-              element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }}
+            key={year}
+            onClick={() => onSelectYear(year)}
           >
             <div className={styles.timelineDot}>
               <div className={styles.dateInfo}>

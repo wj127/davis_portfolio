@@ -8,6 +8,9 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  turbopack: {
+    root: __dirname,
+  },
   sassOptions: {
     includePaths: [path.join(__dirname, 'src', 'styles')],
   },
