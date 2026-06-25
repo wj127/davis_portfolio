@@ -40,6 +40,55 @@ export default function WorkExperience() {
       matchMedia.add(DESKTOP_MEDIA_QUERY, () => {
         const getScrollDistance = () => track.scrollWidth - getViewportWidth();
 
+        // Activate the year whose section currently covers the viewport centre.
+        // Read from live layout (not GSAP containerAnimation triggers): the track
+        // pans positive-x (right-to-left camera), a direction containerAnimation
+        // child triggers don't map correctly, so we derive state from positions.
+        const updateActiveYear = () => {
+          const viewportCenter = getViewportWidth() / 2;
+          for (const year of timelineYears) {
+            const yearSection = yearSectionRefs.current[year];
+            if (!yearSection) continue;
+            const rect = yearSection.getBoundingClientRect();
+            if (rect.left <= viewportCenter && rect.right >= viewportCenter) {
+              setActiveYear(year);
+              return;
+            }
+          }
+        };
+
+        // Paused per-panel reveal tweens, played/reversed from live positions for
+        // the same direction-agnostic reason as the active-year detection above.
+        const companySections = Array.from(pinWrapper.querySelectorAll<HTMLElement>(`.${styles.companySection}`));
+        const companyReveals = companySections.map((companySection) => {
+          const revealTargets = [
+            companySection.querySelector<HTMLElement>(`.${styles.companyLogo}`),
+            companySection.querySelector<HTMLElement>(`.${styles.contentWrapper}`),
+          ].filter((revealTarget): revealTarget is HTMLElement => Boolean(revealTarget));
+
+          const reveal = gsap.from(revealTargets, {
+            autoAlpha: 0,
+            y: 48,
+            duration: 0.8,
+            stagger: 0.12,
+            ease: 'power2.out',
+            paused: true,
+            immediateRender: true,
+          });
+
+          return { companySection, reveal };
+        });
+
+        const updateCompanyReveals = () => {
+          const viewportWidth = getViewportWidth();
+          companyReveals.forEach(({ companySection, reveal }) => {
+            const rect = companySection.getBoundingClientRect();
+            const isInView = rect.left < viewportWidth * 0.75 && rect.right > viewportWidth * 0.25;
+            if (isInView) reveal.play();
+            else reveal.reverse();
+          });
+        };
+
         // The track rests flush-right (see SCSS), so at x:0 the newest year is shown.
         // Panning the track rightward (+x) brings the older years (laid out to the
         // left) into view: a right-to-left camera pan. Starting at x:0 keeps the
@@ -58,49 +107,22 @@ export default function WorkExperience() {
               scrub: 1,
               anticipatePin: 1,
               invalidateOnRefresh: true,
+              onUpdate: () => {
+                updateActiveYear();
+                updateCompanyReveals();
+              },
+              onRefresh: () => {
+                updateActiveYear();
+                updateCompanyReveals();
+              },
             },
           },
         );
 
         horizontalScrollTriggerRef.current = horizontalTween.scrollTrigger ?? null;
 
-        timelineYears.forEach((year) => {
-          const yearSection = yearSectionRefs.current[year];
-          if (!yearSection) return;
-          ScrollTrigger.create({
-            trigger: yearSection,
-            containerAnimation: horizontalTween,
-            start: 'left center',
-            end: 'right center',
-            onToggle: (self) => {
-              if (self.isActive) setActiveYear(year);
-            },
-          });
-        });
-
-        const companySections = Array.from(pinWrapper.querySelectorAll<HTMLElement>(`.${styles.companySection}`));
-        companySections.forEach((companySection) => {
-          const revealTargets = [
-            companySection.querySelector<HTMLElement>(`.${styles.companyLogo}`),
-            companySection.querySelector<HTMLElement>(`.${styles.contentWrapper}`),
-          ].filter((revealTarget): revealTarget is HTMLElement => Boolean(revealTarget));
-
-          gsap.from(revealTargets, {
-            autoAlpha: 0,
-            y: 48,
-            duration: 0.8,
-            stagger: 0.12,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: companySection,
-              containerAnimation: horizontalTween,
-              // Track pans content rightward, so panels enter from the left edge:
-              // reveal shortly after a panel's right edge comes into view.
-              start: 'right 25%',
-              toggleActions: 'play none none reverse',
-            },
-          });
-        });
+        updateActiveYear();
+        updateCompanyReveals();
 
         return () => {
           horizontalScrollTriggerRef.current = null;

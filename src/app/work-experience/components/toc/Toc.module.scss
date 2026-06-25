@@ -1,139 +1,183 @@
 @import "src/styles/varibales";
 
-// TOC Container - positioned in the lower left corner
+$dot-size: 14px;
+$dot-size-active: 22px;
+
+// Fixed, bottom-centered HUD overlay (ref: Stitch centered horizontal timeline).
 .tocContainer {
   position: fixed;
-  bottom: 4%;
-  margin-left: 4%;
+  bottom: 3.5%;
+  left: 20%;
+  transform: translateX(-50%);
   z-index: 100;
-  max-height: 80vh;
-  overflow-x: visible;
-
-  @media screen and (min-width: 2500px) {
-    margin-left: 2%;
-  }
+  max-width: 92vw;
 }
 
-// Timeline
 .timeline {
+  list-style: none;
+  margin: 0;
+  // Vertical padding reserves room for the absolutely-placed year (above) and
+  // caption (below) so they never clip against the panel edges.
+  padding: 2.25rem 1.75rem;
   display: flex;
-  flex-direction: column;
-  position: relative;
-
-  @media screen and (min-width: 768px) {
-    flex-direction: row-reverse;
-  }
-}
-
-// Timeline Items
-.timelineItem {
-  display: flex;
-  flex-direction: column;
+  // newest year (2024) on the right to match the page's right-to-left pan.
+  flex-direction: row-reverse;
   align-items: center;
-  position: relative;
-  cursor: pointer;
 
-  @media screen and (min-width: 768px) {
-    flex-direction: row-reverse;
+  //background: rgba(14, 14, 14, 0.55);
+  //border: 1px solid rgba(182, 196, 255, 0.12);
+  //border-radius: 0.75rem;
+  //backdrop-filter: blur(14px);
+  //-webkit-backdrop-filter: blur(14px);
+  //box-shadow: 0 0 40px rgba(182, 196, 255, 0.06);
+}
+
+// Connecting "data stream" segments between nodes.
+.connector {
+  flex: 0 0 auto;
+  width: clamp(1.75rem, 6vw, 5rem);
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(182, 196, 255, 0.12), transparent);
+  background-size: 200% 100%;
+  animation: datastream 3s linear infinite;
+}
+
+.connectorActive {
+  background: linear-gradient(90deg, rgba(182, 196, 255, 0.25), $timeline-accent, rgba(182, 196, 255, 0.25));
+  background-size: 200% 100%;
+  animation: datastream 2s linear infinite;
+}
+
+@keyframes datastream {
+  0% {
+    background-position: 200% 0;
   }
-  
-  &:last-child {
-    .timelineLine {
-      display: none;
-    }
-  }
-
-  &:hover, &.active {
-    .timelineDot {
-      transform: scale(1.1);
-      border-color: $selected-orange;
-
-      + .timelineLine {
-        //transform: translateX(15px) skewX(-15deg);
-        background: linear-gradient(to bottom, $selected-orange, rgba(255, 255, 255, 0.3));
-
-        @media screen and (min-width: 768px) {
-          transform: translateY(-15px) skewY(-15deg);
-        }
-      }
-      
-      .dateInfo {
-        .date, .month, .year {
-          color: $selected-orange;
-        }
-      }
-    }
-    
-    &:last-child .timelineDot {
-      transform: scale(1.1);
-    }
-    
-    &:not(:last-child) .timelineDot {
-      //transform: scale(1.1) translateX(25px);
-
-      @media screen and (min-width: 768px) {
-        transform: scale(1.1) translateY(-25px);
-      }
-    }
+  100% {
+    background-position: -200% 0;
   }
 }
 
-// Timeline Dot (Circle with date)
-.timelineDot {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  background-color: rgba(40, 44, 52, 0.8);
+.node {
+  flex: 0 0 auto;
   display: flex;
+  align-items: center;
   justify-content: center;
+}
+
+// Fixed footprint keeps node spacing even regardless of active/inactive size.
+.nodeButton {
+  position: relative;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  width: $dot-size-active;
+  height: $dot-size-active;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.year {
+  position: absolute;
+  bottom: calc(100% + 0.65rem);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: $timeline-muted;
+  opacity: 0.6;
+  white-space: nowrap;
+  transition: color 0.3s ease, opacity 0.3s ease, font-size 0.3s ease, text-shadow 0.3s ease;
+}
+
+.dot {
+  width: $dot-size;
+  height: $dot-size;
+  border-radius: 50%;
+  background: $timeline-surface;
+  border: 1px solid rgba(182, 196, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   z-index: 2;
-  transition: all 0.3s ease;
-
-  @media screen and (min-width: 768px) {
-    width: 40px;
-    height: 40px;
-  }
+  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-// Timeline Connecting Line
-.timelineLine {
-  width: 2px;
-  height: 40px;
-  background-color: rgba(20, 19, 19, 0.974);
-  margin: 5px 0;
+.dotCore {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: $timeline-muted;
   transition: all 0.3s ease;
-
-  @media screen and (min-width: 768px) {
-    width: 40px;
-    height: 2px;
-    margin: 0 5px;
-  }
-  
-  @media (max-width: 576px) {
-    height: 30px;
-  }
 }
 
-// Date Information
-.dateInfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-mono);
-  text-align: center;
-  
+.caption {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: $timeline-accent;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nodeButton:hover {
   .year {
-    color: white;
-    font-size: .5rem;
-    font-weight: bold;
-    transition: color 0.3s ease;
-
-    @media screen and (min-width: 768px) {
-      font-size: .7rem;
-    }
+    color: $timeline-accent;
+    opacity: 1;
   }
-} 
+
+  .dot {
+    border-color: $timeline-accent;
+  }
+
+  .dotCore {
+    background: $timeline-accent;
+  }
+}
+
+.active {
+  .year {
+    color: $timeline-accent;
+    opacity: 1;
+    font-size: 0.85rem;
+    text-shadow: 0 0 8px rgba(182, 196, 255, 0.8);
+  }
+
+  .dot {
+    width: $dot-size-active;
+    height: $dot-size-active;
+    border-color: $timeline-accent;
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .dotCore {
+    width: 7px;
+    height: 7px;
+    background: $timeline-accent;
+    box-shadow: 0 0 8px rgba(182, 196, 255, 0.9);
+  }
+
+  .caption {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 4px rgba(182, 196, 255, 0.08), 0 0 8px rgba(182, 196, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(182, 196, 255, 0.12), 0 0 16px rgba(182, 196, 255, 0.9);
+  }
+}
