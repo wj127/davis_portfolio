@@ -23,13 +23,6 @@ $dot-size-active: 22px;
   // newest year (2024) on the right to match the page's right-to-left pan.
   flex-direction: row-reverse;
   align-items: center;
-
-  //background: rgba(14, 14, 14, 0.55);
-  //border: 1px solid rgba(182, 196, 255, 0.12);
-  //border-radius: 0.75rem;
-  //backdrop-filter: blur(14px);
-  //-webkit-backdrop-filter: blur(14px);
-  //box-shadow: 0 0 40px rgba(182, 196, 255, 0.06);
 }
 
 // Connecting "data stream" segments between nodes.
@@ -37,14 +30,17 @@ $dot-size-active: 22px;
   flex: 0 0 auto;
   width: clamp(1.75rem, 6vw, 5rem);
   height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(182, 196, 255, 0.12), transparent);
+  background: linear-gradient(90deg, transparent, rgba(182, 196, 255, 0.55), transparent);
   background-size: 200% 100%;
+  // Dark halo so the light line stays visible over light company backgrounds.
+  filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.55));
   animation: datastream 3s linear infinite;
 }
 
 .connectorActive {
-  background: linear-gradient(90deg, rgba(182, 196, 255, 0.25), $timeline-accent, rgba(182, 196, 255, 0.25));
+  background: linear-gradient(90deg, rgba(182, 196, 255, 0.45), $timeline-accent, rgba(182, 196, 255, 0.45));
   background-size: 200% 100%;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
   animation: datastream 2s linear infinite;
 }
 
@@ -87,9 +83,11 @@ $dot-size-active: 22px;
   font-size: 0.7rem;
   letter-spacing: 0.08em;
   font-weight: 700;
-  color: $timeline-muted;
-  opacity: 0.6;
+  color: #d4d8e6;
+  opacity: 0.92;
   white-space: nowrap;
+  // Dark halo keeps the light label readable on the white / gray company chapters.
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7), 0 0 2px rgba(0, 0, 0, 0.55);
   transition: color 0.3s ease, opacity 0.3s ease, font-size 0.3s ease, text-shadow 0.3s ease;
 }
 
@@ -98,7 +96,7 @@ $dot-size-active: 22px;
   height: $dot-size;
   border-radius: 50%;
   background: $timeline-surface;
-  border: 1px solid rgba(182, 196, 255, 0.3);
+  border: 1px solid rgba(182, 196, 255, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -111,7 +109,7 @@ $dot-size-active: 22px;
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: $timeline-muted;
+  background: #aeb4c9;
   transition: all 0.3s ease;
 }
 
@@ -124,9 +122,10 @@ $dot-size-active: 22px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-weight: 700;
-  color: $timeline-accent;
+  color: #d8defb;
   white-space: nowrap;
   opacity: 0;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7), 0 0 2px rgba(0, 0, 0, 0.55);
   transition: opacity 0.3s ease;
 }
 
@@ -147,10 +146,11 @@ $dot-size-active: 22px;
 
 .active {
   .year {
-    color: $timeline-accent;
+    color: #dbe2ff;
     opacity: 1;
     font-size: 0.85rem;
-    text-shadow: 0 0 8px rgba(182, 196, 255, 0.8);
+    // Dark halo for light backgrounds, plus the accent glow for the neon look on dark ones.
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.72), 0 0 10px rgba(182, 196, 255, 0.85);
   }
 
   .dot {
