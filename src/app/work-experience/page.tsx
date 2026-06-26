@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Fragment, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Image from 'next/image';
 import { Bruno_Ace_SC } from 'next/font/google';
 import { gsap } from 'gsap';
@@ -59,11 +59,11 @@ export default function WorkExperience() {
 
         // Paused per-panel reveal tweens, played/reversed from live positions for
         // the same direction-agnostic reason as the active-year detection above.
-        const companySections = Array.from(pinWrapper.querySelectorAll<HTMLElement>(`.${styles.companySection}`));
-        const companyReveals = companySections.map((companySection) => {
+        const companyPanels = Array.from(pinWrapper.querySelectorAll<HTMLElement>(`.${styles.companyPanel}`));
+        const companyReveals = companyPanels.map((companyPanel) => {
           const revealTargets = [
-            companySection.querySelector<HTMLElement>(`.${styles.companyLogo}`),
-            companySection.querySelector<HTMLElement>(`.${styles.contentWrapper}`),
+            companyPanel.querySelector<HTMLElement>(`.${styles.companyLogo}`),
+            companyPanel.querySelector<HTMLElement>(`.${styles.contentWrapper}`),
           ].filter((revealTarget): revealTarget is HTMLElement => Boolean(revealTarget));
 
           const reveal = gsap.from(revealTargets, {
@@ -76,13 +76,13 @@ export default function WorkExperience() {
             immediateRender: true,
           });
 
-          return { companySection, reveal };
+          return { companyPanel, reveal };
         });
 
         const updateCompanyReveals = () => {
           const viewportWidth = getViewportWidth();
-          companyReveals.forEach(({ companySection, reveal }) => {
-            const rect = companySection.getBoundingClientRect();
+          companyReveals.forEach(({ companyPanel, reveal }) => {
+            const rect = companyPanel.getBoundingClientRect();
             const isInView = rect.left < viewportWidth * 0.75 && rect.right > viewportWidth * 0.25;
             if (isInView) reveal.play();
             else reveal.reverse();
@@ -164,34 +164,42 @@ export default function WorkExperience() {
       <Toc activeYear={activeYear} onSelectYear={handleSelectYear} />
       <section ref={pinWrapperRef} className={styles.pinWrapper}>
         <div ref={trackRef} className={styles.track}>
-          {TimeLineSections.map(({ year, id, logo, subTitle, gradientColor, content, colour, className }) => (
-            <Fragment key={id}>
+          {TimeLineSections.map(({ year, id, logo, subTitle, gradientColor, content, colour }) => {
+            const chapterStyle = { ['--company-brand']: gradientColor, color: colour } as React.CSSProperties;
+
+            return (
               <section
-                ref={(yearSectionElement) => {
-                  yearSectionRefs.current[year] = yearSectionElement;
-                }}
-                className={`${styles.yearSection} ${styles[className] || ''}`}
+                key={id}
+                className={`${styles.companyChapter} ${styles.companyMesh}`}
                 id={id}
+                style={chapterStyle}
               >
-                <div>
-                  <h1>{year}</h1>
-                  <h3>{subTitle}</h3>
+                <div
+                  ref={(yearPanelElement) => {
+                    yearSectionRefs.current[year] = yearPanelElement;
+                  }}
+                  className={styles.yearPanel}
+                >
+                  <div>
+                    <h1>{year}</h1>
+                    <h3>{subTitle}</h3>
+                  </div>
+                </div>
+                <div className={styles.companyPanel}>
+                  <Image src={logo} alt={`${year} company logo`} className={styles.companyLogo} />
+                  <div className={styles.contentWrapper}>
+                    {React.isValidElement(content)
+                      ? content
+                      : content.map((contentBlock) => (
+                          <div key={contentBlock.id} className={styles.contentSection}>
+                            {contentBlock.content}
+                          </div>
+                        ))}
+                  </div>
                 </div>
               </section>
-              <section className={styles.companySection} style={{ background: gradientColor }}>
-                <Image src={logo} alt={`${year} company logo`} className={styles.companyLogo} />
-                <div className={styles.contentWrapper} style={{ color: colour }}>
-                  {React.isValidElement(content)
-                    ? content
-                    : content.map((contentBlock) => (
-                        <div key={contentBlock.id} className={styles.contentSection}>
-                          {contentBlock.content}
-                        </div>
-                      ))}
-                </div>
-              </section>
-            </Fragment>
-          ))}
+            );
+          })}
         </div>
       </section>
     </div>

@@ -1,3 +1,5 @@
+@use '../../styles/mixins' as *;
+
 $desktop-breakpoint: 1025px;
 
 // On mobile the experience is a normal, native, vertical stack.
@@ -41,7 +43,25 @@ $desktop-breakpoint: 1025px;
   }
 }
 
-.yearSection {
+// One section per company holds both halves (year + content), so the mesh is
+// painted once across the whole chapter with no internal seam. On mobile the
+// halves stack vertically; on desktop they sit side by side as two 100vw halves
+// inside a 200vw track item (row-reverse keeps the year on the right, matching
+// the right-to-left pan).
+.companyChapter {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @media screen and (min-width: $desktop-breakpoint) {
+    flex: 0 0 200vw;
+    flex-direction: row-reverse;
+    height: 100vh;
+  }
+}
+
+.yearPanel {
   flex: 0 0 auto;
   min-height: 100vh;
   display: flex;
@@ -71,7 +91,6 @@ $desktop-breakpoint: 1025px;
 
   & h1 {
     font-size: 3rem;
-    color: black;
     margin: 0 0 0.25rem 0;
 
     @media screen and (min-width: 768px) {
@@ -94,7 +113,7 @@ $desktop-breakpoint: 1025px;
   }
 }
 
-.companySection {
+.companyPanel {
   flex: 0 0 auto;
   min-height: 70vh;
   display: flex;
@@ -104,7 +123,7 @@ $desktop-breakpoint: 1025px;
   padding: 0 2rem 2rem 2rem;
 
   @media screen and (min-width: $desktop-breakpoint) {
-    flex: 0 0 80vw;
+    flex: 0 0 100vw;
     height: 100vh;
     min-height: unset;
     padding: 0 6vw;
@@ -173,7 +192,9 @@ $desktop-breakpoint: 1025px;
 .contentSection {
   padding-bottom: 1.5rem;
   margin-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  // Derive the divider from the chapter's text colour so it stays visible on
+  // both light- and dark-background companies.
+  border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent);
 
   &:last-child {
     border-bottom: none;
@@ -182,43 +203,10 @@ $desktop-breakpoint: 1025px;
   }
 }
 
-$hainokGradientColor: #18282f;
-$thmGradientColor: #232c40;
-$proptextGradientColor: #fdfdfd;
-$inatlasGradientColor: #9d9d9d;
-$ubGradientColor: #ffffff;
-
-.hainokBackground {
-  background: linear-gradient(0deg, $hainokGradientColor 0%, $hainokGradientColor 8%, color-mix(in srgb, $hainokGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $hainokGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $hainokGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $hainokGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
-  @media screen and (min-width: 768px) {
-    background: linear-gradient(90deg, $hainokGradientColor 0%, $hainokGradientColor 8%, color-mix(in srgb, $hainokGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $hainokGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $hainokGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $hainokGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
-  }
-}
-
-.thmBackground {
-  background: linear-gradient(0deg, $thmGradientColor 0%, $thmGradientColor 8%, color-mix(in srgb, $thmGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $thmGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $thmGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $thmGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
-  @media screen and (min-width: 768px) {
-    background: linear-gradient(90deg, $thmGradientColor 0%, $thmGradientColor 8%, color-mix(in srgb, $thmGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $thmGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $thmGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $thmGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
-  }
-}
-
-.proptexBackground {
-  background: linear-gradient(0deg, $proptextGradientColor 0%, $proptextGradientColor 8%, color-mix(in srgb, $proptextGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $proptextGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $proptextGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $proptextGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
-  @media screen and (min-width: 768px) {
-    background: linear-gradient(90deg, $proptextGradientColor 0%, $proptextGradientColor 8%, color-mix(in srgb, $proptextGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $proptextGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $proptextGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $proptextGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
-  }
-}
-
-.inAtlasBackground {
-  background: linear-gradient(0deg, $inatlasGradientColor 0%, $inatlasGradientColor 8%, color-mix(in srgb, $inatlasGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $inatlasGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $inatlasGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $inatlasGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
-  @media screen and (min-width: 768px) {
-    background: linear-gradient(90deg, $inatlasGradientColor 0%, $inatlasGradientColor 8%, color-mix(in srgb, $inatlasGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $inatlasGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $inatlasGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $inatlasGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
-  }
-}
-
-.ubBackground {
-  background: linear-gradient(0deg, $ubGradientColor 0%, $ubGradientColor 8%, color-mix(in srgb, $ubGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $ubGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $ubGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $ubGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
-  @media screen and (min-width: 768px) {
-    background: linear-gradient(90deg, $ubGradientColor 0%, $ubGradientColor 8%, color-mix(in srgb, $ubGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $ubGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $ubGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $ubGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
-  }
+// Painted once on the whole chapter section (year half + content half), seeded
+// from the company's brand colour via the `--company-brand` custom property set
+// in the page. Because it's a single element, the mesh flows continuously across
+// both halves with no internal seam.
+.companyMesh {
+  @include company-mesh;
 }

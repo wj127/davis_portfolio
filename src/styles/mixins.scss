@@ -89,6 +89,32 @@
   }
 }
 
+// Layered "mesh" gradient seeded from the company's brand colour (passed via the
+// `--company-brand` custom property). Each blob is a lighter/darker variation of
+// the brand itself, so the company's own colour is preserved while gaining depth.
+// Applied to the whole chapter (year + content) as a single element, the mesh
+// flows continuously across both halves; transitions only occur between different
+// companies, which is a natural chapter boundary.
+@mixin company-mesh($brand: var(--company-brand, #16243a)) {
+  background:
+    radial-gradient(
+      60% 65% at 20% 24%,
+      color-mix(in srgb, #{$brand} 80%, #ffffff 20%) 0%,
+      transparent 72%
+    ),
+    radial-gradient(
+      55% 60% at 82% 22%,
+      color-mix(in srgb, #{$brand} 82%, #000000 18%) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      70% 75% at 66% 86%,
+      color-mix(in srgb, #{$brand} 88%, #000000 12%) 0%,
+      transparent 74%
+    ),
+    color-mix(in srgb, #{$brand} 96%, #000000 4%);
+}
+
 @mixin glitch-skew-keyframes {
   @keyframes glitchSkew {
     0%,
