@@ -120,7 +120,9 @@ $desktop-breakpoint: 1025px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 2rem 2rem 2rem;
+  // Extra right padding on mobile reserves a gutter for the fixed vertical ToC
+  // rail so the centered content never sits under the year labels.
+  padding: 0 1.2rem 2rem 1.5rem;
 
   @media screen and (min-width: $desktop-breakpoint) {
     flex: 0 0 100vw;
@@ -149,7 +151,7 @@ $desktop-breakpoint: 1025px;
 
 .contentWrapper {
   width: 100%;
-  text-align: right;
+  text-align: center;
 
   @media screen and (min-width: $desktop-breakpoint) {
     flex: 1 1 auto;
@@ -180,5 +182,11 @@ $desktop-breakpoint: 1025px;
 // in the page. Because it's a single element, the mesh flows continuously across
 // both halves with no internal seam.
 .companyMesh {
-  @include company-mesh;
+  // Mobile: a balanced vertical mesh for the tall, stacked column.
+  @include company-mesh-mobile;
+
+  // Desktop: the original horizontally-flowing mesh across the 200vw chapter.
+  @media screen and (min-width: $desktop-breakpoint) {
+    @include company-mesh;
+  }
 }

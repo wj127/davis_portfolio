@@ -1,23 +1,35 @@
 // Editorial "narrative column" inspired by the Stitch "Editorial Work Experience"
-// screen: a title + role lockup, a left-bordered TL;DR block, the detailed content
-// and an optional closing note. All accents are derived from the chapter's own
+// screen: a title + role lockup, a TL;DR block, the detailed content and an
+// optional closing note. All accents are derived from the chapter's own
 // `currentColor` (set per company in the page) so contrast holds on both light-
 // and dark-background companies.
+//
+// Mobile-first: the column is centred to sit cleanly under the centred company
+// logo. From the desktop breakpoint up it switches to the left-anchored editorial
+// layout (left accent bar on the TL;DR, leading bullet markers on list items).
+$desktop-breakpoint: 1025px;
+
 .narrative {
   display: flex;
   flex-direction: column;
   gap: 1.75rem;
   width: 100%;
-  // The content wrapper right-aligns text on mobile for the old layout; this
-  // editorial column uses left-anchored accents (TL;DR bar, bullet markers),
-  // so keep it left-aligned consistently across breakpoints.
-  text-align: left;
+  text-align: center;
+
+  @media screen and (min-width: $desktop-breakpoint) {
+    text-align: left;
+  }
 }
 
 .heading {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  align-items: center;
+
+  @media screen and (min-width: $desktop-breakpoint) {
+    align-items: flex-start;
+  }
 }
 
 .title {
@@ -39,12 +51,18 @@
   opacity: 0.7;
 }
 
-// TL;DR callout: left accent bar + faint tint, mirroring the design's hero block.
+// TL;DR callout: faint tint + accent bar. On mobile the bar sits on top so it
+// reads with the centred text; on desktop it moves to the left edge (editorial).
 .tldr {
   position: relative;
   padding: 1rem 1.25rem;
-  border-left: 2px solid color-mix(in srgb, currentColor 55%, transparent);
   background: color-mix(in srgb, currentColor 6%, transparent);
+  border-top: 2px solid color-mix(in srgb, currentColor 55%, transparent);
+
+  @media screen and (min-width: $desktop-breakpoint) {
+    border-top: none;
+    border-left: 2px solid color-mix(in srgb, currentColor 55%, transparent);
+  }
 }
 
 .tldrLabel {
@@ -98,30 +116,34 @@
   gap: 0.5rem;
 }
 
-// Each item is a subtle card with a leading marker, echoing the design's
-// icon + description rows without importing its specific iconography.
+// Subtle cards. On mobile they're centred with no leading marker; from desktop up
+// they gain the left accent border + bullet, echoing the design's icon rows.
 .listItem {
   position: relative;
-  padding: 0.7rem 0.9rem 0.7rem 1.6rem;
+  padding: 0.7rem 0.9rem;
   line-height: 1.5;
   background: color-mix(in srgb, currentColor 4%, transparent);
-  border-left: 1px solid color-mix(in srgb, currentColor 22%, transparent);
   transition: background 200ms ease;
-
-  &::before {
-    content: '';
-    position: absolute;
-    left: 0.7rem;
-    top: 1.15rem;
-    width: 0.35rem;
-    height: 0.35rem;
-    border-radius: 50%;
-    background: currentColor;
-    opacity: 0.6;
-  }
 
   &:hover {
     background: color-mix(in srgb, currentColor 9%, transparent);
+  }
+
+  @media screen and (min-width: $desktop-breakpoint) {
+    padding: 0.7rem 0.9rem 0.7rem 1.6rem;
+    border-left: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0.7rem;
+      top: 1.15rem;
+      width: 0.35rem;
+      height: 0.35rem;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.6;
+    }
   }
 }
 
@@ -129,8 +151,13 @@
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  align-items: center;
   padding: 0.9rem 1.1rem;
   border: 1px dashed color-mix(in srgb, currentColor 28%, transparent);
+
+  @media screen and (min-width: $desktop-breakpoint) {
+    align-items: flex-start;
+  }
 }
 
 .noteLabel {

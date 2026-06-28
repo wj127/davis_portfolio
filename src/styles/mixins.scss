@@ -1,7 +1,10 @@
 @mixin glitch-text {
   p {
     position: relative;
-    text-shadow: 0.05rem 0 0 #00fffc, -0.03rem -0.04rem 0 #fc00ff, 0.025rem 0.04rem 0 #fffc00;
+    text-shadow:
+      0.05rem 0 0 #00fffc,
+      -0.03rem -0.04rem 0 #fc00ff,
+      0.025rem 0.04rem 0 #fffc00;
     animation: text-glitch 725ms infinite;
 
     span {
@@ -53,12 +56,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.15),
-      transparent
-    );
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
     transition: left 500ms ease;
   }
 
@@ -96,22 +94,21 @@
 // flows continuously across both halves; transitions only occur between different
 // companies, which is a natural chapter boundary.
 @mixin company-mesh($brand: var(--company-brand, #16243a)) {
-  background:
-    radial-gradient(
-      60% 65% at 20% 24%,
-      color-mix(in srgb, #{$brand} 80%, #ffffff 20%) 0%,
-      transparent 72%
-    ),
-    radial-gradient(
-      55% 60% at 82% 22%,
-      color-mix(in srgb, #{$brand} 82%, #000000 18%) 0%,
-      transparent 70%
-    ),
-    radial-gradient(
-      70% 75% at 66% 86%,
-      color-mix(in srgb, #{$brand} 88%, #000000 12%) 0%,
-      transparent 74%
-    ),
+  background: radial-gradient(60% 65% at 20% 24%, color-mix(in srgb, #{$brand} 80%, #ffffff 20%) 0%, transparent 72%),
+    radial-gradient(55% 60% at 82% 22%, color-mix(in srgb, #{$brand} 82%, #000000 18%) 0%, transparent 70%),
+    radial-gradient(70% 75% at 66% 86%, color-mix(in srgb, #{$brand} 88%, #000000 12%) 0%, transparent 74%),
+    color-mix(in srgb, #{$brand} 96%, #000000 4%);
+}
+
+// Mobile counterpart of `company-mesh`. On mobile the chapter is a tall, narrow
+// vertical column (one panel stacked over the other), so the horizontally-biased
+// blob positions used on desktop read as a lopsided left-to-right wash. Here the
+// blobs are centred horizontally (50%) and distributed down the column (top /
+// middle / bottom), producing a balanced, symmetric vertical mesh.
+@mixin company-mesh-mobile($brand: var(--company-brand, #16243a)) {
+  background: radial-gradient(125% 26% at 50% 8%, color-mix(in srgb, #{$brand} 80%, #ffffff 20%) 0%, transparent 60%),
+    radial-gradient(125% 30% at 50% 46%, color-mix(in srgb, #{$brand} 84%, #000000 16%) 0%, transparent 62%),
+    radial-gradient(135% 32% at 50% 86%, color-mix(in srgb, #{$brand} 88%, #000000 12%) 0%, transparent 66%),
     color-mix(in srgb, #{$brand} 96%, #000000 4%);
 }
 
