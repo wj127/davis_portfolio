@@ -172,35 +172,6 @@ $desktop-breakpoint: 1025px;
       border-radius: 3px;
     }
   }
-
-  ul {
-    padding-left: 1.5rem;
-    margin: 1rem 0;
-
-    li {
-      margin-bottom: 0.5rem;
-      line-height: 1.4;
-    }
-  }
-
-  p {
-    margin: 1rem 0;
-    font-weight: 600;
-  }
-}
-
-.contentSection {
-  padding-bottom: 1.5rem;
-  margin-bottom: 1.5rem;
-  // Derive the divider from the chapter's text colour so it stays visible on
-  // both light- and dark-background companies.
-  border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent);
-
-  &:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
-  }
 }
 
 // Painted once on the whole chapter section (year half + content half), seeded

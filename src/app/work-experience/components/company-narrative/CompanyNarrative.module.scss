@@ -1,0 +1,148 @@
+// Editorial "narrative column" inspired by the Stitch "Editorial Work Experience"
+// screen: a title + role lockup, a left-bordered TL;DR block, the detailed content
+// and an optional closing note. All accents are derived from the chapter's own
+// `currentColor` (set per company in the page) so contrast holds on both light-
+// and dark-background companies.
+.narrative {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  width: 100%;
+  // The content wrapper right-aligns text on mobile for the old layout; this
+  // editorial column uses left-anchored accents (TL;DR bar, bullet markers),
+  // so keep it left-aligned consistently across breakpoints.
+  text-align: left;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.9rem;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+
+  @media screen and (min-width: 768px) {
+    font-size: 2.4rem;
+  }
+}
+
+.role {
+  margin: 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  opacity: 0.7;
+}
+
+// TL;DR callout: left accent bar + faint tint, mirroring the design's hero block.
+.tldr {
+  position: relative;
+  padding: 1rem 1.25rem;
+  border-left: 2px solid color-mix(in srgb, currentColor 55%, transparent);
+  background: color-mix(in srgb, currentColor 6%, transparent);
+}
+
+.tldrLabel {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  opacity: 0.85;
+}
+
+.tldrText {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  font-weight: 600;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.paragraph {
+  margin: 0;
+  line-height: 1.6;
+  font-weight: 600;
+}
+
+.listGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.listHeading {
+  margin: 0;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.75;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+// Each item is a subtle card with a leading marker, echoing the design's
+// icon + description rows without importing its specific iconography.
+.listItem {
+  position: relative;
+  padding: 0.7rem 0.9rem 0.7rem 1.6rem;
+  line-height: 1.5;
+  background: color-mix(in srgb, currentColor 4%, transparent);
+  border-left: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+  transition: background 200ms ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0.7rem;
+    top: 1.15rem;
+    width: 0.35rem;
+    height: 0.35rem;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.6;
+  }
+
+  &:hover {
+    background: color-mix(in srgb, currentColor 9%, transparent);
+  }
+}
+
+.note {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px dashed color-mix(in srgb, currentColor 28%, transparent);
+}
+
+.noteLabel {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  opacity: 0.7;
+}
+
+.noteText {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  font-style: italic;
+  opacity: 0.9;
+}

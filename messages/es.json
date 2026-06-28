@@ -16,7 +16,144 @@
     "description": "Bienvenido a mi portafolio"
   },
   "WorkExperience": {
-    "title": "Experiencia Laboral"
+    "title": "Experiencia Laboral",
+    "tldrLabel": "TL;DR",
+    "noteLabel": "Nota",
+    "companies": {
+      "hainok": {
+        "title": "Hainok Technologies SL.",
+        "role": "Tech Lead y más tarde CTO",
+        "tldr": "Llevé mi mentalidad de “Business first” a otro nivel, liderando los productos técnicos de un Holding.",
+        "content": [
+          {
+            "type": "paragraph",
+            "text": "Después de todo el conocimiento acumulado en mi empresa anterior, tuve la oportunidad de aplicarlo en un contexto diferente y más pequeño."
+          },
+          {
+            "type": "list",
+            "items": [
+              "Gestionar y liderar un equipo de 3 personas, 1 ingeniero senior y 1 junior más una persona de CS.",
+              "Decidir el stack tecnológico de los productos y diseñar los cimientos de la infraestructura.",
+              "Planificar el modelo de negocio con CEOs y accionistas.",
+              "Diseñar, controlar y ejecutar la hoja de ruta técnica.",
+              "Implantar metodologías y reuniones Agile en la medida de lo posible.",
+              "Hablar directamente con clientes, clientes potenciales y administraciones públicas españolas para dar soporte a ventas y explicar o resolver dudas técnicas.",
+              "Liderar los siguientes pasos del producto, apuntando a nuevos hitos no alcanzados para crear pequeños océanos azules, o asociándonos con otros prospectos.",
+              "Conducir sesiones de contratación.",
+              "Controlar los costes técnicos y las previsiones.",
+              "Adoptar e integrar la IA en nuestros procesos y herramientas internas y externas."
+            ]
+          },
+          {
+            "type": "list",
+            "heading": "Y por debajo de eso, sigo implicándome en la programación:",
+            "items": [
+              "Mentorizar y tutorizar a los desarrolladores.",
+              "Migrar código legacy, corregir bugs, desarrollar features, etc…",
+              "El resto, ¡ya lo sabes!"
+            ]
+          },
+          {
+            "type": "note",
+            "text": "En este rol, el mayor reto ha sido (y sigue siendo) encontrar el equilibrio adecuado entre calidad y velocidad, cuándo sacrificar una por la otra, ya que esto no es un porcentaje o una ecuación fija que aplicar cada semana, sino que cambia o fluye dinámicamente según los múltiples criterios."
+          }
+        ]
+      },
+      "thm": {
+        "title": "THM (TryHackMe)",
+        "role": "Desarrollador full stack",
+        "tldr": "Exploté mi potencial en el desarrollo full stack trabajando en una startup finamente engrasada. También empecé a descubrir e inclinarme hacia la mentalidad de “business first”, yendo más allá del simple desarrollo de código para pensar en formas de generar más beneficio y en lo que los clientes pueden necesitar.",
+        "content": [
+          {
+            "type": "paragraph",
+            "text": "Intentaré ser conciso, aunque hubo muchísimas cosas en las que estuve involucrado durante un periodo de más de tres años."
+          },
+          {
+            "type": "list",
+            "items": [
+              "Participé en la migración del código a nuevas tecnologías, frameworks y principios. Para ser preciso, separar un front-end EJS fuertemente acoplado a un backend Express JS hacia una app React 18 pura con un nuevo submódulo independiente de Express TS.",
+              "Mantuve features y endpoints legacy en las tecnologías mencionadas.",
+              "Desarrollé nuevas APIs y features en los códigos migrados.",
+              "Trabajé y me especialicé en el squad B2B, pero gracias a mi conocimiento de todo el código, di soporte a otros squads que lo necesitaban, como los de Growth y B2C.",
+              "Me centré en mejorar la velocidad y eficiencia de las APIs, principalmente refactorizando consultas y código de mongo, con una mediana de ~34x en velocidad, con casos excepcionales de ~77x.",
+              "También me centré en mejorar el rendimiento de React en páginas pesadas, usando técnicas de lazy loading, sistemas de caché y pre-renderizados para hacer el “First Contentful Paint” más rápido.",
+              "Más tarde pasé a dar gran soporte y a liderar, durante un tiempo, el squad de Careers, y luego volví a B2B para ayudar a entregar una feature importante del SOC Simulator, profundizando en las máquinas on-demand de AWS, VMs y otros recursos, trabajando codo a codo con los ingenieros de Contenido (Cyber).",
+              "Siempre mantuve un contacto cercano con diseñadores UX/UI, Product Managers, Customer Success y Ventas, donde incluso tuve reuniones con prospectos y leads B2B potenciales.",
+              "Participé en Hackathons internos, Go To Market Weeks y sesiones de Brainstorming con CEOs, POs, PMs y stakeholders para encontrar, discutir y ejecutar soluciones para B2B…",
+              "Mentoricé y tutoricé a nuevos desarrolladores en los distintos squads en los que participé y di soporte.",
+              "También absorbí la fuerte mentalidad de A/B testing de la empresa.",
+              "Trabajé en un flujo experimental para el crecimiento B2C-2B."
+            ]
+          }
+        ]
+      },
+      "proptex": {
+        "title": "Proptex",
+        "role": "Desarrollador full stack",
+        "tldr": "Aprendí a superarme y a mantener siempre los más altos estándares para el código que entregaba en un entorno rápido y muy escrutado.",
+        "content": [
+          {
+            "type": "paragraph",
+            "text": "Trabajé codo a codo con el CTO de la startup. Me infundió su obsesión por la alta calidad y fiabilidad del código entregado a los clientes, convirtiendo esto en nuestro “motto” diario. También di soporte al desarrollador front-end senior."
+          },
+          {
+            "type": "list",
+            "items": [
+              "Empecé a aplicar TDD (Test Driven Development) respaldado por DDD (Domain Driven Design).",
+              "Construí y mantuve servicios de API.",
+              "Construí nuevos microservicios y controlé la red en Kubernetes.",
+              "Desarrollé y diseñé la lógica del frontend con Angular 13 y Pug.",
+              "Tuve sesiones de aprendizaje y charlas de negocio con el CTO, que acabó siendo, en cierto modo, mi mentor implícito."
+            ]
+          },
+          {
+            "type": "note",
+            "text": "Hoy en día, tras mis años de experiencia, puedo ver cómo esa cultura obsesiva de alta calidad y fiabilidad del código, sacrificando la velocidad de entrega en una startup joven, fue su perdición. Aunque estos valores y principios son excelentes, uno debe saber cuándo y en qué cantidad aplicarlos dependiendo del entorno."
+          }
+        ]
+      },
+      "inatlas": {
+        "title": "InAtlas (Intelligent Atlas)",
+        "role": "Data Miner y desarrollador full stack junior",
+        "tldr": "Dominé el crawling y el procesamiento de datos en un entorno muy exigente y desafiante. También sentí las bases de ser un desarrollador full stack.",
+        "content": [
+          {
+            "type": "list",
+            "heading": "Como responsable de data mining:",
+            "items": [
+              "Creé y mantuve toda la red de crawlers para obtener datos en profundidad de numerosas plataformas en España (como Airbnb, Booking, TripAdvisor… y muchas más) desde sus APIs internas, o en algunos casos específicos y pequeños desde servicios web.",
+              "Gestioné los procesos posteriores al crawling, como la limpieza, normalización y análisis de los datos, dejándolos listos para ser consumidos.",
+              "Construí servicios de Backend para que los demás equipos de la empresa consumieran e interactuaran con los datos."
+            ]
+          },
+          {
+            "type": "list",
+            "heading": "Como desarrollador Front-end junior:",
+            "items": [
+              "Refactoricé componentes de complejidad pequeña a media en nuestra aplicación Angular 8.",
+              "Desarrollé nuevas features y lógica, tutorizado por mi desarrollador full stack senior asignado.",
+              "Empecé a trabajar codo a codo con un diseñador UX/UI.",
+              "Entré en el entorno Agile."
+            ]
+          }
+        ]
+      },
+      "ub": {
+        "title": "Universidad de Barcelona",
+        "role": "Grado en Informática",
+        "tldr": "Aprendí a valerme por mí mismo, y a lidiar con la presión y los plazos urgentes.",
+        "content": [
+          {
+            "type": "list",
+            "items": [
+              "Me gradué en Informática con un grado en la Universidad de Barcelona, donde cursé una variedad de asignaturas que iban desde matemáticas hasta física, de Sistemas Operativos a Visión/Inteligencia Artificial, etc…",
+              "Para que conste, no fui un estudiante sobresaliente, ya que sufrí en los primeros años, pero conseguí recuperar el ritmo, obteniendo una nota de “excelente” en mi trabajo de fin de grado, donde creé una web que intentaba predecir el precio del Bitcoin usando los modelos de machine learning disponibles en aquel momento (2015).",
+              "También comencé mi trayectoria profesional empezando a trabajar a media jornada para una empresa durante mi 4º y último año de carrera, en lo que más tarde se convertiría en mi primer trabajo a tiempo completo."
+            ]
+          }
+        ]
+      }
+    }
   },
   "AboutMe": {
     "title": "Sobre Mí",

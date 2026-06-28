@@ -8,6 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import styles from '@/app/work-experience/work-experience.module.scss';
 import { Toc } from '@/app/work-experience/components/toc/Toc';
+import { CompanyNarrative } from '@/app/work-experience/components/company-narrative/CompanyNarrative';
 import { TimeLineSections, timelineYears } from '@/app/work-experience/constants/sections';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -164,7 +165,7 @@ export default function WorkExperience() {
       <Toc activeYear={activeYear} onSelectYear={handleSelectYear} />
       <section ref={pinWrapperRef} className={styles.pinWrapper}>
         <div ref={trackRef} className={styles.track}>
-          {TimeLineSections.map(({ year, id, logo, subTitle, gradientColor, content, colour }) => {
+          {TimeLineSections.map(({ year, id, logo, subTitle, gradientColor, companyKey, colour }) => {
             const chapterStyle = { ['--company-brand']: gradientColor, color: colour } as React.CSSProperties;
 
             return (
@@ -188,13 +189,7 @@ export default function WorkExperience() {
                 <div className={styles.companyPanel}>
                   <Image src={logo} alt={`${year} company logo`} className={styles.companyLogo} />
                   <div className={styles.contentWrapper}>
-                    {React.isValidElement(content)
-                      ? content
-                      : content.map((contentBlock) => (
-                          <div key={contentBlock.id} className={styles.contentSection}>
-                            {contentBlock.content}
-                          </div>
-                        ))}
+                    <CompanyNarrative companyKey={companyKey} />
                   </div>
                 </div>
               </section>
