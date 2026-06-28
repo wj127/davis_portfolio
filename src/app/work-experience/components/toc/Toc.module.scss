@@ -212,6 +212,11 @@ $desktop-breakpoint: 1025px;
     top: 80%;
     transform: translateY(-50%);
     max-width: none;
+    background: rgba(8, 12, 24, 0.55);
+    border: 1px solid rgba(182, 196, 255, 0.18);
+    border-radius: 0.75rem;
+    backdrop-filter: blur(6px);
+    padding-left: 4rem;
   }
 
   .timeline {
