@@ -158,6 +158,7 @@ $desktop-breakpoint: 1025px;
     overflow-y: auto;
     text-align: left;
     padding-right: 1rem;
+    margin-bottom: 1rem;
     // Default overscroll lets the inner read hand off to the page (horizontal track)
     // once the top/bottom edge is reached - native, smooth, no custom wheel code.
     scrollbar-width: thin;

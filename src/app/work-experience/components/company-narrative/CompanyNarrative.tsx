@@ -2,9 +2,17 @@
 
 import React from 'react';
 import { useTranslations } from 'next-intl';
+import { Source_Code_Pro } from 'next/font/google';
 import styles from '@/app/work-experience/components/company-narrative/CompanyNarrative.module.scss';
 import { WorkContentBlock } from '@/app/work-experience/types';
 import { CompanyNarrativeProps } from '@/app/work-experience/components/company-narrative/CompanyNarrative.types';
+
+const sourceCodePro = Source_Code_Pro({
+  subsets: ['latin'],
+  weight: ['200', '400'],
+  style: ['normal', 'italic'],
+  variable: '--font-source-code-pro',
+});
 
 const renderContentBlock = (contentBlock: WorkContentBlock, blockIndex: number) => {
   switch (contentBlock.type) {
@@ -44,7 +52,7 @@ export const CompanyNarrative: React.FC<CompanyNarrativeProps> = ({ companyKey }
   const bodyBlocks = contentBlocks.filter((contentBlock) => contentBlock.type !== 'note');
 
   return (
-    <article className={styles.narrative}>
+    <article className={`${styles.narrative} ${sourceCodePro.variable}`}>
       <header className={styles.heading}>
         <h2 className={styles.title}>{translations(`${companyPath}.title`)}</h2>
         {role ? <p className={styles.role}>{role}</p> : null}
