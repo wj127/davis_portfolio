@@ -24,6 +24,37 @@ const clamp = (value: number, min: number, max: number) => Math.min(Math.max(val
 // (window.innerWidth includes the scrollbar, which would offset the centering math.)
 const getViewportWidth = () => document.documentElement.clientWidth;
 
+type CompanyReveal = {
+  companyPanel: HTMLElement;
+  reveal: gsap.core.Tween;
+};
+
+// Build the per-panel logo + content reveal as paused tweens so both the horizontal
+// (desktop) and vertical (mobile) drivers can play/reverse them from live positions.
+// Created synchronously inside a matchMedia callback so GSAP reverts them on teardown.
+const createCompanyReveals = (pinWrapper: HTMLElement): CompanyReveal[] => {
+  const companyPanels = Array.from(pinWrapper.querySelectorAll<HTMLElement>(`.${styles.companyPanel}`));
+
+  return companyPanels.map((companyPanel) => {
+    const revealTargets = [
+      companyPanel.querySelector<HTMLElement>(`.${styles.companyLogo}`),
+      companyPanel.querySelector<HTMLElement>(`.${styles.contentWrapper}`),
+    ].filter((revealTarget): revealTarget is HTMLElement => Boolean(revealTarget));
+
+    const reveal = gsap.from(revealTargets, {
+      autoAlpha: 0,
+      y: 48,
+      duration: 0.8,
+      stagger: 0.12,
+      ease: 'power2.out',
+      paused: true,
+      immediateRender: true,
+    });
+
+    return { companyPanel, reveal };
+  });
+};
+
 export default function WorkExperience() {
   const [activeYear, setActiveYear] = useState<number>(timelineYears[0]);
   const pinWrapperRef = useRef<HTMLDivElement>(null);
@@ -61,25 +92,7 @@ export default function WorkExperience() {
 
         // Paused per-panel reveal tweens, played/reversed from live positions for
         // the same direction-agnostic reason as the active-year detection above.
-        const companyPanels = Array.from(pinWrapper.querySelectorAll<HTMLElement>(`.${styles.companyPanel}`));
-        const companyReveals = companyPanels.map((companyPanel) => {
-          const revealTargets = [
-            companyPanel.querySelector<HTMLElement>(`.${styles.companyLogo}`),
-            companyPanel.querySelector<HTMLElement>(`.${styles.contentWrapper}`),
-          ].filter((revealTarget): revealTarget is HTMLElement => Boolean(revealTarget));
-
-          const reveal = gsap.from(revealTargets, {
-            autoAlpha: 0,
-            y: 48,
-            duration: 0.8,
-            stagger: 0.12,
-            ease: 'power2.out',
-            paused: true,
-            immediateRender: true,
-          });
-
-          return { companyPanel, reveal };
-        });
+        const companyReveals = createCompanyReveals(pinWrapper);
 
         const updateCompanyReveals = () => {
           const viewportWidth = getViewportWidth();
@@ -131,9 +144,13 @@ export default function WorkExperience() {
         };
       });
 
-      // Mobile is a native vertical scroller (no GSAP): keep the ToC in sync with a
-      // plain scroll listener on the pin wrapper, which is the scroll container here.
+      // Mobile is a native vertical scroller driven by plain scroll listeners (no
+      // ScrollTrigger/pin): keep the ToC in sync and play the same per-panel reveals
+      // as desktop, detected from the pin wrapper's visible band since it is the
+      // scroll container here.
       matchMedia.add(MOBILE_MEDIA_QUERY, () => {
+        const companyReveals = createCompanyReveals(pinWrapper);
+
         // Activate the year whose chapter currently covers the scroller's vertical
         // centre. Chapters stack newest-first, so as the user scrolls down the active
         // year walks through timelineYears in order.
@@ -152,11 +169,32 @@ export default function WorkExperience() {
           setActiveYear(currentYear);
         };
 
-        updateActiveYearMobile();
-        pinWrapper.addEventListener('scroll', updateActiveYearMobile, { passive: true });
+        // Reveal a panel once it has entered ~25% into the scroller's visible band,
+        // and reverse it once it leaves - mirroring the desktop 0.25/0.75 logic on
+        // the vertical axis.
+        const updateCompanyRevealsMobile = () => {
+          const scrollerRect = pinWrapper.getBoundingClientRect();
+          const visibleTop = scrollerRect.top;
+          const visibleHeight = pinWrapper.clientHeight;
+          companyReveals.forEach(({ companyPanel, reveal }) => {
+            const rect = companyPanel.getBoundingClientRect();
+            const isInView =
+              rect.top < visibleTop + visibleHeight * 0.75 && rect.bottom > visibleTop + visibleHeight * 0.25;
+            if (isInView) reveal.play();
+            else reveal.reverse();
+          });
+        };
+
+        const handleMobileScroll = () => {
+          updateActiveYearMobile();
+          updateCompanyRevealsMobile();
+        };
+
+        handleMobileScroll();
+        pinWrapper.addEventListener('scroll', handleMobileScroll, { passive: true });
 
         return () => {
-          pinWrapper.removeEventListener('scroll', updateActiveYearMobile);
+          pinWrapper.removeEventListener('scroll', handleMobileScroll);
         };
       });
     },
