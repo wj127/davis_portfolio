@@ -1,71 +1,103 @@
-.sectionOne {
-  width: 100vw;
-  height: 100vh;
-  background-color: #595858;
-}
+@use '../../styles/mixins' as *;
 
-.sectionTwo {
-  width: 100vw;
-  height: 100vh;
-  background-color: #FAA066;
-}
+$desktop-breakpoint: 1025px;
 
-.horizontalContainer {
-  display: flex;                        /* Lay out children in a row */
-  flex-direction: column;              /* Column layout for smaller screens */
-  height: 100vh;                        /* Full viewport height */
-  width: 100vw;                         /* Full viewport width */
-  overflow-y: scroll;                  /* Hide vertical overflow */
+// On mobile the experience is a normal, native, vertical stack.
+// On desktop GSAP ScrollTrigger pins this wrapper and drives the track horizontally.
+.pinWrapper {
+  width: 100%;
+  // Mobile: a self-contained, native vertical scroller.
+  height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 
-  overscroll-behavior-x: contain;
-  overscroll-behavior-y: none;
-
-  @media screen and (min-width: 1025px) {
-    flex-direction: row-reverse;        /* Reverse row layout for larger screens to show latest at initial view */
-    overflow-x: auto;                     /* Enable horizontal scrolling */
-    scroll-snap-type: x proximity;        /* Snap to each section */
+  @media screen and (min-width: $desktop-breakpoint) {
+    // Desktop: GSAP pins this and drives the track horizontally.
+    height: 100vh;
+    overflow: hidden;
+    // Rest the track flush-right so the newest year (rightmost) is shown at x:0.
+    // This makes the pre-hydration paint match the first animated frame (no flick),
+    // while keeping the right-to-left camera pan.
+    display: flex;
+    justify-content: flex-end;
   }
 }
 
-.yearSection {
-  flex: 0 0 auto;                       /* Auto height on mobile */
+.track {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @media screen and (min-width: $desktop-breakpoint) {
+    position: relative; // stable offsetParent for scroll-to math
+    // row-reverse keeps the newest year on the right; combined with the parent's
+    // flex-end alignment, the track rests showing the newest year, and we pan
+    // right-to-left toward older years.
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    flex-shrink: 0; // keep max-content width inside the flex pin wrapper
+    width: max-content;
+    height: 100vh;
+    will-change: transform;
+  }
+}
+
+// One section per company holds both halves (year + content), so the mesh is
+// painted once across the whole chapter with no internal seam. On mobile the
+// halves stack vertically; on desktop they sit side by side as two 100vw halves
+// inside a 200vw track item (row-reverse keeps the year on the right, matching
+// the right-to-left pan).
+.companyChapter {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @media screen and (min-width: $desktop-breakpoint) {
+    flex: 0 0 200vw;
+    flex-direction: row-reverse;
+    height: 100vh;
+  }
+}
+
+.yearPanel {
+  flex: 0 0 auto;
   min-height: 100vh;
-  //scroll-snap-align: start;             /* Snap alignment */
-  /* Optional styling… */
-  display: flex;                        /* Center content */
-  justify-content: center;              /* Center horizontally */
-  align-items: center;                  /* Center vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 2rem 0;
 
-  @media screen and (min-width: 1025px) {
-    flex: 0 0 100%;                     /* Full viewport width on desktop */
+  @media screen and (min-width: $desktop-breakpoint) {
+    flex: 0 0 100vw;
+    height: 100vh;
     min-height: unset;
     padding: 0;
   }
 
   > div {
-    width: 80%;                        /* Wider on mobile */
+    width: 80%;
+    display: flex;
     flex-direction: column;
-    display: flex;                      /* Flexbox for inner content */
-    justify-content: center;            /* Center horizontally */
-    align-items: center;                /* Center vertically */
+    justify-content: center;
+    align-items: center;
     text-align: center;
 
-    @media screen and (min-width: 1025px) {
+    @media screen and (min-width: $desktop-breakpoint) {
       width: 100%;
     }
   }
 
   & h1 {
-    font-size: 3rem;                    /* Smaller on mobile */
-    color: black;                       /* Text color */
+    font-size: 3rem;
     margin: 0 0 0.25rem 0;
 
     @media screen and (min-width: 768px) {
       font-size: 5rem;
     }
 
-    @media screen and (min-width: 1025px) {
+    @media screen and (min-width: $desktop-breakpoint) {
       font-size: 7rem;
     }
   }
@@ -81,183 +113,80 @@
   }
 }
 
-.companySection {
+.companyPanel {
   flex: 0 0 auto;
   min-height: 70vh;
-  display: flex;                        /* Center content */
+  display: flex;
   flex-direction: column;
-  justify-content: center;              /* Center horizontally */
-  align-items: center;                  /* Center vertically */
-  background-color: #F86E12;            /* Background color for company section */
-  padding: 0 2rem 2rem 2rem;
+  justify-content: center;
+  align-items: center;
+  // Extra right padding on mobile reserves a gutter for the fixed vertical ToC
+  // rail so the centered content never sits under the year labels.
+  padding: 0 1.2rem 2rem 1.5rem;
 
-  @media screen and (min-width: 1025px) {
-    flex: 0 0 80%;
+  @media screen and (min-width: $desktop-breakpoint) {
+    flex: 0 0 100vw;
+    height: 100vh;
     min-height: unset;
-    padding: 0;
+    padding: 0 6vw;
     flex-direction: row-reverse;
-    justify-content: flex-start;
+    justify-content: center;
+    gap: 4rem;
   }
-
-  & h2 {
-    font-size: 5rem;                    /* Adjust font size as needed */
-    color: black;                       /* Text color */
-  }
-}
-
-// Desktop content wrapper with reveal animation
-.contentWrapper {
-  width: 100%;
-  margin-left: 6rem;
-  text-align: left;
-  opacity: 0;
-  transform: translateX(-100px);
-  transition: transform 1200ms ease-out, opacity 1200ms ease-out;
-  will-change: transform, opacity, scale;
-
-  &[data-visible='true'] {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-// Mobile content wrapper - no reveal animation needed
-.mobileContentWrapper {
-  width: 80%;
-  margin: 0 0 0 1rem;
-  text-align: right;
-  // Ensure content is visible on mobile (no reveal animation)
-  opacity: 1;
-  transform: none;
-}
-
-.yScroll {
-  max-height: 50vh;              /* adjust taste */
-  overflow-y: auto;
-  overscroll-behavior: contain;  /* don’t bubble until top/bottom */
-  padding-right: 1rem;           /* room for scrollbar */
-  scrollbar-gutter: stable;      /* avoid layout jump when bar appears */
-
-  /* Hide scrollbar for webkit browsers */
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Hide scrollbar for Firefox */
-  scrollbar-width: none;
-
-  ul {
-    padding-left: 1.5rem;
-    margin: 1rem 0;
-
-    li {
-      margin-bottom: 0.5rem;
-      margin-left: 1rem;
-      line-height: 1.4;
-    }
-  }
-
-  p {
-    margin: 1rem 0;
-    font-weight: 600;
-  }
-}
-
-.yScroll:not([data-visible="true"]) {
-  pointer-events: none;      /* ignore wheel/clicks while hidden */
-  overflow-y: hidden;        /* avoid any accidental inner scroll */
 }
 
 .companyLogo {
-  width: 50%;                         /* Smaller on mobile */
+  width: 50%;
   max-width: 200px;
-  height: auto;                         /* Maintain aspect ratio */
-  margin: 1rem 0 1.5rem 0;              /* Spacing around the logo */
+  height: auto;
+  margin: 1rem 0 1.5rem 0;
 
-  opacity: 0;                           /* hidden before reveal */
-  transition: transform 1600ms ease, opacity 1600ms ease;
-  will-change: transform, opacity;      /* Hint for smoother animation */
-
-  @media screen and (min-width: 1025px) {
-    width: 500px;
+  @media screen and (min-width: $desktop-breakpoint) {
+    width: 420px;
     max-width: unset;
-    margin-left: 100px;
-    margin-top: 0;
-    margin-bottom: 0;
+    margin: 0;
+    flex: 0 0 auto;
   }
+}
 
-  &[data-index-type='even'] {
-    transform: translateY(80px);       /* smaller offset on mobile */
-    
-    @media screen and (min-width: 1025px) {
-      transform: translateY(160px);       /* start from bottom for even */
+.contentWrapper {
+  width: 100%;
+  text-align: center;
+
+  @media screen and (min-width: $desktop-breakpoint) {
+    flex: 1 1 auto;
+    max-width: 640px;
+    max-height: 70vh;
+    overflow-y: auto;
+    text-align: left;
+    padding-right: 1rem;
+    margin-bottom: 1rem;
+    // Default overscroll lets the inner read hand off to the page (horizontal track)
+    // once the top/bottom edge is reached - native, smooth, no custom wheel code.
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.25) transparent;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 3px;
     }
   }
-
-  &[data-index-type='odd'] {
-    transform: translateY(-80px);      /* smaller offset on mobile */
-    
-    @media screen and (min-width: 1025px) {
-      transform: translateY(-160px);      /* start from top for odd */
-    }
-  }
-
-  &[data-visible='true'] {
-    transform: translateY(0);           /* move to center when visible */
-    opacity: 1;
-  }
 }
 
-// Content section separator for grouped slides (both mobile and desktop)
-.contentSection {
-  padding-bottom: 1.5rem;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+// Painted once on the whole chapter section (year half + content half), seeded
+// from the company's brand colour via the `--company-brand` custom property set
+// in the page. Because it's a single element, the mesh flows continuously across
+// both halves with no internal seam.
+.companyMesh {
+  // Mobile: a balanced vertical mesh for the tall, stacked column.
+  @include company-mesh-mobile;
 
-  &:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
-  }
-}
-
-$hainokGradientColor: #18282f;
-$thmGradientColor: #232c40;
-$proptextGradientColor: #fdfdfd;
-$inatlasGradientColor: #9d9d9d;
-$ubGradientColor: #ffffff;
-
-.hainokBackground {
-  background: linear-gradient(0deg, $hainokGradientColor 0%, $hainokGradientColor 8%, color-mix(in srgb, $hainokGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $hainokGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $hainokGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $hainokGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
-  @media screen and (min-width: 768px) {
-    background: linear-gradient(90deg, $hainokGradientColor 0%, $hainokGradientColor 8%, color-mix(in srgb, $hainokGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $hainokGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $hainokGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $hainokGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
-  }
-}
-
-.thmBackground {
-  background: linear-gradient(0deg, $thmGradientColor 0%, $thmGradientColor 8%, color-mix(in srgb, $thmGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $thmGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $thmGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $thmGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
-  @media screen and (min-width: 768px) {
-    background: linear-gradient(90deg, $thmGradientColor 0%, $thmGradientColor 8%, color-mix(in srgb, $thmGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $thmGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $thmGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $thmGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
-  }
-}
-
-.proptexBackground {
-  background: linear-gradient(0deg, $proptextGradientColor 0%, $proptextGradientColor 8%, color-mix(in srgb, $proptextGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $proptextGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $proptextGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $proptextGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
-  @media screen and (min-width: 768px) {
-    background: linear-gradient(90deg, $proptextGradientColor 0%, $proptextGradientColor 8%, color-mix(in srgb, $proptextGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $proptextGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $proptextGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $proptextGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
-  }
-}
-
-.inAtlasBackground {
-  background: linear-gradient(0deg, $inatlasGradientColor 0%, $inatlasGradientColor 8%, color-mix(in srgb, $inatlasGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $inatlasGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $inatlasGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $inatlasGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
-  @media screen and (min-width: 768px) {
-    background: linear-gradient(90deg, $inatlasGradientColor 0%, $inatlasGradientColor 8%, color-mix(in srgb, $inatlasGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $inatlasGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $inatlasGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $inatlasGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
-  }
-}
-
-.ubBackground {
-  background: linear-gradient(0deg, $ubGradientColor 0%, $ubGradientColor 8%, color-mix(in srgb, $ubGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $ubGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $ubGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $ubGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
-  @media screen and (min-width: 768px) {
-    background: linear-gradient(90deg, $ubGradientColor 0%, $ubGradientColor 8%, color-mix(in srgb, $ubGradientColor 85%, #3599CA 15%) 15%, color-mix(in srgb, $ubGradientColor 70%, #3599CA 30%) 22%, color-mix(in srgb, $ubGradientColor 50%, #3599CA 50%) 30%, color-mix(in srgb, $ubGradientColor 30%, #3599CA 70%) 35%, #3599CA 40%, #3599CA 100%);
+  // Desktop: the original horizontally-flowing mesh across the 200vw chapter.
+  @media screen and (min-width: $desktop-breakpoint) {
+    @include company-mesh;
   }
 }

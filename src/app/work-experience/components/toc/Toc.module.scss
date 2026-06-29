@@ -1,139 +1,272 @@
-@import "src/styles/varibales";
+@import 'src/styles/varibales';
 
-// TOC Container - positioned in the lower left corner
+$dot-size: 14px;
+$dot-size-active: 22px;
+$desktop-breakpoint: 1025px;
+
+// Fixed, bottom-centered HUD overlay (ref: Stitch centered horizontal timeline).
 .tocContainer {
   position: fixed;
-  bottom: 4%;
-  margin-left: 4%;
+  bottom: 1.5%;
+  left: 20%;
+  transform: translateX(-50%);
   z-index: 100;
-  max-height: 80vh;
-  overflow-x: visible;
-
-  @media screen and (min-width: 2500px) {
-    margin-left: 2%;
-  }
+  max-width: 92vw;
 }
 
-// Timeline
 .timeline {
+  list-style: none;
+  margin: 0;
+  // Vertical padding reserves room for the absolutely-placed year (above) and
+  // caption (below) so they never clip against the panel edges.
+  padding: 2.25rem 1.75rem;
   display: flex;
-  flex-direction: column;
-  position: relative;
-
-  @media screen and (min-width: 768px) {
-    flex-direction: row-reverse;
-  }
-}
-
-// Timeline Items
-.timelineItem {
-  display: flex;
-  flex-direction: column;
+  // newest year (2024) on the right to match the page's right-to-left pan.
+  flex-direction: row-reverse;
   align-items: center;
-  position: relative;
-  cursor: pointer;
+}
 
-  @media screen and (min-width: 768px) {
-    flex-direction: row-reverse;
+// Connecting "data stream" segments between nodes.
+.connector {
+  flex: 0 0 auto;
+  width: clamp(1.75rem, 6vw, 5rem);
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(182, 196, 255, 0.55), transparent);
+  background-size: 200% 100%;
+  // Dark halo so the light line stays visible over light company backgrounds.
+  filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.55));
+  animation: datastream 3s linear infinite;
+}
+
+.connectorActive {
+  background: linear-gradient(90deg, rgba(182, 196, 255, 0.45), $timeline-accent, rgba(182, 196, 255, 0.45));
+  background-size: 200% 100%;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
+  animation: datastream 2s linear infinite;
+}
+
+@keyframes datastream {
+  0% {
+    background-position: 200% 0;
   }
-  
-  &:last-child {
-    .timelineLine {
-      display: none;
-    }
-  }
-
-  &:hover, &.active {
-    .timelineDot {
-      transform: scale(1.1);
-      border-color: $selected-orange;
-
-      + .timelineLine {
-        //transform: translateX(15px) skewX(-15deg);
-        background: linear-gradient(to bottom, $selected-orange, rgba(255, 255, 255, 0.3));
-
-        @media screen and (min-width: 768px) {
-          transform: translateY(-15px) skewY(-15deg);
-        }
-      }
-      
-      .dateInfo {
-        .date, .month, .year {
-          color: $selected-orange;
-        }
-      }
-    }
-    
-    &:last-child .timelineDot {
-      transform: scale(1.1);
-    }
-    
-    &:not(:last-child) .timelineDot {
-      //transform: scale(1.1) translateX(25px);
-
-      @media screen and (min-width: 768px) {
-        transform: scale(1.1) translateY(-25px);
-      }
-    }
+  100% {
+    background-position: -200% 0;
   }
 }
 
-// Timeline Dot (Circle with date)
-.timelineDot {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  background-color: rgba(40, 44, 52, 0.8);
+.node {
+  flex: 0 0 auto;
   display: flex;
+  align-items: center;
   justify-content: center;
+}
+
+// Fixed footprint keeps node spacing even regardless of active/inactive size.
+.nodeButton {
+  position: relative;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  width: $dot-size-active;
+  height: $dot-size-active;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.year {
+  position: absolute;
+  bottom: calc(100% + 0.65rem);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: #d4d8e6;
+  opacity: 0.92;
+  white-space: nowrap;
+  // Dark halo keeps the light label readable on the white / gray company chapters.
+  text-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.7),
+    0 0 2px rgba(0, 0, 0, 0.55);
+  transition:
+    color 0.3s ease,
+    opacity 0.3s ease,
+    font-size 0.3s ease,
+    text-shadow 0.3s ease;
+}
+
+.dot {
+  width: $dot-size;
+  height: $dot-size;
+  border-radius: 50%;
+  background: $timeline-surface;
+  border: 1px solid rgba(182, 196, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   z-index: 2;
-  transition: all 0.3s ease;
-
-  @media screen and (min-width: 768px) {
-    width: 40px;
-    height: 40px;
-  }
+  transition:
+    width 0.3s ease,
+    height 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
-// Timeline Connecting Line
-.timelineLine {
-  width: 2px;
-  height: 40px;
-  background-color: rgba(20, 19, 19, 0.974);
-  margin: 5px 0;
+.dotCore {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #aeb4c9;
   transition: all 0.3s ease;
-
-  @media screen and (min-width: 768px) {
-    width: 40px;
-    height: 2px;
-    margin: 0 5px;
-  }
-  
-  @media (max-width: 576px) {
-    height: 30px;
-  }
 }
 
-// Date Information
-.dateInfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-mono);
-  text-align: center;
-  
+.caption {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #d8defb;
+  white-space: nowrap;
+  opacity: 0;
+  text-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.7),
+    0 0 2px rgba(0, 0, 0, 0.55);
+  transition: opacity 0.3s ease;
+}
+
+.nodeButton:hover {
   .year {
-    color: white;
-    font-size: .5rem;
-    font-weight: bold;
-    transition: color 0.3s ease;
+    color: $timeline-accent;
+    opacity: 1;
+  }
 
-    @media screen and (min-width: 768px) {
-      font-size: .7rem;
+  .dot {
+    border-color: $timeline-accent;
+  }
+
+  .dotCore {
+    background: $timeline-accent;
+  }
+}
+
+.active {
+  .year {
+    color: #dbe2ff;
+    opacity: 1;
+    font-size: 0.85rem;
+    // Dark halo for light backgrounds, plus the accent glow for the neon look on dark ones.
+    text-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.72),
+      0 0 10px rgba(182, 196, 255, 0.85);
+  }
+
+  .dot {
+    width: $dot-size-active;
+    height: $dot-size-active;
+    border-color: $timeline-accent;
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .dotCore {
+    width: 7px;
+    height: 7px;
+    background: $timeline-accent;
+    box-shadow: 0 0 8px rgba(182, 196, 255, 0.9);
+  }
+
+  .caption {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 4px rgba(182, 196, 255, 0.08),
+      0 0 8px rgba(182, 196, 255, 0.5);
+  }
+  50% {
+    box-shadow:
+      0 0 0 6px rgba(182, 196, 255, 0.12),
+      0 0 16px rgba(182, 196, 255, 0.9);
+  }
+}
+
+// Mobile: the page scrolls vertically, so the timeline becomes a vertical rail
+// pinned to the right edge (newest year on top, matching the scroll direction),
+// instead of the desktop bottom-centered horizontal bar (which clipped off-screen).
+@media screen and (max-width: ($desktop-breakpoint - 1)) {
+  .tocContainer {
+    left: auto;
+    right: 1rem;
+    bottom: auto;
+    top: 80%;
+    transform: translateY(-50%);
+    max-width: none;
+    background: rgba(8, 12, 24, 0.55);
+    border: 1px solid rgba(182, 196, 255, 0.18);
+    border-radius: 0.75rem;
+    backdrop-filter: blur(6px);
+    padding: 1rem 1rem;
+  }
+
+  .active {
+    .year {
+      top: -60%;
+      right: -70%;
     }
   }
-} 
+
+  .timeline {
+    flex-direction: column;
+    padding: 1rem 0.5rem;
+  }
+
+  .connector {
+    width: 2px;
+    height: clamp(1.25rem, 4.5vh, 2.75rem);
+    background: linear-gradient(180deg, transparent, rgba(182, 196, 255, 0.55), transparent);
+    background-size: 100% 200%;
+    animation: datastream-vertical 3s linear infinite;
+  }
+
+  .connectorActive {
+    background: linear-gradient(180deg, rgba(182, 196, 255, 0.45), $timeline-accent, rgba(182, 196, 255, 0.45));
+    background-size: 100% 200%;
+    animation: datastream-vertical 2s linear infinite;
+  }
+
+  // Year label sits to the left of its dot; the "Current" caption is dropped to
+  // keep the rail compact.
+  .year {
+    top: 50%;
+    bottom: auto;
+    left: auto;
+    right: calc(100% + 0.55rem);
+    transform: translateY(-50%);
+    top: -40%;
+    right: -45%;
+  }
+
+  .caption {
+    display: none;
+  }
+}
+
+@keyframes datastream-vertical {
+  0% {
+    background-position: 0 200%;
+  }
+  100% {
+    background-position: 0 -200%;
+  }
+}

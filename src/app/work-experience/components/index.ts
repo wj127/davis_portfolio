@@ -1,2 +1,2 @@
-export * from './expandable-content';
 export * from './toc/Toc';
+export * from './company-narrative/CompanyNarrative';

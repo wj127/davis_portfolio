@@ -1,0 +1,179 @@
+// Editorial "narrative column" inspired by the Stitch "Editorial Work Experience"
+// screen: a title + role lockup, a TL;DR block, the detailed content and an
+// optional closing note. All accents are derived from the chapter's own
+// `currentColor` (set per company in the page) so contrast holds on both light-
+// and dark-background companies.
+//
+// Mobile-first: the column is centred to sit cleanly under the centred company
+// logo. From the desktop breakpoint up it switches to the left-anchored editorial
+// layout (left accent bar on the TL;DR, leading bullet markers on list items).
+$desktop-breakpoint: 1025px;
+
+$tldr-color: rgba(248, 255, 42, 1);
+
+.narrative {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  width: 100%;
+  text-align: center;
+
+  @media screen and (min-width: $desktop-breakpoint) {
+    text-align: left;
+  }
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: center;
+
+  @media screen and (min-width: $desktop-breakpoint) {
+    align-items: flex-start;
+  }
+}
+
+.title {
+  margin: 0;
+  font-size: 1.9rem;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+
+  @media screen and (min-width: 768px) {
+    font-size: 2.4rem;
+  }
+}
+
+.role {
+  margin: 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  opacity: 0.7;
+}
+
+// TL;DR callout: faint tint + accent bar. On mobile the bar sits on top so it
+// reads with the centred text; on desktop it moves to the left edge (editorial).
+.tldr {
+  position: relative;
+  padding: 1rem 1.25rem;
+  background: color-mix(in srgb, $tldr-color 6%, transparent);
+  border-top: 2px solid color-mix(in srgb, $tldr-color 55%, transparent);
+
+  @media screen and (min-width: $desktop-breakpoint) {
+    border-top: none;
+    border-left: 2px solid color-mix(in srgb, $tldr-color 55%, transparent);
+  }
+}
+
+.tldrLabel {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  opacity: 0.85;
+}
+
+.tldrText {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  font-weight: 600;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  font-family: var(--font-source-code-pro), serif;
+}
+
+.paragraph {
+  margin: 0;
+  line-height: 1.6;
+  font-weight: 600;
+}
+
+.listGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.listHeading {
+  margin: 0;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.75;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+// Subtle cards. On mobile they're centred with no leading marker; from desktop up
+// they gain the left accent border + bullet, echoing the design's icon rows.
+.listItem {
+  position: relative;
+  padding: 0.7rem 0.9rem;
+  line-height: 1.5;
+  background: color-mix(in srgb, currentColor 4%, transparent);
+  transition: background 200ms ease;
+
+  &:hover {
+    background: color-mix(in srgb, currentColor 9%, transparent);
+  }
+
+  @media screen and (min-width: $desktop-breakpoint) {
+    padding: 0.7rem 0.9rem 0.7rem 1.6rem;
+    border-left: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0.7rem;
+      top: 1.15rem;
+      width: 0.35rem;
+      height: 0.35rem;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.6;
+    }
+  }
+}
+
+.note {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: center;
+  padding: 0.9rem 1.1rem;
+  border: 1px dashed color-mix(in srgb, currentColor 28%, transparent);
+
+  @media screen and (min-width: $desktop-breakpoint) {
+    align-items: flex-start;
+  }
+}
+
+.noteLabel {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  opacity: 0.7;
+  font-family: var(--font-source-code-pro), serif;
+}
+
+.noteText {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  font-style: italic;
+  opacity: 0.9;
+}
