@@ -16,6 +16,7 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 const brunoAce = Bruno_Ace_SC({ weight: '400', subsets: ['latin'] });
 
 const DESKTOP_MEDIA_QUERY = '(min-width: 1025px)';
+const MOBILE_MEDIA_QUERY = '(max-width: 1024px)';
 
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
 
@@ -127,6 +128,35 @@ export default function WorkExperience() {
 
         return () => {
           horizontalScrollTriggerRef.current = null;
+        };
+      });
+
+      // Mobile is a native vertical scroller (no GSAP): keep the ToC in sync with a
+      // plain scroll listener on the pin wrapper, which is the scroll container here.
+      matchMedia.add(MOBILE_MEDIA_QUERY, () => {
+        // Activate the year whose chapter currently covers the scroller's vertical
+        // centre. Chapters stack newest-first, so as the user scrolls down the active
+        // year walks through timelineYears in order.
+        const updateActiveYearMobile = () => {
+          const scrollerRect = pinWrapper.getBoundingClientRect();
+          const viewportCenter = scrollerRect.top + pinWrapper.clientHeight / 2;
+          let currentYear = timelineYears[0];
+          for (const year of timelineYears) {
+            const yearSection = yearSectionRefs.current[year];
+            const chapter = yearSection?.parentElement;
+            if (!chapter) continue;
+            if (chapter.getBoundingClientRect().top <= viewportCenter) {
+              currentYear = year;
+            }
+          }
+          setActiveYear(currentYear);
+        };
+
+        updateActiveYearMobile();
+        pinWrapper.addEventListener('scroll', updateActiveYearMobile, { passive: true });
+
+        return () => {
+          pinWrapper.removeEventListener('scroll', updateActiveYearMobile);
         };
       });
     },
