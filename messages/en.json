@@ -19,10 +19,14 @@
     "title": "Work Experience",
     "tldrLabel": "TL;DR",
     "noteLabel": "Note",
+    "toc": {
+      "current": "Current"
+    },
     "companies": {
       "hainok": {
         "title": "Hainok Technologies SL.",
         "role": "Tech Lead and later CTO",
+        "subTitle": "(to the present)",
         "tldr": "Took my “Business first” mindset to another level, leading the technical products of a Holding.",
         "content": [
           {
@@ -62,6 +66,7 @@
       "thm": {
         "title": "THM (TryHackMe)",
         "role": "Full stack developer",
+        "subTitle": "(to August 2024)",
         "tldr": "Exploded my potential in full stack development working in a finely tuned startup. Also started discovering and leaning towards the “business first” mentality, going beyond simply code development to think of ways to generate more profit and what customers may need.",
         "content": [
           {
@@ -90,6 +95,7 @@
       "proptex": {
         "title": "Proptex",
         "role": "Full stack developer",
+        "subTitle": "(to April 2022)",
         "tldr": "Learnt how to push myself and always keep the highest standards for the code I shipped in a fast and very scrutinised environment.",
         "content": [
           {
@@ -115,6 +121,7 @@
       "inatlas": {
         "title": "InAtlas (Intelligent Atlas)",
         "role": "Data Miner & Junior full stack developer",
+        "subTitle": "(to September 2021)",
         "tldr": "I mastered data crawling and data processing in a highly demanding and challenging environment. I also laid the foundations of being a full stack developer.",
         "content": [
           {
@@ -141,6 +148,7 @@
       "ub": {
         "title": "University of Barcelona",
         "role": "Computer Science Degree",
+        "subTitle": "(to June 2017)",
         "tldr": "Learnt to fend for myself, and how to deal with pressure and urgent deadlines.",
         "content": [
           {

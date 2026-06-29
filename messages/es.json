@@ -19,10 +19,14 @@
     "title": "Experiencia Laboral",
     "tldrLabel": "TL;DR",
     "noteLabel": "Nota",
+    "toc": {
+      "current": "Actual"
+    },
     "companies": {
       "hainok": {
         "title": "Hainok Technologies SL.",
         "role": "Tech Lead y más tarde CTO",
+        "subTitle": "(hasta la actualidad)",
         "tldr": "Llevé mi mentalidad de “Business first” a otro nivel, liderando los productos técnicos de un Holding.",
         "content": [
           {
@@ -62,6 +66,7 @@
       "thm": {
         "title": "THM (TryHackMe)",
         "role": "Desarrollador full stack",
+        "subTitle": "(hasta agosto de 2024)",
         "tldr": "Exploté mi potencial en el desarrollo full stack trabajando en una startup finamente engrasada. También empecé a descubrir e inclinarme hacia la mentalidad de “business first”, yendo más allá del simple desarrollo de código para pensar en formas de generar más beneficio y en lo que los clientes pueden necesitar.",
         "content": [
           {
@@ -90,6 +95,7 @@
       "proptex": {
         "title": "Proptex",
         "role": "Desarrollador full stack",
+        "subTitle": "(hasta abril de 2022)",
         "tldr": "Aprendí a superarme y a mantener siempre los más altos estándares para el código que entregaba en un entorno rápido y muy escrutado.",
         "content": [
           {
@@ -115,6 +121,7 @@
       "inatlas": {
         "title": "InAtlas (Intelligent Atlas)",
         "role": "Data Miner y desarrollador full stack junior",
+        "subTitle": "(hasta septiembre de 2021)",
         "tldr": "Dominé el crawling y el procesamiento de datos en un entorno muy exigente y desafiante. También sentí las bases de ser un desarrollador full stack.",
         "content": [
           {
@@ -141,6 +148,7 @@
       "ub": {
         "title": "Universidad de Barcelona",
         "role": "Grado en Informática",
+        "subTitle": "(hasta junio de 2017)",
         "tldr": "Aprendí a valerme por mí mismo, y a lidiar con la presión y los plazos urgentes.",
         "content": [
           {

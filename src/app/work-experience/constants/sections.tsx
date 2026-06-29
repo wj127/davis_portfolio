@@ -7,7 +7,6 @@ import { CompanyKey } from '@/app/work-experience/types';
 
 type TimelineSection = {
   year: number;
-  subTitle: string;
   colour: string;
   id: string;
   logo: typeof HainokoLogo;
@@ -18,7 +17,6 @@ type TimelineSection = {
 export const TimeLineSections: readonly TimelineSection[] = [
   {
     year: 2024,
-    subTitle: '(to the present)',
     colour: '#f0f0f0',
     id: 'year-2024',
     logo: HainokoLogo,
@@ -27,7 +25,6 @@ export const TimeLineSections: readonly TimelineSection[] = [
   },
   {
     year: 2022,
-    subTitle: '(to August 2024)',
     colour: '#f8f8fb',
     id: 'year-2022',
     logo: THMLogo,
@@ -36,7 +33,6 @@ export const TimeLineSections: readonly TimelineSection[] = [
   },
   {
     year: 2021,
-    subTitle: '(to April 2022)',
     colour: '#2f364f',
     id: 'year-2021',
     logo: ProptexLogo,
@@ -45,7 +41,6 @@ export const TimeLineSections: readonly TimelineSection[] = [
   },
   {
     year: 2016,
-    subTitle: '(to September 2021)',
     colour: '#02203d',
     id: 'year-2016',
     logo: InAtlasLogo,
@@ -54,7 +49,6 @@ export const TimeLineSections: readonly TimelineSection[] = [
   },
   {
     year: 2013,
-    subTitle: '(to June 2017)',
     colour: '#080a09',
     id: 'year-2013',
     logo: BCNUniLogo,

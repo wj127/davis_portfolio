@@ -6,6 +6,7 @@ import { Bruno_Ace_SC } from 'next/font/google';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import { useTranslations } from 'next-intl';
 import styles from '@/app/work-experience/work-experience.module.scss';
 import { Toc } from '@/app/work-experience/components/toc/Toc';
 import { CompanyNarrative } from '@/app/work-experience/components/company-narrative/CompanyNarrative';
@@ -56,6 +57,7 @@ const createCompanyReveals = (pinWrapper: HTMLElement): CompanyReveal[] => {
 };
 
 export default function WorkExperience() {
+  const translations = useTranslations('WorkExperience');
   const [activeYear, setActiveYear] = useState<number>(timelineYears[0]);
   const pinWrapperRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -233,8 +235,9 @@ export default function WorkExperience() {
       <Toc activeYear={activeYear} onSelectYear={handleSelectYear} />
       <section ref={pinWrapperRef} className={styles.pinWrapper}>
         <div ref={trackRef} className={styles.track}>
-          {TimeLineSections.map(({ year, id, logo, subTitle, gradientColor, companyKey, colour }) => {
+          {TimeLineSections.map(({ year, id, logo, gradientColor, companyKey, colour }) => {
             const chapterStyle = { ['--company-brand']: gradientColor, color: colour } as React.CSSProperties;
+            const subTitle = translations(`companies.${companyKey}.subTitle`);
 
             return (
               <section

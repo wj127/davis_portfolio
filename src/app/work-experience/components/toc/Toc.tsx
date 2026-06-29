@@ -1,6 +1,7 @@
 'use client';
 
 import React, { Fragment } from 'react';
+import { useTranslations } from 'next-intl';
 import styles from '@/app/work-experience/components/toc/Toc.module.scss';
 import { TimeLineSections } from '@/app/work-experience/constants/sections';
 import { TocProps } from '@/app/work-experience/components/toc/Toc.types';
@@ -8,6 +9,7 @@ import { TocProps } from '@/app/work-experience/components/toc/Toc.types';
 const timelineYears = TimeLineSections.map(({ year }) => year);
 
 export const Toc: React.FC<TocProps> = ({ activeYear, onSelectYear }) => {
+  const translations = useTranslations('WorkExperience.toc');
   const activeIndex = timelineYears.findIndex((timelineYear) => timelineYear === activeYear);
 
   return (
@@ -33,7 +35,7 @@ export const Toc: React.FC<TocProps> = ({ activeYear, onSelectYear }) => {
                   <span className={styles.dot}>
                     <span className={styles.dotCore} />
                   </span>
-                  <span className={styles.caption}>Current</span>
+                  <span className={styles.caption}>{translations('current')}</span>
                 </button>
               </li>
               {yearIndex < timelineYears.length - 1 && (

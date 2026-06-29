@@ -9,6 +9,8 @@
 // layout (left accent bar on the TL;DR, leading bullet markers on list items).
 $desktop-breakpoint: 1025px;
 
+$tldr-color: rgba(248, 255, 42, 1);
+
 .narrative {
   display: flex;
   flex-direction: column;
@@ -56,12 +58,12 @@ $desktop-breakpoint: 1025px;
 .tldr {
   position: relative;
   padding: 1rem 1.25rem;
-  background: color-mix(in srgb, currentColor 6%, transparent);
-  border-top: 2px solid color-mix(in srgb, currentColor 55%, transparent);
+  background: color-mix(in srgb, $tldr-color 6%, transparent);
+  border-top: 2px solid color-mix(in srgb, $tldr-color 55%, transparent);
 
   @media screen and (min-width: $desktop-breakpoint) {
     border-top: none;
-    border-left: 2px solid color-mix(in srgb, currentColor 55%, transparent);
+    border-left: 2px solid color-mix(in srgb, $tldr-color 55%, transparent);
   }
 }
 
