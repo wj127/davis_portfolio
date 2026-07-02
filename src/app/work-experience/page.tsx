@@ -208,11 +208,23 @@ export default function WorkExperience() {
     const track = trackRef.current;
     if (!yearSection) return;
 
-    setActiveYear(year);
-
+    // Don't eagerly set the active year here: the scroll-driven detectors (mobile
+    // scroll listener / desktop onUpdate) already track it from the live scroll
+    // position. Setting it up front made the target flash active, then revert as
+    // the smooth scroll passed through the intermediate years.
     const horizontalScrollTrigger = horizontalScrollTriggerRef.current;
     if (!track || !horizontalScrollTrigger || !window.matchMedia(DESKTOP_MEDIA_QUERY).matches) {
-      yearSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Mobile: the pin wrapper is the real vertical scroller. Scroll it explicitly
+      // (instead of scrollIntoView, which picks an ambiguous scroll ancestor and
+      // only worked reliably in one direction) so any year jumps up or down.
+      const pinWrapper = pinWrapperRef.current;
+      if (pinWrapper) {
+        const targetScrollTop =
+          pinWrapper.scrollTop + (yearSection.getBoundingClientRect().top - pinWrapper.getBoundingClientRect().top);
+        pinWrapper.scrollTo({ top: targetScrollTop, behavior: 'smooth' });
+      } else {
+        yearSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
       return;
     }
 

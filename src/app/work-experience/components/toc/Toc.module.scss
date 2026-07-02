@@ -208,15 +208,18 @@ $desktop-breakpoint: 1025px;
   .tocContainer {
     left: auto;
     right: 1rem;
-    bottom: auto;
-    top: 80%;
-    transform: translateY(-50%);
+    // Anchor to the bottom edge with a fixed offset. Using `top: %` made the rail
+    // drift as mobile browser chrome (URL bar) collapsed/expanded and changed the
+    // viewport height; a bottom-anchored fixed value stays put while scrolling.
+    top: auto;
+    bottom: 2.5rem;
+    transform: none;
     max-width: none;
     background: rgba(8, 12, 24, 0.55);
     border: 1px solid rgba(182, 196, 255, 0.18);
     border-radius: 0.75rem;
     backdrop-filter: blur(6px);
-    padding: 1rem 1rem;
+    padding: 1rem 1rem 0 1rem;
   }
 
   .active {
