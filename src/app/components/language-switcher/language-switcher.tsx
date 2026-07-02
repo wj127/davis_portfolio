@@ -47,7 +47,7 @@ export const LanguageSwitcher: React.FC = () => {
         </DropdownMenu.Trigger>
 
         <DropdownMenu.Portal>
-          <DropdownMenu.Content className={styles.content} sideOffset={8} align='end'>
+          <DropdownMenu.Content className={styles.content} sideOffset={8} align='center'>
             {locales.map((locale) => {
               const flag = FLAG_MAP[locale];
               const isActive = locale === currentLocale;
