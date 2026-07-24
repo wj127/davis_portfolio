@@ -168,6 +168,13 @@
     "soWhoAmI": "So who the hell am I?",
     "whoAmIDescription1": "I am nobody famous or on the spot... just yet!! 😜. However, people say I leave a lasting impression and my personal fingerprint wherever I step into. Maybe they're right, maybe not...guess it's up to you to find out 😉.",
     "whoAmIDescription2": "What I can tell you is that I'm a very ambitious guy that grew up in an entrepreneurial family full of issues and challenges that made me who I am today, with a spice of modesty. I've specialised in software engineering, slowly leaning towards entrepreneurship and business development, always seeking to make a difference and leave a lasting impact.",
+    "tabs": {
+      "ariaLabel": "About me sections",
+      "howIThink": "How I think",
+      "whatImGoodAt": "What I'm good at",
+      "beyondTheResume": "Beyond the resume",
+      "workWithMe": "What it's like to work with me"
+    },
     "howIThink": {
       "title": "How I think",
       "description": "I'd say my rationale is a bit too obsessive, in good and bad ways, as I analyse absoulutely everything to the smallest detail and try to foresee all possible scenarios and outcomes. That said, I can tell you:",

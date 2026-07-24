@@ -23,7 +23,7 @@ const sourceCodePro = Source_Code_Pro({
 const sections = [
   {
     id: 'how-i-think',
-    label: 'How I think',
+    labelKey: 'tabs.howIThink',
     colors: {
       primary: '#4169e1',
       secondary: '#7dd3fc',
@@ -34,7 +34,7 @@ const sections = [
   },
   {
     id: 'what-im-good-at',
-    label: "What I'm good at",
+    labelKey: 'tabs.whatImGoodAt',
     colors: {
       primary: '#1f9d55',
       secondary: '#f4b942',
@@ -45,7 +45,7 @@ const sections = [
   },
   {
     id: 'beyond-the-resume',
-    label: 'Beyond the resume',
+    labelKey: 'tabs.beyondTheResume',
     colors: {
       primary: '#f97316',
       secondary: '#facc15',
@@ -56,7 +56,7 @@ const sections = [
   },
   {
     id: 'work-with-me',
-    label: "What it's like to work with me",
+    labelKey: 'tabs.workWithMe',
     colors: {
       primary: '#e11d48',
       secondary: '#8b5cf6',
@@ -102,7 +102,7 @@ export default function AboutMePage() {
           </aside>
         </div>
 
-        <div className={styles.tabs} role='tablist' aria-label='About me sections'>
+        <div className={styles.tabs} role='tablist' aria-label={aboutMeTranslations('tabs.ariaLabel')}>
           {sections.map((section) => {
             const isActive = section.id === activeTab.id;
             return (
@@ -112,11 +112,11 @@ export default function AboutMePage() {
                 role='tab'
                 id={`${section.id}-tab`}
                 aria-selected={isActive}
-                aria-controls={activePanelId}
+                aria-controls={`${section.id}-panel`}
                 className={`${styles.tab} ${isActive ? styles.activeTab : ''}`}
                 onClick={() => setActiveTab(section)}
               >
-                {section.label}
+                {aboutMeTranslations(section.labelKey)}
               </button>
             );
           })}

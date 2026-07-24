@@ -168,6 +168,13 @@
     "soWhoAmI": "¿Quién diablos soy yo?",
     "whoAmIDescription1": "No soy nadie mediático o en el punto de mira... ¡No aún!! 😜. Sin embargo, la gente suele decir que dejo una impresión duradera y mi huella personal en cada cosa que hago. Tal vez estén en lo cierto, tal vez no... ¡tendrás que descubrirlo tú mismo 😉.",
     "whoAmIDescription2": "Lo que sí puedo decirte es que soy un tío muy ambicioso que creció en una familia empresarial llena de problemas y desafíos que moldearon la persona que soy hoy, con un toque de modestia. Me especialicé en ingeniería de software, lentamente inclinándome hacia la emprendeduría y el desarrollo de negocios, siempre buscando crear la diferencia y dejar una huella duradera.",
+    "tabs": {
+      "ariaLabel": "Secciones sobre mí",
+      "howIThink": "Cómo pienso",
+      "whatImGoodAt": "En qué soy bueno",
+      "beyondTheResume": "Más allá del currículum",
+      "workWithMe": "Cómo es trabajar conmigo"
+    },
     "howIThink": {
       "title": "Cómo pienso",
       "description": "Diría que mi forma de razonar es un poco obsesiva, tanto para bien como para mal, ya que analizo absolutamente todo hasta el más mínimo detalle e intento prever todos los escenarios y resultados posibles. Dicho esto, puedo contarte:",
