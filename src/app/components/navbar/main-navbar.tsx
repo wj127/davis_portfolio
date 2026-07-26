@@ -177,18 +177,15 @@ export const MainNavbar: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
         role='navigation'
       >
         <div className={NavBarStyles.InnerWrapper}>
+          <BrandLink />
+
+          <span className={NavBarStyles.BrandDivider} aria-hidden='true' />
+
           <NavigationMenu.Root
             orientation='horizontal'
             className={`${NavBarStyles.NavigationMenuRoot} ${isOpen ? NavBarStyles.Open : ''}`}
           >
             <NavigationMenu.List className={NavBarStyles.NavigationMenuList}>
-              <NavigationMenu.Item>
-                <CustomLink href='/' className={NavBarStyles.ImageContainer} isDisabled={false}>
-                  <LogoImage />
-                  <GlitchText>{mainNavbarTranslations.rich('home', { i: (chunks) => <i>{chunks}</i> })}</GlitchText>
-                </CustomLink>
-              </NavigationMenu.Item>
-
               <NavigationMenu.Item>
                 <CustomLink href='/work-experience' isDisabled={false}>
                   <GlitchText>
@@ -278,5 +275,18 @@ const GlitchText: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 const LogoImage: React.FC = () => {
   return (
     <Image alt='Mr. Davis logo' src={MrDavisLogo} width={50} height={50} priority className={NavBarStyles.ImageLogo} />
+  );
+};
+
+const BrandLink: React.FC = () => {
+  const pathname = usePathname();
+  const brandTranslations = useTranslations('Navbar');
+  const isActive = pathname === '/';
+
+  return (
+    <Link href='/' className={`${NavBarStyles.BrandLink} ${isActive ? NavBarStyles.active : ''}`}>
+      <LogoImage />
+      <GlitchText>{brandTranslations.rich('home', { i: (chunks) => <i>{chunks}</i> })}</GlitchText>
+    </Link>
   );
 };

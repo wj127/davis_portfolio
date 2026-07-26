@@ -340,12 +340,20 @@
 }
 
 .NavbarContainer.Shrink .NavigationMenuLink:not(.active),
-.NavbarContainer.Shrink .ImageContainer
+.NavbarContainer.Shrink .BrandLink,
+.NavbarContainer.Shrink .BrandDivider
 {
   opacity: 0;
   visibility: hidden;
   width: 0;
-  transition: opacity 0.8s ease-in, visibility 0.8s ease-in;
+  transition: opacity 0.8s ease-in, visibility 0.8s ease-in, padding 0.8s ease-in;
+}
+
+// The brand is a direct flex child with no zero-width `li` wrapper to absorb it,
+// so its padding has to be dropped too or it keeps nudging the collapsed circle.
+.NavbarContainer.Shrink .BrandLink {
+  padding: 0;
+  overflow: hidden;
 }
 
 
@@ -359,17 +367,25 @@
   opacity: 1;
   visibility: visible;
   width: auto;
+  padding: 8px 12px;
 
   &.active {
     color: $bluish;
   }
 }
 
-.NavbarContainer.Shrink:hover .ImageContainer {
+.NavbarContainer.Shrink:hover .BrandLink {
   display: flex;
   opacity: 1;
   visibility: visible;
   width: auto;
+  padding: 0 0.25rem;
+}
+
+.NavbarContainer.Shrink:hover .BrandDivider {
+  opacity: 1;
+  visibility: visible;
+  width: 1px;
 }
 
 .NavbarContainer.Shrink .NavigationMenuList {
@@ -392,47 +408,66 @@
 
 .NavbarContainer.Shrink .InnerWrapper {
   justify-content: center;
+  gap: 0;
+  padding-left: 0;
 }
 
 .NavbarContainer.Shrink:hover .InnerWrapper {
   justify-content: flex-start;
+  gap: 1.75rem;
+  padding-left: 1rem;
 }
 
 .InnerWrapper {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 3rem;
+  gap: 1.75rem;
   height: 100%;
+  padding-left: 1rem;
+  // Matches the container's 0.8s width/clip-path easing so the brand and links
+  // slide out with the navbar instead of snapping into place.
+  transition: gap 0.8s ease-in, padding-left 0.8s ease-in;
 }
 
-.ImageContainer {
-  margin: 1rem .5rem 1rem 1rem;
+.BrandLink {
   display: flex;
-  justify-content: center;
   align-items: center;
+  gap: 0.75rem;
   height: 100%;
-  width: auto;
-  background: inherit;
+  padding: 0 0.25rem;
+  flex-shrink: 0;
   text-decoration: none;
+  transition: transform .4s ease;
 
   p {
-    margin-left: 0.5rem;
+    margin: 0;
     color: white;
-    transition: transform .5s ease, color .5s ease-in-out;
-
-    &:hover {
-      color: $bluish;
-      transform: scale(1.1);
-    }
+    font-size: 1.2rem;
+    letter-spacing: 0.06em;
+    text-shadow: 0 0 12px rgba($bluish, 0.35);
+    transition: color .4s ease-in-out, text-shadow .4s ease-in-out;
 
     span {
       display: none;
     }
   }
+
+  &:hover {
+    transform: scale(1.04);
+
+    p {
+      color: $bluish;
+      text-shadow: 0 0 16px rgba($bluish, 0.6);
+    }
+
+    .ImageLogo {
+      box-shadow: 0 0 0 2px rgba($bluish, 0.7), 0 0 18px rgba($bluish, 0.45);
+    }
+  }
 }
 
-.ImageContainer.active {
+.BrandLink.active {
   @include glitch-text;
 
   p {
@@ -440,9 +475,19 @@
   }
 }
 
+.BrandDivider {
+  flex-shrink: 0;
+  width: 1px;
+  height: 42px;
+  background: linear-gradient(to bottom, transparent, rgba($bluish, 0.55), transparent);
+  transition: opacity 0.8s ease-in;
+}
+
 .ImageLogo {
   display: block;
-  border-radius: 50px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba($bluish, 0.35), 0 0 12px rgba(0, 0, 0, 0.45);
+  transition: box-shadow .4s ease;
 }
 
 .NavigationMenuRoot {
@@ -514,7 +559,7 @@
   line-height: 1;
   font-size: 15px;
   color: white;
-  transition: transform .5s ease, color .5s ease-in-out;
+  transition: transform .5s ease, color .5s ease-in-out, padding 0.8s ease-in;
 
   p {
     all: unset;
