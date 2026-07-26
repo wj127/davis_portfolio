@@ -15,8 +15,38 @@
     "title": "Welcome to my portfolio",
     "description": "Welcome to my portfolio"
   },
+  "Skills": {
+    "sectionTitle": "Skills",
+    "categories": {
+      "frontEnd": "Front-end",
+      "backEnd": "Back-end",
+      "mobile": "Mobile",
+      "toolsAndTechnologies": "Tools & Technologies",
+      "leadershipAndManagement": "Leadership & Management",
+      "productAndStrategy": "Product & Strategy",
+      "businessAndClientFacing": "Business & Client-Facing"
+    },
+    "soft": {
+      "teamLeadership": "Team Leadership",
+      "technicalMentorship": "Technical Mentorship & Coaching",
+      "hiringAndInterviewing": "Hiring & Technical Interviewing",
+      "stakeholderManagement": "Cross-functional Stakeholder Management",
+      "budgetForecasting": "Budget Forecasting & Cost Control",
+      "technicalRoadmap": "Technical Roadmap Ownership",
+      "productDifferentiation": "Product Differentiation Strategy",
+      "techStackDecisions": "Technology Stack Decision-Making",
+      "infrastructureArchitecture": "Infrastructure Architecture",
+      "legacyMigration": "Legacy System Migration",
+      "aiIntegration": "AI Integration & Process Automation",
+      "businessModelDesign": "Business Model Design",
+      "preSalesSupport": "Pre-Sales & Sales Engineering Support",
+      "publicSectorRelations": "Public Sector Client Relations",
+      "partnershipDevelopment": "Partnership Development"
+    }
+  },
   "WorkExperience": {
     "title": "Work Experience",
+    "downloadCv": "Download CV",
     "tldrLabel": "TL;DR",
     "noteLabel": "Note",
     "toc": {

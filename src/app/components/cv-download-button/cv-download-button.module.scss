@@ -1,0 +1,75 @@
+@import 'src/styles/varibales';
+
+.wrapper {
+  position: fixed;
+  top: 1.5rem;
+  right: 4.25rem;
+  z-index: 1001;
+
+  &:hover .tooltip,
+  &:focus-within .tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba($bluish, 0.3);
+  background: rgba(10, 10, 50, 0.8);
+  color: $bluish;
+  cursor: pointer;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    border-color: rgba($bluish, 0.6);
+    box-shadow: 0 0 12px rgba($bluish, 0.2);
+    transform: scale(1.08);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $bluish;
+    outline-offset: 2px;
+  }
+
+  &[data-pending] {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}
+
+.icon {
+  display: block;
+}
+
+.tooltip {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  padding: 4px 8px;
+  border-radius: 8px;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  color: #f0f0f0;
+  background: rgba(10, 10, 50, 0.95);
+  border: 1px solid rgba($bluish, 0.25);
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.5),
+    0 0 16px rgba($bluish, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}

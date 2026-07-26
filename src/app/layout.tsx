@@ -7,6 +7,7 @@ import { cookies } from 'next/headers';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 import { LanguageSwitcher } from '@/app/components/language-switcher/language-switcher';
+import { CvDownloadButton } from '@/app/components/cv-download-button/cv-download-button';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -32,6 +33,7 @@ export default async function RootLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           <MainNavbar isMobile={isMobile} />
           <LanguageSwitcher />
+          <CvDownloadButton />
           <main>{children}</main>
         </NextIntlClientProvider>
       </body>

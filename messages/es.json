@@ -15,8 +15,38 @@
     "title": "Bienvenido a mi portafolio",
     "description": "Bienvenido a mi portafolio"
   },
+  "Skills": {
+    "sectionTitle": "Habilidades",
+    "categories": {
+      "frontEnd": "Front-end",
+      "backEnd": "Back-end",
+      "mobile": "Móvil",
+      "toolsAndTechnologies": "Herramientas y Tecnologías",
+      "leadershipAndManagement": "Liderazgo y Gestión",
+      "productAndStrategy": "Producto y Estrategia",
+      "businessAndClientFacing": "Negocio y Trato con Clientes"
+    },
+    "soft": {
+      "teamLeadership": "Liderazgo de Equipos",
+      "technicalMentorship": "Mentoría y Coaching Técnico",
+      "hiringAndInterviewing": "Contratación y Entrevistas Técnicas",
+      "stakeholderManagement": "Gestión de Stakeholders Multifuncionales",
+      "budgetForecasting": "Previsión Presupuestaria y Control de Costes",
+      "technicalRoadmap": "Propiedad del Roadmap Técnico",
+      "productDifferentiation": "Estrategia de Diferenciación de Producto",
+      "techStackDecisions": "Toma de Decisiones sobre el Stack Tecnológico",
+      "infrastructureArchitecture": "Arquitectura de Infraestructura",
+      "legacyMigration": "Migración de Sistemas Legados",
+      "aiIntegration": "Integración de IA y Automatización de Procesos",
+      "businessModelDesign": "Diseño de Modelos de Negocio",
+      "preSalesSupport": "Soporte de Preventa e Ingeniería de Ventas",
+      "publicSectorRelations": "Relaciones con Clientes del Sector Público",
+      "partnershipDevelopment": "Desarrollo de Alianzas"
+    }
+  },
   "WorkExperience": {
     "title": "Experiencia Laboral",
+    "downloadCv": "Descargar CV",
     "tldrLabel": "TL;DR",
     "noteLabel": "Nota",
     "toc": {
