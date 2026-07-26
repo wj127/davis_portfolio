@@ -6,8 +6,7 @@ import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import NavBarStyles from '@/app/components/navbar/main-navbar.module.scss';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
-import MrDavisLogoGIF from '@public/MrDavis2.gif';
-import MrDavisTransparentLogo from '@public/MrDavis-transparentbg.png';
+import MrDavisLogo from '@public/mrD-logos/mrD-cropped_circle_image.png';
 import { useObserverApi } from '@/app/hooks/observer-api/use-oberser-api';
 import { Bruno_Ace_SC } from 'next/font/google';
 import { X, Home, Briefcase, User, BookOpen } from 'lucide-react';
@@ -277,18 +276,7 @@ const GlitchText: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 };
 
 const LogoImage: React.FC = () => {
-  const pathname = usePathname();
-  const isActive = pathname === '/';
-
   return (
-    <Image
-      alt='logo image'
-      src={isActive ? MrDavisLogoGIF : MrDavisTransparentLogo}
-      width={50}
-      height={50}
-      unoptimized
-      priority
-      className={NavBarStyles.ImageLogo}
-    />
+    <Image alt='Mr. Davis logo' src={MrDavisLogo} width={50} height={50} priority className={NavBarStyles.ImageLogo} />
   );
 };
