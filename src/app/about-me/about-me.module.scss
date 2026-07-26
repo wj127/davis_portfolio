@@ -82,8 +82,9 @@
 }
 
 .heroText {
-  font-size: 0.92rem;
-  line-height: 1.45;
+  font-family: var(--font-source-code-pro), monospace;
+  font-size: 0.78rem;
+  line-height: 1.5;
 }
 
 .photoCard {
@@ -212,12 +213,12 @@
 
   .cardLabel {
     margin-bottom: 1rem;
-    font-size: 0.82rem;
+    font-size: 1.45rem;
   }
 
   .heroText {
-    font-size: clamp(1.45rem, 2vw, 1.8rem);
-    line-height: 1.32;
+    font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+    line-height: 1.4;
   }
 
   .photoCard {

@@ -89,7 +89,7 @@ export default function AboutMePage() {
       <section className={styles.panel}>
         <div className={styles.heroGrid}>
           <article className={styles.heroCard}>
-            <span className={styles.cardLabel}>{aboutMeTranslations('soWhoAmI')}</span>
+            <h2 className={styles.cardLabel}>{aboutMeTranslations('soWhoAmI')}</h2>
             <p className={styles.heroText}>
               {aboutMeTranslations('whoAmIDescription1')}
               <br />
