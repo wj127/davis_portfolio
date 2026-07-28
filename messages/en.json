@@ -266,6 +266,21 @@
       "button": "INITIATE_CONTACT"
     }
   },
+  "Blog": {
+    "windowTitle": "blog.init",
+    "statusLabel": "SYSTEM_STATUS",
+    "statusValue": "INITIALIZING",
+    "title": "Blog",
+    "subtitle": "// module_under_construction",
+    "description": "The stories, experiments and hard-earned lessons are still compiling. This module is booting up — soon this space will stream my thoughts on code, business and everything in between.",
+    "boot": {
+      "mount": "$ mount /dev/thoughts --verbose",
+      "compile": "> compiling articles ............ [ OK ]",
+      "index": "> indexing ideas ................ [ OK ]",
+      "await": "> awaiting first transmission ... [ 0% ]"
+    },
+    "comingSoon": "COMING_SOON"
+  },
   "LanguageSwitcher": {
     "label": "Change language"
   },

@@ -2,8 +2,12 @@
 
 .consoleWrapper {
   width: 65%;
-  height: 65%;
-  max-width: 100%;
+  // Fill the available height (its parent already reserves the fixed navbar), so
+  // the typed messages fit without an internal scroll on medium screens. Capped
+  // so the terminal doesn't grow unwieldy on very large / tall displays.
+  height: 100%;
+  max-width: 1100px;
+  max-height: 900px;
   background-color: #00000078;
   border-radius: 10px;
   display: flex;
@@ -91,10 +95,10 @@
 }
 
 .consoleTextWrapper {
-  padding: 17px 13px 0 10px;
+  padding: 10px 13px 0 10px;
 
   @media screen and (max-width: 768px) {
-    padding: 12px 10px 0 8px;
+    padding: 8px 10px 0 8px;
   }
 }
 

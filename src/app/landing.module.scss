@@ -15,7 +15,15 @@
   padding: 5.25rem 0.75rem 1.25rem;
   box-sizing: border-box;
 
+  // Reserve the fixed navbar's height (90px) so the console is centered within
+  // the visible area below it and can use the full remaining height instead of
+  // being squeezed into a small centered box that overflows on medium screens.
   @media screen and (min-width: 769px) {
-    padding: 0;
+    padding: 7rem 1.5rem 2rem;
+  }
+
+  // The navbar grows to 110px on ultra-wide screens (see main-navbar.module.scss).
+  @media screen and (min-width: 3780px) {
+    padding-top: 9rem;
   }
 }

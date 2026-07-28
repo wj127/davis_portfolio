@@ -266,6 +266,21 @@
       "button": "INICIAR_CONTACTO"
     }
   },
+  "Blog": {
+    "windowTitle": "blog.init",
+    "statusLabel": "ESTADO_SISTEMA",
+    "statusValue": "INICIALIZANDO",
+    "title": "Blog",
+    "subtitle": "// módulo_en_construcción",
+    "description": "Las historias, experimentos y lecciones aprendidas todavía se están compilando. Este módulo está arrancando — pronto este espacio transmitirá mis pensamientos sobre código, negocio y todo lo que hay entre medias.",
+    "boot": {
+      "mount": "$ mount /dev/pensamientos --verbose",
+      "compile": "> compilando artículos .......... [ OK ]",
+      "index": "> indexando ideas .............. [ OK ]",
+      "await": "> esperando primera transmisión . [ 0% ]"
+    },
+    "comingSoon": "PRÓXIMAMENTE"
+  },
   "LanguageSwitcher": {
     "label": "Cambiar idioma"
   },
