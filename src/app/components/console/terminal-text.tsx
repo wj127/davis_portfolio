@@ -22,11 +22,9 @@ export const TerminalText: React.FC<TerminalTextProps> = ({
 
     // Find the scrollable parent container
     let scrollableParent = textRef.current.parentElement;
-    while (
-      scrollableParent &&
-      getComputedStyle(scrollableParent).overflowY !== 'scroll' &&
-      scrollableParent !== document.body
-    ) {
+    while (scrollableParent && scrollableParent !== document.body) {
+      const overflowY = getComputedStyle(scrollableParent).overflowY;
+      if (overflowY === 'scroll' || overflowY === 'auto') break;
       scrollableParent = scrollableParent.parentElement;
     }
 

@@ -1,10 +1,21 @@
 @import "src/styles/varibales";
 
 .mainDiv {
-  width: 100vw;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
   height: 100vh;
+  height: 100dvh;
   background: radial-gradient(circle, $start-color, $end-color);
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  padding: 5.25rem 0.75rem 1.25rem;
+  box-sizing: border-box;
+
+  @media screen and (min-width: 769px) {
+    padding: 0;
+  }
 }
