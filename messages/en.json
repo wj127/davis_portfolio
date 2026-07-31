@@ -15,6 +15,25 @@
     "title": "Welcome to my portfolio",
     "description": "Welcome to my portfolio"
   },
+  "Console": {
+    "texts": [
+      "Hey you, yeah YOU! 🫵🏼",
+      "Don't be shy, let's get to know each other 😉",
+      "Welcome to my portfolio! Here you'll find my work experience, who I am, blog/video posts and more.",
+      "For now, let me briefly introduce myself:",
+      "This is Davis, a full stack software engineer with a passion for creating amazing things.",
+      "My mindset is of an entrepreneurial software engineer who aligns technical decisions with business growth, customer retention, and product quality.",
+      "Having contributed to multiple ventures, I leverage strategic business insights in my coding approach that emphasizes in rigorous testing and scalable engineering solutions that directly drive business success 🚀.",
+      "Now, I DARE you go and check the rest of my portfolio. 😏"
+    ],
+    "easterEgg": {
+      "title": "Access Denied",
+      "message": "Uh uh uh! Didn't you like the console?… I must congratulate you since you found my easter egg anyway.",
+      "ok": "OK",
+      "close": "Close",
+      "gifAlt": "Dennis Nedry wagging his finger and saying ah ah ah"
+    }
+  },
   "Skills": {
     "sectionTitle": "Skills",
     "categories": {

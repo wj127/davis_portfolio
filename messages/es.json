@@ -15,6 +15,25 @@
     "title": "Bienvenido a mi portafolio",
     "description": "Bienvenido a mi portafolio"
   },
+  "Console": {
+    "texts": [
+      "¡Eh tú, sí TÚ! 🫵🏼",
+      "No seas tímido, vamos a conocernos 😉",
+      "¡Bienvenido a mi portafolio! Aquí encontrarás mi experiencia laboral, quién soy, posts de blog/vídeo y más.",
+      "Por ahora, déjame presentarme brevemente:",
+      "Este es Davis, un ingeniero de software full stack con pasión por crear cosas increíbles.",
+      "Mi mentalidad es la de un ingeniero de software emprendedor que alinea las decisiones técnicas con el crecimiento del negocio, la retención de clientes y la calidad del producto.",
+      "Habiendo contribuido a múltiples 'ventures', aprovecho insights estratégicos de negocio en mi enfoque de código, que enfatiza pruebas rigurosas y soluciones de ingeniería escalables que impulsan directamente el éxito del negocio 🚀.",
+      "Ahora, te RETO a que vayas a revisar el resto de mi portafolio. 😏"
+    ],
+    "easterEgg": {
+      "title": "Acceso denegado",
+      "message": "¡Eh eh eh! ¿No te gustó la consola?… debo felicitarte ya que encontraste mi easter egg.",
+      "ok": "Aceptar",
+      "close": "Cerrar",
+      "gifAlt": "Dennis Nedry moviendo el dedo y diciendo ah ah ah"
+    }
+  },
   "Skills": {
     "sectionTitle": "Habilidades",
     "categories": {

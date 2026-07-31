@@ -2,9 +2,11 @@
 
 import React, { useRef, useEffect } from 'react';
 import ConsoleStyles from '@/app/components/console/console.module.scss';
+import { EasterEggDialog } from '@/app/components/console/easter-egg-dialog';
 import { TerminalCursor } from '@/app/components/console/terminal-cursor';
 import { TerminalText } from '@/app/components/console/terminal-text';
 import { Source_Code_Pro } from 'next/font/google';
+import { useTranslations } from 'next-intl';
 
 const sourceCodePro = Source_Code_Pro({
   subsets: ['latin'],
@@ -13,19 +15,12 @@ const sourceCodePro = Source_Code_Pro({
   variable: '--font-source-code-pro',
 });
 
-const texts = [
-  'Hey you, yeah YOU! 🫵🏼',
-  "Don't be shy, let's get to know each other 😉",
-  "I'm Davis, a humble entrepreneur and occasional angel investor.",
-  'I also work full time as a software engineer with a passion for creating amazing things.',
-  "I'm an entrepreneurial software engineer who aligns technical decisions with business growth, customer retention, and product quality.",
-  'Having contributed to multiple ventures, I leverage strategic business insights in my coding approach that emphasizes in rigorous testing and scalable engineering solutions that directly drive business success 🚀.',
-  'Now, I DARE you go and check the rest of my portfolio. 😏',
-];
-
 export const Console: React.FC = () => {
+  const consoleTranslations = useTranslations('Console');
+  const texts = consoleTranslations.raw('texts') as string[];
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [hasClosed, setHasClosed] = React.useState(false);
+  const [isEasterEggOpen, setIsEasterEggOpen] = React.useState(false);
   const [isMinimized, setIsMinimized] = React.useState(false);
   const [isExpanded, setIsExpanded] = React.useState(false);
   const scrollableAreaRef = useRef<HTMLDivElement>(null);
@@ -36,7 +31,15 @@ export const Console: React.FC = () => {
     }
   }, [currentIndex]);
 
-  if (hasClosed) return null;
+  const handleClose = () => {
+    setHasClosed(true);
+    setIsMinimized(false);
+    setIsEasterEggOpen(true);
+  };
+
+  if (hasClosed) {
+    return <EasterEggDialog open={isEasterEggOpen} onOpenChange={setIsEasterEggOpen} />;
+  }
 
   if (isMinimized) {
     return (
@@ -47,7 +50,7 @@ export const Console: React.FC = () => {
             className={ConsoleStyles.button}
             onClick={(e) => {
               e.stopPropagation();
-              setHasClosed(true);
+              handleClose();
             }}
           />
           <div
@@ -69,7 +72,7 @@ export const Console: React.FC = () => {
     >
       <div className={ConsoleStyles.consoleTop}>
         <div className={ConsoleStyles.buttonContainer}>
-          <div id={ConsoleStyles.buttonCancel} className={ConsoleStyles.button} onClick={() => setHasClosed(true)} />
+          <div id={ConsoleStyles.buttonCancel} className={ConsoleStyles.button} onClick={handleClose} />
           <div
             id={ConsoleStyles.buttonMinimize}
             className={ConsoleStyles.button}
