@@ -89,6 +89,10 @@ export default function AboutMePage() {
       <section className={styles.panel}>
         <div className={styles.heroGrid}>
           <article className={styles.heroCard}>
+            <header className={styles.nameHeader}>
+              <h1 className={styles.nameHeading}>{aboutMeTranslations('nameHeading')}</h1>
+              <p className={styles.nameRole}>{aboutMeTranslations('nameRole')}</p>
+            </header>
             <h2 className={styles.cardLabel}>{aboutMeTranslations('soWhoAmI')}</h2>
             <p className={styles.heroText}>
               {aboutMeTranslations('whoAmIDescription1')}

@@ -13,7 +13,8 @@
   },
   "HomePage": {
     "title": "Welcome to my portfolio",
-    "description": "Welcome to my portfolio"
+    "description": "Welcome to my portfolio",
+    "srTitle": "Davis Yoel Armas Ayala — Full Stack Software Engineer"
   },
   "Console": {
     "texts": [
@@ -214,6 +215,8 @@
   },
   "AboutMe": {
     "title": "About Me",
+    "nameHeading": "Davis Yoel Armas Ayala",
+    "nameRole": "Full Stack Software Engineer",
     "soWhoAmI": "So who the hell am I?",
     "whoAmIDescription1": "I am nobody famous or on the spot... just yet!! 😜. However, people say I leave a lasting impression and my personal fingerprint wherever I step into. Maybe they're right, maybe not...guess it's up to you to find out 😉.",
     "whoAmIDescription2": "What I can tell you is that I'm a very ambitious guy that grew up in an entrepreneurial family full of issues and challenges that made me who I am today, with a spice of modesty. I've specialised in software engineering, slowly leaning towards entrepreneurship and business development, always seeking to make a difference and leave a lasting impact.",
