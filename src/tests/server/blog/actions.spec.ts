@@ -60,6 +60,17 @@ describe('Blog Actions', () => {
       );
     });
 
+    it('should expose the alternative text of the category cover', async () => {
+      // Given
+      inMemoryClient.setData(CATEGORIES_QUERY, [CATEGORY_WITH_COVER]);
+
+      // When
+      const [category] = await getCategories();
+
+      // Then
+      expect(category.image?.alt).toBe('laptop with code and essential technologies');
+    });
+
     it('should throw an error if the categories are not valid', async () => {
       // Given
       inMemoryClient.setData(CATEGORIES_QUERY, [

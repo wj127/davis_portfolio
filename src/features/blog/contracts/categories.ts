@@ -8,6 +8,7 @@ export const CategorySchema = z.object({
   image: z
     .object({
       _type: z.literal('image'),
+      alt: z.string().optional(),
       asset: z.object({
         _type: z.literal('reference'),
         _ref: z.string(),
@@ -38,6 +39,7 @@ export type Category = z.infer<typeof CategorySchema>;
 
 export type CategoryCover = {
   url: string;
+  alt?: string;
 };
 
 export type BlogCategory = Omit<Category, 'image'> & {
