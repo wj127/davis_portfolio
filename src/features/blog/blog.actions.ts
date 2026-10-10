@@ -19,7 +19,7 @@ export const getCategories = async (): Promise<BlogCategory[]> => {
     .map(({ image, ...category }) => ({
       ...category,
       image: image && {
-        url: urlForImage(image.asset).width(720).height(320).fit('crop').auto('format').url(),
+        url: urlForImage(image).width(720).height(320).fit('crop').auto('format').url(),
         alt: image.alt,
       },
     }));
