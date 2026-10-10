@@ -60,6 +60,46 @@ describe('Blog Actions', () => {
       );
     });
 
+    it('should deliver the category cover cropped to the card proportions in the best format for the browser', async () => {
+      // Given
+      inMemoryClient.setData(CATEGORIES_QUERY, [CATEGORY_WITH_COVER]);
+
+      // When
+      const [category] = await getCategories();
+
+      // Then
+      const coverParams = new URL(category.image?.url ?? '').searchParams;
+      expect(coverParams.get('w')).toBe('720');
+      expect(coverParams.get('h')).toBe('320');
+      expect(coverParams.get('fit')).toBe('crop');
+      expect(coverParams.get('auto')).toBe('format');
+    });
+
+    it('should keep the category cover within the crop set in Sanity Studio', async () => {
+      // Given
+      inMemoryClient.setData(CATEGORIES_QUERY, [
+        {
+          ...CATEGORY_WITH_COVER,
+          image: {
+            ...CATEGORY_WITH_COVER.image,
+            crop: { top: 0.1, bottom: 0.1, left: 0.1, right: 0.1 },
+          },
+        },
+      ]);
+
+      // When
+      const [category] = await getCategories();
+
+      // Then
+      const rect = new URL(category.image?.url ?? '').searchParams.get('rect');
+      expect(rect).not.toBeNull();
+      const [left, top, width, height] = (rect ?? '').split(',').map(Number);
+      expect(left).toBeGreaterThanOrEqual(167);
+      expect(top).toBeGreaterThanOrEqual(94);
+      expect(left + width).toBeLessThanOrEqual(1505);
+      expect(top + height).toBeLessThanOrEqual(847);
+    });
+
     it('should expose the alternative text of the category cover', async () => {
       // Given
       inMemoryClient.setData(CATEGORIES_QUERY, [CATEGORY_WITH_COVER]);
