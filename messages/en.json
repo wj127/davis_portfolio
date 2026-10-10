@@ -289,19 +289,19 @@
     }
   },
   "Blog": {
-    "windowTitle": "blog.init",
-    "statusLabel": "SYSTEM_STATUS",
-    "statusValue": "INITIALIZING",
     "title": "Blog",
-    "subtitle": "// module_under_construction",
-    "description": "The stories, experiments and hard-earned lessons are still compiling. This module is booting up — soon this space will stream my thoughts on code, business and everything in between.",
-    "boot": {
-      "mount": "$ mount /dev/thoughts --verbose",
-      "compile": "> compiling articles ............ [ OK ]",
-      "index": "> indexing ideas ................ [ OK ]",
-      "await": "> awaiting first transmission ... [ 0% ]"
+    "description": "Things I build. Things I learn. Notes on the web, side projects, and finding my way as a developer.",
+    "categories": {
+      "title": "Browse by category",
+      "description": "Browse by category. Start with what you’re curious about."
     },
-    "comingSoon": "COMING_SOON"
+    "postCount": "{count, plural, one {{formattedCount} published post} other {{formattedCount} published posts}}",
+    "footer": {
+      "copyright": "© {year} MRDAVIS · Built with curiosity.",
+      "gitHub": "GitHub",
+      "linkedIn": "LinkedIn",
+      "email": "Email"
+    }
   },
   "LanguageSwitcher": {
     "label": "Change language"
