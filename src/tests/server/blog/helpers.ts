@@ -29,3 +29,18 @@ export const CATEGORIES = [
     postCount: 20,
   },
 ];
+
+export const CATEGORY_WITH_COVER = {
+  _id: '3',
+  title: 'Software Engineering',
+  slug: 'software-engineering',
+  postCount: 8,
+  image: {
+    _type: 'image',
+    alt: 'laptop with code and essential technologies',
+    asset: {
+      _type: 'reference',
+      _ref: 'image-3fd05d274208d27feba85b3c85deb54bd27a87f1-1672x941-png',
+    },
+  },
+};

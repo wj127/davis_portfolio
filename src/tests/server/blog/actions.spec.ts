@@ -1,4 +1,4 @@
-import { inMemoryClient, CATEGORIES } from '@/tests/server/blog/helpers';
+import { inMemoryClient, CATEGORIES, CATEGORY_WITH_COVER } from '@/tests/server/blog/helpers';
 import { getCategories } from '@/features/blog/blog.actions';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { CATEGORIES_QUERY } from '@/sanity/queries/categories.query';
@@ -45,6 +45,19 @@ describe('Blog Actions', () => {
 
       // Then
       expect(categories).toEqual([]);
+    });
+
+    it("should resolve the category cover into an image served from Sanity's CDN", async () => {
+      // Given
+      inMemoryClient.setData(CATEGORIES_QUERY, [CATEGORY_WITH_COVER]);
+
+      // When
+      const [category] = await getCategories();
+
+      // Then
+      expect(category.image?.url).toMatch(
+        /^https:\/\/cdn\.sanity\.io\/images\/db3qh9tf\/production\/3fd05d274208d27feba85b3c85deb54bd27a87f1-1672x941\.png/,
+      );
     });
 
     it('should throw an error if the categories are not valid', async () => {

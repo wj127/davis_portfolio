@@ -35,3 +35,11 @@ export const CategorySchema = z.object({
 });
 
 export type Category = z.infer<typeof CategorySchema>;
+
+export type CategoryCover = {
+  url: string;
+};
+
+export type BlogCategory = Omit<Category, 'image'> & {
+  image?: CategoryCover;
+};
