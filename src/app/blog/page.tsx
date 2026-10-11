@@ -36,7 +36,7 @@ export default async function BlogPage() {
         </section>
       </div>
 
-      <BlogFooter year={new Date().getFullYear()} />
+      <BlogFooter />
     </div>
   );
 }

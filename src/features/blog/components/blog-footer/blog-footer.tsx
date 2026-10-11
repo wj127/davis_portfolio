@@ -1,14 +1,15 @@
-import { useTranslations } from 'next-intl';
 import { siteConfig, socialProfiles } from '@/app/seo/site-config';
 import styles from '@/features/blog/components/blog-footer/blog-footer.module.scss';
+import { getTranslations } from 'next-intl/server';
 
-type BlogFooterProps = {
-  year: number;
-};
+async function getFullYear() {
+  'use cache';
+  return new Date().getFullYear();
+}
 
-export const BlogFooter = ({ year }: BlogFooterProps) => {
-  const footerTranslations = useTranslations('Blog.footer');
-
+export const BlogFooter = async () => {
+  const footerTranslations = await getTranslations('Blog.footer');
+  const year = await getFullYear();
   const socialLinks = [
     { label: footerTranslations('gitHub'), href: socialProfiles.gitHub },
     { label: footerTranslations('linkedIn'), href: socialProfiles.linkedIn },
