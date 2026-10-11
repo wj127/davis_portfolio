@@ -16,8 +16,11 @@ $art-path: '/blog/lagoon-glass';
   }
 }
 
-@mixin drift($animation-name) {
-  animation: $animation-name 24s ease-in-out infinite;
+// Desynchronised duration/delay per layer keeps the composite loop from ever
+// feeling periodic, which is what sells the "alive" ambient motion.
+@mixin drift($animation-name, $duration: 24s, $delay: 0s) {
+  animation: $animation-name $duration ease-in-out $delay infinite;
+  will-change: transform, opacity;
 
   @media (prefers-reduced-motion: reduce) {
     animation: none;
@@ -60,20 +63,21 @@ $art-path: '/blog/lagoon-glass';
 .cornerAtmosphere {
   inset: -36.69% -24.56% -110.5% -100.2%;
 
+  @include drift(breathe, 20s, -6s);
   @include layer-art('corner-atmosphere', -0.54% -0.56%, -0.37% -2.07%);
 }
 
 .cornerFlare {
   inset: 9.02% 12.41% -88.79% -83.19%;
 
-  @include drift(drift-forward);
+  @include drift(drift-forward, 14s, -4s);
   @include layer-art('corner-flare', -0.74%, -0.51% -2.73%);
 }
 
 .cornerCore {
   inset: 47.22% 49.49% -50.59% -46.11%;
 
-  @include drift(drift-backward);
+  @include drift(drift-backward, 18s, -12s);
   @include layer-art('corner-core', -1.28% -1.3%, -0.89% -4.82%);
 }
 
@@ -109,14 +113,14 @@ $art-path: '/blog/lagoon-glass';
 .distantReflection {
   inset: -55.03% -56.38% 47.17% 44.02%;
 
-  @include drift(drift-forward);
+  @include drift(drift-forward, 12s, -9s);
   @include layer-art('distant-reflection', -1.23% -1.12%, -0.85% -4.14%);
 }
 
 .ambientDrift {
   inset: -55.92% -62.29% 14.06% 7.92%;
 
-  @include drift(drift-backward);
+  @include drift(drift-backward, 16s, -7s);
   @include layer-art('ambient-drift', -2.38% -2.08%, -1.64% -7.67%);
 }
 
@@ -146,17 +150,17 @@ $art-path: '/blog/lagoon-glass';
   0%,
   100% {
     opacity: 1;
-    transform: translate(0, 0);
+    transform: translate(0, 0) scale(1) rotate(0deg);
   }
 
   33.33% {
-    opacity: 0.87;
-    transform: translate(36px, -21.726px);
+    opacity: 0.82;
+    transform: translate(120px, -72px) scale(1.14) rotate(3deg);
   }
 
   66.67% {
-    opacity: 0.96;
-    transform: translate(-14.4px, -7.604px);
+    opacity: 0.94;
+    transform: translate(-56px, -30px) scale(0.92) rotate(-2.2deg);
   }
 }
 
@@ -164,16 +168,31 @@ $art-path: '/blog/lagoon-glass';
   0%,
   100% {
     opacity: 1;
-    transform: translate(0, 0);
+    transform: translate(0, 0) scale(1) rotate(0deg);
   }
 
   33.33% {
-    opacity: 0.87;
-    transform: translate(-36px, 21.726px);
+    opacity: 0.82;
+    transform: translate(-120px, 72px) scale(1.12) rotate(-2.8deg);
   }
 
   66.67% {
-    opacity: 0.96;
-    transform: translate(14.4px, 7.604px);
+    opacity: 0.94;
+    transform: translate(56px, 30px) scale(0.93) rotate(2.4deg);
+  }
+}
+
+// Pure "breathe" for layers that should swell and fade in place without sliding,
+// giving the composite a slow, organic pulse.
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+
+  50% {
+    opacity: 0.82;
+    transform: scale(1.12) rotate(1.4deg);
   }
 }
