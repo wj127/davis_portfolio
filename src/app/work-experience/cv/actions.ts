@@ -5,7 +5,6 @@ import { headers } from 'next/headers';
 import { getLocale } from 'next-intl/server';
 import { locales, type Locale } from '@/i18n/config';
 import { generateCvMarkdown } from '@/app/work-experience/cv/generate-cv-markdown';
-import { markdownToPdfBuffer } from '@/app/work-experience/cv/markdown-to-pdf';
 import { buildCvBlobKey, buildCvDownloadPath } from '@/app/work-experience/cv/cv-storage';
 
 const TEMPLATE_PDF_PATHNAME = 'cv-template.pdf';
@@ -64,6 +63,12 @@ export async function getOrGenerateCvPdf(requestedLocale: string, regenToken: st
 
     const templatePdfBase64 = await fetchTemplatePdfBase64();
     const markdown = await generateCvMarkdown({ locale, templatePdfBase64 });
+
+    // Imported lazily so the externalized @react-pdf/renderer dependency is only
+    // resolved in the Node runtime when the action actually runs. A static import
+    // would pull it into the client -> server-action module graph and make SSR of
+    // <CvDownloadButton /> fail to resolve the externalized module.
+    const { markdownToPdfBuffer } = await import('@/app/work-experience/cv/markdown-to-pdf');
     const pdfBuffer = await markdownToPdfBuffer(markdown);
 
     await put(blobKey, pdfBuffer, {
