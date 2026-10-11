@@ -8,8 +8,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { useTranslations } from 'next-intl';
 import styles from '@/app/work-experience/work-experience.module.scss';
-import { Toc } from '@/app/work-experience/components/toc/Toc';
-import { CompanyNarrative } from '@/app/work-experience/components/company-narrative/CompanyNarrative';
+import { Toc } from '@/features/work-experience/components/toc/Toc';
+import { CompanyNarrative } from '@/features/work-experience/components/company-narrative/CompanyNarrative';
 import { TimeLineSections, timelineYears } from '@/app/work-experience/constants/sections';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);

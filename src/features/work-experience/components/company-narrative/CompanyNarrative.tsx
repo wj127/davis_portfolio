@@ -3,9 +3,9 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
 import { Source_Code_Pro } from 'next/font/google';
-import styles from '@/app/work-experience/components/company-narrative/CompanyNarrative.module.scss';
+import styles from '@/features/work-experience/components/company-narrative/CompanyNarrative.module.scss';
 import { WorkContentBlock } from '@/app/work-experience/types';
-import { CompanyNarrativeProps } from '@/app/work-experience/components/company-narrative/CompanyNarrative.types';
+import { CompanyNarrativeProps } from '@/features/work-experience/components/company-narrative/CompanyNarrative.types';
 
 const sourceCodePro = Source_Code_Pro({
   subsets: ['latin'],

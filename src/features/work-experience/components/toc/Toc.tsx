@@ -2,9 +2,9 @@
 
 import React, { Fragment } from 'react';
 import { useTranslations } from 'next-intl';
-import styles from '@/app/work-experience/components/toc/Toc.module.scss';
+import styles from '@/features/work-experience/components/toc/Toc.module.scss';
 import { TimeLineSections } from '@/app/work-experience/constants/sections';
-import { TocProps } from '@/app/work-experience/components/toc/Toc.types';
+import { TocProps } from '@/features/work-experience/components/toc/Toc.types';
 
 const timelineYears = TimeLineSections.map(({ year }) => year);
 
