@@ -6,6 +6,9 @@ import { ZodError } from 'zod';
 
 vi.mock('@/sanity/client', () => ({
   client: inMemoryClient,
+  projectId: 'some-project-id',
+  dataset: 'production',
+  apiVersion: '2026-05-15',
 }));
 
 vi.mock('next/cache');
@@ -56,7 +59,7 @@ describe('Blog Actions', () => {
 
       // Then
       expect(category.image?.url).toMatch(
-        /^https:\/\/cdn\.sanity\.io\/images\/db3qh9tf\/production\/3fd05d274208d27feba85b3c85deb54bd27a87f1-1672x941\.png/,
+        /^https:\/\/cdn\.sanity\.io\/images\/some-project-id\/production\/3fd05d274208d27feba85b3c85deb54bd27a87f1-1672x941\.png/,
       );
     });
 

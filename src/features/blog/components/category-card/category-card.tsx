@@ -36,7 +36,7 @@ export const CategoryCard = ({ category }: CategoryCardProps) => {
           <p className={styles.postCount}>
             {blogTranslations('postCount', {
               count: category.postCount,
-              formattedCount: String(category.postCount).padStart(2, '0'),
+              formattedCount: String(category.postCount),
             })}
           </p>
           <ArrowRight className={styles.arrow} size={18} strokeWidth={1.6} absoluteStrokeWidth aria-hidden='true' />

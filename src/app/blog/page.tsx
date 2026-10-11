@@ -6,8 +6,7 @@ import { LagoonGlassBackground } from '@/features/blog/components/lagoon-glass-b
 import styles from '@/app/blog/blog.module.scss';
 
 export default async function BlogPage() {
-  const blogTranslations = await getTranslations('Blog');
-  const categories = await getCategories();
+  const [blogTranslations, categories] = await Promise.all([getTranslations('Blog'), getCategories()]);
 
   return (
     <div className={styles.page}>

@@ -26,10 +26,7 @@
   display: none;
   height: 160px;
   flex-shrink: 0;
-
-  @media screen and (min-width: $blog-desktop-breakpoint) {
-    display: block;
-  }
+  display: block;
 }
 
 .coverImage {
