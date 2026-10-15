@@ -1,8 +1,9 @@
-import { inMemoryClient, CATEGORIES, CATEGORY_WITH_COVER } from '@/tests/server/blog/helpers';
-import { getCategories } from '@/features/blog/blog.actions';
+import { inMemoryClient, CATEGORIES, CATEGORY_WITH_COVER, LATEST_POSTS } from '@/tests/server/blog/helpers';
+import { getCategories, getLatestPosts } from '@/features/blog/blog.actions';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { CATEGORIES_QUERY } from '@/sanity/queries/categories.query';
 import { ZodError } from 'zod';
+import { LATEST_POSTS_QUERY } from '@/sanity/queries/latest-posts.query';
 
 vi.mock('@/sanity/client', () => ({
   client: inMemoryClient,
@@ -14,11 +15,11 @@ vi.mock('@/sanity/client', () => ({
 vi.mock('next/cache');
 
 describe('Blog Actions', () => {
-  describe('getCategories', () => {
-    beforeEach(() => {
-      inMemoryClient.clearData();
-    });
+  beforeEach(() => {
+    inMemoryClient.clearData();
+  });
 
+  describe('getCategories', () => {
     it("should return a bunch of categories from Sanity's data lake", async () => {
       // Given
       inMemoryClient.setData(CATEGORIES_QUERY, CATEGORIES);
@@ -137,6 +138,19 @@ describe('Blog Actions', () => {
           },
         ],
       });
+    });
+  });
+
+  describe('getLatestPosts', () => {
+    it("should return the latest posts from Sanity's data lake", async () => {
+      // Given
+      inMemoryClient.setData(LATEST_POSTS_QUERY, LATEST_POSTS);
+
+      // When
+      const latestPosts = await getLatestPosts();
+
+      // Then
+      expect(latestPosts).toEqual(LATEST_POSTS);
     });
   });
 });

@@ -6,8 +6,10 @@ import { CATEGORIES_QUERY } from '@/sanity/queries/categories.query';
 import { BlogCategory, Category, CategorySchema } from '@/features/blog/contracts/categories';
 import { cacheLife } from 'next/cache';
 import { toSeconds } from 'duration-fns';
+import { LatestPosts, LatestPostsSchema } from '@/features/blog/contracts/latest-posts';
+import { LATEST_POSTS_QUERY } from '@/sanity/queries/latest-posts.query';
 
-export const getCategories = async (): Promise<BlogCategory[]> => {
+export const getCategories = async () => {
   cacheLife({
     stale: toSeconds({ minutes: 30 }),
     revalidate: toSeconds({ days: 1 }),
@@ -22,5 +24,15 @@ export const getCategories = async (): Promise<BlogCategory[]> => {
         url: urlForImage(image).width(720).height(320).fit('crop').auto('format').url(),
         alt: image.alt,
       },
-    }));
+    })) satisfies BlogCategory[];
+};
+
+export const getLatestPosts = async () => {
+  cacheLife({
+    stale: toSeconds({ minutes: 30 }),
+    revalidate: toSeconds({ days: 1 }),
+    expire: toSeconds({ days: 3 }),
+  });
+  const latestPosts = await client.fetch<LatestPosts[]>(LATEST_POSTS_QUERY);
+  return LatestPostsSchema.array().parse(latestPosts);
 };
