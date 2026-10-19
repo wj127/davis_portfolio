@@ -296,6 +296,16 @@
       "description": "Browse by category. Start with what you’re curious about."
     },
     "postCount": "{count, plural, one {{formattedCount} published post} other {{formattedCount} published posts}}",
+    "latestPosts": {
+      "title": "Latest Posts",
+      "description": "The latest three posts, across all categories.",
+      "emptyDescription": "New posts will appear here as they’re published.",
+      "emptyTitle": "No posts yet",
+      "emptyBody": "I’m gathering the first notes on what I build and learn. Check back soon for stories from the web, side projects, and life as a developer.",
+      "readPost": "Read post",
+      "readingTime": "{minutes} min read",
+      "aboutMe": "Get to know me"
+    },
     "footer": {
       "copyright": "© {year} MRDAVIS · Built with curiosity.",
       "gitHub": "GitHub",

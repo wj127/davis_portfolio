@@ -296,6 +296,16 @@
       "description": "Explora por categoría. Empieza por lo que más te interese."
     },
     "postCount": "{count, plural, one {{formattedCount} artículo publicado} other {{formattedCount} artículos publicados}}",
+    "latestPosts": {
+      "title": "Últimas publicaciones",
+      "description": "Las tres publicaciones más recientes, de todas las categorías.",
+      "emptyDescription": "Las publicaciones nuevas aparecerán aquí en cuanto se publiquen.",
+      "emptyTitle": "Todavía no hay publicaciones",
+      "emptyBody": "Estoy reuniendo las primeras notas sobre lo que construyo y aprendo. Vuelve pronto para leer historias sobre la web, los proyectos personales y la vida como desarrollador.",
+      "readPost": "Leer publicación",
+      "readingTime": "{minutes} min de lectura",
+      "aboutMe": "Conóceme"
+    },
     "footer": {
       "copyright": "© {year} MRDAVIS · Hecho con curiosidad.",
       "gitHub": "GitHub",
