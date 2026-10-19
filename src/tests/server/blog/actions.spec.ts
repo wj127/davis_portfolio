@@ -1,5 +1,11 @@
-import { inMemoryClient, CATEGORIES, CATEGORY_WITH_COVER, LATEST_POSTS } from '@/tests/server/blog/helpers';
-import { getCategories, getLatestPosts } from '@/features/blog/blog.actions';
+import {
+  inMemoryClient,
+  CATEGORIES,
+  CATEGORY_WITH_COVER,
+  LATEST_POSTS,
+  createPosts,
+} from '@/tests/server/blog/helpers';
+import { getCategories, getLatestPosts } from '@/features/blog/blog.data';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { CATEGORIES_QUERY } from '@/sanity/queries/categories.query';
 import { ZodError } from 'zod';
@@ -151,6 +157,48 @@ describe('Blog Actions', () => {
 
       // Then
       expect(latestPosts).toEqual(LATEST_POSTS);
+    });
+
+    it('should throw an error if the latest posts are not valid', async () => {
+      // Given
+      inMemoryClient.setData(LATEST_POSTS_QUERY, [{ ...LATEST_POSTS[0], estimatedReadingTime: 'not a number' }]);
+
+      // When
+      const latestPosts = getLatestPosts();
+
+      // Then
+      await expect(latestPosts).rejects.toThrow(ZodError);
+      await expect(getLatestPosts()).rejects.toMatchObject({
+        issues: [
+          {
+            code: 'invalid_type',
+            expected: 'number',
+            path: [0, 'estimatedReadingTime'],
+          },
+        ],
+      });
+    });
+
+    it('should return no more than 10 posts', async () => {
+      // Given
+      inMemoryClient.setData(LATEST_POSTS_QUERY, createPosts(LATEST_POSTS, 11));
+
+      // When
+      const latestPosts = await getLatestPosts();
+
+      // Then
+      expect(latestPosts).toHaveLength(10);
+    });
+
+    it('should return an empty array if there are no latest posts', async () => {
+      // Given
+      inMemoryClient.setData(LATEST_POSTS_QUERY, []);
+
+      // When
+      const latestPosts = await getLatestPosts();
+
+      // Then
+      expect(latestPosts).toEqual([]);
     });
   });
 });

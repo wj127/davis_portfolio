@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server';
-import { getCategories } from '@/features/blog/blog.actions';
+import { getCategories } from '@/features/blog/blog.data';
 import { BlogFooter } from '@/features/blog/components/blog-footer/blog-footer';
 import { CategoryCard } from '@/features/blog/components/category-card/category-card';
 import { LagoonGlassBackground } from '@/features/blog/components/lagoon-glass-background/lagoon-glass-background';

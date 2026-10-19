@@ -11,9 +11,9 @@ import { LATEST_POSTS_QUERY } from '@/sanity/queries/latest-posts.query';
 
 export const getCategories = async () => {
   cacheLife({
-    stale: toSeconds({ minutes: 30 }),
-    revalidate: toSeconds({ days: 1 }),
-    expire: toSeconds({ days: 3 }),
+    stale: toSeconds({ hours: 12 }),
+    revalidate: toSeconds({ days: 3 }),
+    expire: toSeconds({ days: 7 }),
   });
   const categories = await client.fetch<Category[]>(CATEGORIES_QUERY);
   return CategorySchema.array()
@@ -29,10 +29,10 @@ export const getCategories = async () => {
 
 export const getLatestPosts = async () => {
   cacheLife({
-    stale: toSeconds({ minutes: 30 }),
-    revalidate: toSeconds({ days: 1 }),
-    expire: toSeconds({ days: 3 }),
+    stale: toSeconds({ minutes: 15 }),
+    revalidate: toSeconds({ hours: 6 }),
+    expire: toSeconds({ days: 2 }),
   });
   const latestPosts = await client.fetch<LatestPosts[]>(LATEST_POSTS_QUERY);
-  return LatestPostsSchema.array().parse(latestPosts);
+  return LatestPostsSchema.array().parse(latestPosts.slice(0, 10));
 };
