@@ -1,0 +1,41 @@
+@import 'src/styles/varibales';
+
+.fallback {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title,
+.description,
+.post {
+  border-radius: 6px;
+  background: rgba($blog-text-muted, 0.18);
+}
+
+.title {
+  width: 180px;
+  height: 32px;
+}
+
+.description {
+  width: min(100%, 320px);
+  height: 22px;
+}
+
+.posts {
+  list-style: none;
+}
+
+.post {
+  height: 95px;
+  border-bottom: 1px solid $blog-stroke;
+  border-radius: 0;
+  background: transparent;
+}
