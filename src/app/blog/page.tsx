@@ -1,8 +1,13 @@
+import { Suspense } from 'react';
 import { getTranslations } from 'next-intl/server';
 import { getCategories } from '@/features/blog/blog.data';
 import { BlogFooter } from '@/features/blog/components/blog-footer/blog-footer';
 import { CategoryCard } from '@/features/blog/components/category-card/category-card';
 import { LagoonGlassBackground } from '@/features/blog/components/lagoon-glass-background/lagoon-glass-background';
+import {
+  LatestPostsSection,
+  LatestPostsSectionFallback,
+} from '@/features/blog/components/latest-posts-section/latest-posts-section';
 import styles from '@/app/blog/blog.module.scss';
 
 export default async function BlogPage() {
@@ -33,6 +38,12 @@ export default async function BlogPage() {
               </li>
             ))}
           </ul>
+        </section>
+
+        <section aria-labelledby='latest-posts-heading'>
+          <Suspense fallback={<LatestPostsSectionFallback />}>
+            <LatestPostsSection />
+          </Suspense>
         </section>
       </div>
 
