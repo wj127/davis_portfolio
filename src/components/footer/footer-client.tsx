@@ -3,12 +3,8 @@
 import styles from '@/components/footer/footer.module.scss';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-
-interface SocialLink {
-  label: string;
-  iconSrc: string;
-  motionClassName: string;
-}
+import { SocialLink, SitemapLabel } from '@/components/footer/footer';
+import Link from 'next/link';
 
 export const FooterClient = ({
   socialLinks,
@@ -16,7 +12,7 @@ export const FooterClient = ({
   copyrightYear,
 }: {
   socialLinks: Readonly<SocialLink[]>;
-  sitemapLabels: Readonly<string[]>;
+  sitemapLabels: Readonly<SitemapLabel[]>;
   copyrightYear: number;
 }) => {
   const pathname = usePathname();
@@ -38,10 +34,10 @@ export const FooterClient = ({
           <h2 className={styles.sitemapHeading}>Sitemap</h2>
           <ul className={styles.sitemapLinks}>
             {sitemapLabels.map((sitemapLabel) => (
-              <li key={sitemapLabel}>
-                <button className={styles.sitemapLink} type='button'>
-                  {sitemapLabel}
-                </button>
+              <li key={sitemapLabel.label}>
+                <Link className={styles.sitemapLink} href={sitemapLabel.href}>
+                  {sitemapLabel.label}
+                </Link>
               </li>
             ))}
           </ul>
@@ -53,7 +49,12 @@ export const FooterClient = ({
         <ul className={styles.socialLinks}>
           {socialLinks.map((socialLink) => (
             <li key={socialLink.label}>
-              <button className={`${styles.socialLink} ${socialLink.motionClassName}`} type='button'>
+              <a
+                className={`${styles.socialLink} ${socialLink.motionClassName}`}
+                href={socialLink.href}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
                 <Image
                   alt=''
                   className={styles.socialIcon}
@@ -63,7 +64,7 @@ export const FooterClient = ({
                   width={18}
                 />
                 {socialLink.label}
-              </button>
+              </a>
             </li>
           ))}
         </ul>
