@@ -12,9 +12,9 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/dialog/dialog';
-import { sendContactEmail } from '@/app/about-me/actions';
+import { sendContactEmail } from '@/components/contact-dialog/actions';
 import type { ContactFormState } from '@/app/about-me/actions.types';
-import styles from '@/app/about-me/contact-dialog/contact-dialog.module.scss';
+import styles from '@/components/contact-dialog/contact-dialog.module.scss';
 
 type ContactDialogProps = {
   trigger: ReactElement;

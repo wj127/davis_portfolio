@@ -1,72 +1,52 @@
-'use client';
-
-import { Bruno_Ace_SC, Source_Code_Pro } from 'next/font/google';
-import { useTranslations } from 'next-intl';
-import { Terminal } from 'lucide-react';
+import { Suspense } from 'react';
+import { getTranslations } from 'next-intl/server';
+import { getCategories } from '@/features/blog/blog.data';
+import { CategoryCard } from '@/features/blog/components/category-card/category-card';
+import { LagoonGlassBackground } from '@/features/blog/components/lagoon-glass-background/lagoon-glass-background';
+import {
+  LatestPostsSection,
+  LatestPostsSectionFallback,
+} from '@/features/blog/components/latest-posts-section/latest-posts-section';
 import styles from '@/app/blog/blog.module.scss';
 
-const brunoAce = Bruno_Ace_SC({ weight: '400', subsets: ['latin'] });
-const sourceCodePro = Source_Code_Pro({
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  variable: '--font-source-code-pro',
-});
-
-const bootKeys = ['boot.mount', 'boot.compile', 'boot.index', 'boot.await'] as const;
-
-export default function BlogPage() {
-  const blogTranslations = useTranslations('Blog');
-  const title = blogTranslations('title');
+export default async function BlogPage() {
+  const [blogTranslations, categories] = await Promise.all([getTranslations('Blog'), getCategories()]);
 
   return (
-    <main className={`${styles.page} ${brunoAce.className} ${sourceCodePro.variable}`}>
-      <div className={styles.meshBackdrop} aria-hidden='true' />
+    <div className={styles.page}>
+      <LagoonGlassBackground />
 
-      <section className={styles.panel}>
-        <article className={styles.terminalCard}>
-          <header className={styles.cardChrome}>
-            <div className={styles.chromeButtons} aria-hidden='true'>
-              <span className={`${styles.chromeDot} ${styles.cancel}`} />
-              <span className={`${styles.chromeDot} ${styles.minimize}`} />
-              <span className={`${styles.chromeDot} ${styles.maximize}`} />
-            </div>
-            <span className={styles.windowTitle}>{blogTranslations('windowTitle')}</span>
-          </header>
+      <div className={styles.content}>
+        <header className={styles.hero}>
+          <h1 className={styles.title}>{blogTranslations('title')}</h1>
+          <p className={styles.lead}>{blogTranslations('description')}</p>
+        </header>
 
-          <div className={styles.cardBody}>
-            <p className={styles.statusRow}>
-              <span className={styles.statusDot} aria-hidden='true' />
-              <span className={styles.statusLabel}>{blogTranslations('statusLabel')}:</span>
-              <span className={styles.statusValue}>{blogTranslations('statusValue')}</span>
-            </p>
-
-            <div className={styles.glitchTitle}>
-              <p>
-                <span aria-hidden='true'>{title}</span>
-                {title}
-                <span aria-hidden='true'>{title}</span>
-              </p>
-            </div>
-
-            <p className={styles.subtitle}>{blogTranslations('subtitle')}</p>
-            <p className={styles.description}>{blogTranslations('description')}</p>
-
-            <ul className={styles.bootLog}>
-              {bootKeys.map((bootKey) => (
-                <li key={bootKey} className={styles.bootLine}>
-                  {blogTranslations(bootKey)}
-                </li>
-              ))}
-            </ul>
-
-            <p className={styles.promptRow}>
-              <Terminal size={16} className={styles.promptIcon} aria-hidden='true' />
-              <span>{blogTranslations('comingSoon')}</span>
-              <span className={styles.cursor} aria-hidden='true' />
-            </p>
+        <section className={styles.section} aria-labelledby='blog-categories-heading'>
+          <div className={styles.sectionHeading}>
+            <h2 id='blog-categories-heading' className={styles.sectionTitle}>
+              {blogTranslations('categories.title')}
+            </h2>
+            <p className={styles.sectionDescription}>{blogTranslations('categories.description')}</p>
           </div>
-        </article>
-      </section>
-    </main>
+
+          <ul className={styles.categories}>
+            {categories.map((category) => (
+              <li key={category._id}>
+                <CategoryCard category={category} />
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section aria-labelledby='latest-posts-heading'>
+          <Suspense fallback={<LatestPostsSectionFallback />}>
+            <LatestPostsSection />
+          </Suspense>
+        </section>
+      </div>
+
+      {/* <BlogFooter /> */}
+    </div>
   );
 }

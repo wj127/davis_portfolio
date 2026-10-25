@@ -7,6 +7,7 @@
     "aboutMe": "About Me",
     "aboutMeShort": "AM",
     "blog": "Blog",
+    "blogShort": "Bl",
     "menu": "Menu",
     "openMenu": "Open navigation menu",
     "closeMenu": "Close navigation menu"
@@ -289,19 +290,29 @@
     }
   },
   "Blog": {
-    "windowTitle": "blog.init",
-    "statusLabel": "SYSTEM_STATUS",
-    "statusValue": "INITIALIZING",
     "title": "Blog",
-    "subtitle": "// module_under_construction",
-    "description": "The stories, experiments and hard-earned lessons are still compiling. This module is booting up — soon this space will stream my thoughts on code, business and everything in between.",
-    "boot": {
-      "mount": "$ mount /dev/thoughts --verbose",
-      "compile": "> compiling articles ............ [ OK ]",
-      "index": "> indexing ideas ................ [ OK ]",
-      "await": "> awaiting first transmission ... [ 0% ]"
+    "description": "Things I build. Things I learn. Notes on the web, side projects, and finding my way as a developer.",
+    "categories": {
+      "title": "Browse by category",
+      "description": "Browse by category. Start with what you’re curious about."
     },
-    "comingSoon": "COMING_SOON"
+    "postCount": "{count, plural, one {{formattedCount} published post} other {{formattedCount} published posts}}",
+    "latestPosts": {
+      "title": "Latest Posts",
+      "description": "The latest three posts, across all categories.",
+      "emptyDescription": "New posts will appear here as they’re published.",
+      "emptyTitle": "No posts yet",
+      "emptyBody": "I’m gathering the first notes on what I build and learn. Check back soon for stories from the web, side projects, and life as a developer.",
+      "readPost": "Read post",
+      "readingTime": "{minutes} min read",
+      "aboutMe": "Get to know me"
+    },
+    "footer": {
+      "copyright": "© {year} MRDAVIS · Built with curiosity.",
+      "gitHub": "GitHub",
+      "linkedIn": "LinkedIn",
+      "email": "Email"
+    }
   },
   "LanguageSwitcher": {
     "label": "Change language"
@@ -320,5 +331,14 @@
     "statusLeft": "CHANNEL: SECURE",
     "statusRight": "STATUS: OPERATIONAL",
     "smallHint": "Yes...if you were thinking it, all these small things around the dialog and the texts (like the \"Secure_Handshake_v4.0\" protocol) are fake...just for the sake of the story 😂"
+  },
+  "NotFound": {
+    "metaTitle": "Page not found",
+    "metaDescription": "The page you’re looking for doesn’t exist or has moved.",
+    "headingLead": "This page",
+    "headingFollow": "wandered off.",
+    "descriptionLead": "The page you’re looking for doesn’t exist or has moved.",
+    "descriptionFollow": "Let’s get you back to familiar ground.",
+    "backToHome": "Back to home"
   }
 }

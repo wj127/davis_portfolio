@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/davis-portfolio.iml" filepath="$PROJECT_DIR$/.idea/davis-portfolio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../davis-portfolio-sanity-studio/studio-mrdavis/.idea/studio-mrdavis.iml" filepath="$PROJECT_DIR$/../davis-portfolio-sanity-studio/studio-mrdavis/.idea/studio-mrdavis.iml" />
     </modules>
   </component>
 </project>

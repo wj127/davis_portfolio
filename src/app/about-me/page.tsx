@@ -10,7 +10,7 @@ import { HowIThinkSection } from '@/app/about-me/sections/how-i-think';
 import { WhatImGoodAtSection } from '@/app/about-me/sections/what-im-good-at';
 import { BeyondTheResumeSection } from '@/app/about-me/sections/beyond-the-resume';
 import { WorkWithMeSection } from '@/app/about-me/sections/work-with-me';
-import { ContactDialog } from '@/app/about-me/contact-dialog/contact-dialog';
+import { ContactDialog } from '@/components/contact-dialog/contact-dialog';
 import { Terminal } from 'lucide-react';
 
 const brunoAce = Bruno_Ace_SC({ weight: '400', subsets: ['latin'] });

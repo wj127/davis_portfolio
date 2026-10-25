@@ -7,6 +7,7 @@
     "aboutMe": "Sobre Mí",
     "aboutMeShort": "SM",
     "blog": "Blog",
+    "blogShort": "Bl",
     "menu": "Menú",
     "openMenu": "Abrir menú de navegación",
     "closeMenu": "Cerrar menú de navegación"
@@ -289,19 +290,29 @@
     }
   },
   "Blog": {
-    "windowTitle": "blog.init",
-    "statusLabel": "ESTADO_SISTEMA",
-    "statusValue": "INICIALIZANDO",
     "title": "Blog",
-    "subtitle": "// módulo_en_construcción",
-    "description": "Las historias, experimentos y lecciones aprendidas todavía se están compilando. Este módulo está arrancando — pronto este espacio transmitirá mis pensamientos sobre código, negocio y todo lo que hay entre medias.",
-    "boot": {
-      "mount": "$ mount /dev/pensamientos --verbose",
-      "compile": "> compilando artículos .......... [ OK ]",
-      "index": "> indexando ideas .............. [ OK ]",
-      "await": "> esperando primera transmisión . [ 0% ]"
+    "description": "Cosas que construyo. Cosas que aprendo. Notas sobre la web, proyectos personales y cómo voy encontrando mi camino como desarrollador.",
+    "categories": {
+      "title": "Explorar por categoría",
+      "description": "Explora por categoría. Empieza por lo que más te interese."
     },
-    "comingSoon": "PRÓXIMAMENTE"
+    "postCount": "{count, plural, one {{formattedCount} artículo publicado} other {{formattedCount} artículos publicados}}",
+    "latestPosts": {
+      "title": "Últimas publicaciones",
+      "description": "Las tres publicaciones más recientes, de todas las categorías.",
+      "emptyDescription": "Las publicaciones nuevas aparecerán aquí en cuanto se publiquen.",
+      "emptyTitle": "Todavía no hay publicaciones",
+      "emptyBody": "Estoy reuniendo las primeras notas sobre lo que construyo y aprendo. Vuelve pronto para leer historias sobre la web, los proyectos personales y la vida como desarrollador.",
+      "readPost": "Leer publicación",
+      "readingTime": "{minutes} min de lectura",
+      "aboutMe": "Conóceme"
+    },
+    "footer": {
+      "copyright": "© {year} MRDAVIS · Hecho con curiosidad.",
+      "gitHub": "GitHub",
+      "linkedIn": "LinkedIn",
+      "email": "Correo"
+    }
   },
   "LanguageSwitcher": {
     "label": "Cambiar idioma"
@@ -320,5 +331,14 @@
     "statusLeft": "CANAL: SEGURO",
     "statusRight": "ESTADO: OPERATIVO",
     "smallHint": "Sí...si te lo estabas preguntando, todas estas pequeñas cosas alrededor del diálogo y los textos (como el protocolo \"Handshake_Seguro_v4.0\") son falsos...son solo para darle el toque de realismo a la historia 😂"
+  },
+  "NotFound": {
+    "metaTitle": "Página no encontrada",
+    "metaDescription": "La página que buscas no existe o se ha movido.",
+    "headingLead": "Esta página",
+    "headingFollow": "se fue por ahí.",
+    "descriptionLead": "La página que buscas no existe o se ha movido.",
+    "descriptionFollow": "Volvamos a terreno conocido.",
+    "backToHome": "Volver al inicio"
   }
 }

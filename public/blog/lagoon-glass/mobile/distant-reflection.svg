@@ -1,0 +1,16 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="474.504" height="2173.01" viewBox="0 0 474.504 2173.01" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Distant reflection" filter="url(#filter0_f_0_51)" style="mix-blend-mode:screen">
+<ellipse cx="237.252" cy="1086.5" rx="219.102" ry="1068.35" fill="url(#paint0_radial_0_51)"/>
+</g>
+<defs>
+<filter id="filter0_f_0_51" x="0" y="0" width="474.504" height="2173.01" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="9.075" result="effect1_foregroundBlur_0_51"/>
+</filter>
+<radialGradient id="paint0_radial_0_51" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(237.252 1086.5) scale(219.102 1068.35)">
+<stop stop-color="#497FEA" stop-opacity="0.596078"/>
+<stop offset="1" stop-color="#497FEA" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>

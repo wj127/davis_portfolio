@@ -12,7 +12,9 @@ export const siteConfig = {
 
 // Public profiles that identify the same person (e.g. GitHub, LinkedIn).
 // Add profile URLs here to strengthen the Person structured data.
-export const socialProfileUrls: string[] = [
-  'https://www.linkedin.com/in/davis-yoel-armas-ayala-a88815144',
-  'https://github.com/wj127',
-];
+export const socialProfiles = {
+  linkedIn: 'https://www.linkedin.com/in/davis-yoel-armas-ayala-a88815144',
+  gitHub: 'https://github.com/wj127',
+} as const;
+
+export const socialProfileUrls: string[] = Object.values(socialProfiles);
