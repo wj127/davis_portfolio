@@ -331,5 +331,14 @@
     "statusLeft": "CHANNEL: SECURE",
     "statusRight": "STATUS: OPERATIONAL",
     "smallHint": "Yes...if you were thinking it, all these small things around the dialog and the texts (like the \"Secure_Handshake_v4.0\" protocol) are fake...just for the sake of the story 😂"
+  },
+  "NotFound": {
+    "metaTitle": "Page not found",
+    "metaDescription": "The page you’re looking for doesn’t exist or has moved.",
+    "headingLead": "This page",
+    "headingFollow": "wandered off.",
+    "descriptionLead": "The page you’re looking for doesn’t exist or has moved.",
+    "descriptionFollow": "Let’s get you back to familiar ground.",
+    "backToHome": "Back to home"
   }
 }

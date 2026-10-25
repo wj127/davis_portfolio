@@ -331,5 +331,14 @@
     "statusLeft": "CANAL: SEGURO",
     "statusRight": "ESTADO: OPERATIVO",
     "smallHint": "Sí...si te lo estabas preguntando, todas estas pequeñas cosas alrededor del diálogo y los textos (como el protocolo \"Handshake_Seguro_v4.0\") son falsos...son solo para darle el toque de realismo a la historia 😂"
+  },
+  "NotFound": {
+    "metaTitle": "Página no encontrada",
+    "metaDescription": "La página que buscas no existe o se ha movido.",
+    "headingLead": "Esta página",
+    "headingFollow": "se fue por ahí.",
+    "descriptionLead": "La página que buscas no existe o se ha movido.",
+    "descriptionFollow": "Volvamos a terreno conocido.",
+    "backToHome": "Volver al inicio"
   }
 }
