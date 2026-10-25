@@ -13,6 +13,7 @@ import { CvDownloadButton } from '@/app/components/cv-download-button/cv-downloa
 import { CvDownloadButtonSkeleton } from '@/app/components/cv-download-button/cv-download-button-skeleton';
 import { StructuredData } from '@/app/components/structured-data/structured-data';
 import { siteConfig } from '@/app/seo/site-config';
+import { Footer } from '@/components/footer/footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -86,6 +87,7 @@ export default async function RootLayout({
             <CvDownloadButton />
           </Suspense>
           <main>{children}</main>
+          <Footer />
         </NextIntlClientProvider>
       </body>
     </html>

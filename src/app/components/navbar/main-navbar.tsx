@@ -86,7 +86,7 @@ export const MainNavbar: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
       case '/about-me':
         return mainNavbarTranslations('aboutMeShort');
       case '/blog':
-        return mainNavbarTranslations('blog');
+        return mainNavbarTranslations('blogShort');
       default:
         return mainNavbarTranslations('menu');
     }
@@ -206,7 +206,9 @@ export const MainNavbar: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
 
               <NavigationMenu.Item>
                 <CustomLink href='/blog' isDisabled={false}>
-                  <GlitchText>{mainNavbarTranslations('blog')}</GlitchText>
+                  <GlitchText>
+                    {mustAbbreviate ? mainNavbarTranslations('blogShort') : mainNavbarTranslations('blog')}
+                  </GlitchText>
                 </CustomLink>
               </NavigationMenu.Item>
             </NavigationMenu.List>
