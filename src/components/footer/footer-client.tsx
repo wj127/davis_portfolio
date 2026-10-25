@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { SocialLink, SitemapLabel } from '@/components/footer/footer';
 import Link from 'next/link';
+import { ContactDialog } from '@/components/contact-dialog/contact-dialog';
 
 export const FooterClient = ({
   socialLinks,
@@ -41,9 +42,17 @@ export const FooterClient = ({
               </li>
             ))}
           </ul>
-          <button className={styles.contactButton} type='button'>
-            Contact
-          </button>
+          <ContactDialog
+            trigger={
+              <button className={styles.contactButton} type='button'>
+                Contact
+              </button>
+            }
+            colors={{
+              gradientColor1: '#b6c4ff',
+              gradientColor2: '#4169e1',
+            }}
+          />
         </div>
 
         <ul className={styles.socialLinks}>
